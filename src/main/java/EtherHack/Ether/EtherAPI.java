@@ -622,7 +622,7 @@ public class EtherAPI
                 Rendering.drawTextCenterWithShadow((String)(EtherMain.getInstance().etherTranslator.getTranslate("UI_VisualsDraws_PrimaryHand") + firstHandItem), (UIFont)UIFont.Small, (float)playerPosX, (float)(playerPosY + 70.0f), (float)colorR, (float)colorG, (float)colorB, (float)colorA);
                 Rendering.drawTextCenterWithShadow((String)(EtherMain.getInstance().etherTranslator.getTranslate("UI_VisualsDraws_SecondaryHand") + secondHandItem), (UIFont)UIFont.Small, (float)playerPosX, (float)(playerPosY + 80.0f), (float)colorR, (float)colorG, (float)colorB, (float)colorA);
             }
-            if (player.isLocalPlayer() || !this.isVisualDrawLineToPlayers || !(PlayerUtils.getDistanceBetweenPlayers((IsoPlayer)localPlayer, (IsoPlayer)player) < 150.0f)) continue;
+            if (player.isLocalPlayer() || !this.isVisualDrawLineToPlayers) continue;
             int distance = (int)PlayerUtils.getDistanceBetweenPlayers((IsoPlayer)player, (IsoPlayer)localPlayer);
             int textDistance = Math.max(30, Math.min(150, distance));
             float totalLength = (float)Math.sqrt(Math.pow(playerPosX - posLocalPlayerX, 2.0) + Math.pow(playerPosY - posLocalPlayerY, 2.0));
