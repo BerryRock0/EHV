@@ -620,12 +620,12 @@ public class EtherAPI
             }
             if (player.isLocalPlayer() || !this.isVisualDrawLineToPlayers) continue;
             int distance = (int)PlayerUtils.getDistanceBetweenPlayers((IsoPlayer)player, (IsoPlayer)localPlayer);
-            int textDistance = Math.max(30, Math.min(150, distance));
+            int textDistance = distance;
             float totalLength = (float)Math.sqrt(Math.pow(playerPosX - posLocalPlayerX, 2.0) + Math.pow(playerPosY - posLocalPlayerY, 2.0));
             float ratio = (float)textDistance / totalLength;
             float textPosX = posLocalPlayerX + ratio * (playerPosX - posLocalPlayerX);
-            float textPosY = posLocalPlayerY + 60.0f + ratio * (playerPosY - posLocalPlayerY);
-            Rendering.drawLine((int)((int)playerPosX), (int)((int)playerPosY), (int)((int)posLocalPlayerX), (int)((int)posLocalPlayerY + 60), (float)colorR, (float)colorG, (float)colorB, (float)0.8f, (int)1);
+            float textPosY = posLocalPlayerY + ratio * (playerPosY - posLocalPlayerY);
+            Rendering.drawLine((int)((int)playerPosX), (int)((int)playerPosY), (int)((int)posLocalPlayerX), (int)((int)posLocalPlayerY), (float)colorR, (float)colorG, (float)colorB, (float)0.8f, (int)1);
             Rendering.drawTextCenterWithShadow((String)String.valueOf(distance), (UIFont)UIFont.Small, (float)textPosX, (float)textPosY, (float)colorR, (float)colorG, (float)colorB, (float)colorA);
         }
     }
