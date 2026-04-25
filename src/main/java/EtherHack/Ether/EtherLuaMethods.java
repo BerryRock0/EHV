@@ -164,7 +164,7 @@ public final class EtherLuaMethods {
         if (localPlayer == null) {
             return;
         }
-        ArrayList recipesList = ScriptManager.instance.getAllRecipes();
+        ArrayList<Recipe> recipesList = ScriptManager.instance.getAllRecipes();
         if (recipesList != null) {
             for (Recipe recipe : recipesList) {
                 if (recipe.getOriginalname() == null) continue;
