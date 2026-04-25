@@ -119,6 +119,14 @@ function EtherMain:createChildren()
     self:addVerticalButton("Player Editor", "PlayerEditor", self.width - 20, 30, function() EtherPlayerEditor.OnOpenPanel() end, true)
     self:addVerticalButton("Get Admin Access", "SetAdminAccess", self.width - 20, 30, function() EtherHack.API.setAdminAccess() end, true)
     self:addVerticalButton("Open Admin Menu", "AdminMenu", self.width - 20, 30, function() EtherHack.API.openAdminMenu() end, true)
+
+    self:addVerticalButton("Increment Major", "M++", self.width - 20, 30, function() EtherHack.API.incrementA end, true)
+    self:addVerticalButton("Increment Minor", "m++", self.width - 20, 30, function() EtherHack.API.incrementB end, true)
+    self:addVerticalButton("Increment Core", "C++", self.width - 20, 30, function() EtherHack.API.incrementC end, true)
+    self:addVerticalButton("Decrement Major", "M++", self.width - 20, 30, function() EtherHack.API.decrementA end, true)
+    self:addVerticalButton("Decrement Minor", "m--", self.width - 20, 30, function() EtherHack.API.decrementB end, true)
+    self:addVerticalButton("Decrement Core", "C--", self.width - 20, 30, function() EtherHack.API.decrementC end, true)
+    self.addVerticalButton("Change Client Version", "Change Version", self.width - 20, 30, function() EtherHack.API.changeVersion end, false)
 end
 
 --*********************************************************
