@@ -1,7 +1,6 @@
 package EtherHack.Ether;
 
 import EtherHack.Ether.EtherAPI;
-import EtherHack.Ether.EtherCredits;
 import EtherHack.Ether.EtherLuaManager;
 import EtherHack.Ether.EtherTranslator;
 import EtherHack.utils.Logger;
@@ -20,7 +19,6 @@ public class EtherMain {
         Logger.printLog((String)"Initializing EtherHack...");
         this.etherTranslator = new EtherTranslator();
         this.etherTranslator.loadTranslations();
-        this.etherCredits = new EtherCredits();
         this.etherAPI = new EtherAPI();
         this.etherAPI.loadAPI();
         this.etherLuaManager = new EtherLuaManager();
