@@ -3,7 +3,6 @@ package EtherHack.Ether;
 public class EtherMain {
 
     private static EtherMain instance;
-    public EtherHackCredits etherHackCredits;
     public EtherGUI etherGUI;
     public EtherAPI etherAPI;
     public EtherInitializer etherInitializer;
@@ -18,7 +17,6 @@ public class EtherMain {
      * Реализация инициализации EtherHack
      */
     public void initEther(){
-        etherHackCredits = new EtherHackCredits();
         etherInitializer = new EtherInitializer();
         etherAPI = new EtherAPI();
         etherGUI = new EtherGUI();
