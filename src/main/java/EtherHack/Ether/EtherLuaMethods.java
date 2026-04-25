@@ -450,16 +450,6 @@ public final class EtherLuaMethods {
         return EtherMain.getInstance().etherAPI.isVisualsPlayersEnable;
     }
 
-    @LuaMethod(name="toggleVisualsPlayersEnable", global=true)
-    public static void toggleVisualsPlayersEnable(boolean isToggled) {
-        EtherMain.getInstance().etherAPI.isVisualsPlayersEnable = isToggled;
-    }
-
-    @LuaMethod(name="isVisualDrawCredits", global=true)
-    public static boolean isVisualDrawCredits() {
-        return EtherMain.getInstance().etherAPI.isVisualDrawCredits;
-    }
-
     @LuaMethod(name="toggleVisualDrawCredits", global=true)
     public static void toggleVisualDrawCredits(boolean isToggled) {
         EtherMain.getInstance().etherAPI.isVisualDrawCredits = isToggled;
