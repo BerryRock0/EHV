@@ -16,6 +16,35 @@ EtherHack.API = {
         isDisableThirst = false,
     },
 
+   	-- Смена версии клиента
+   	incrementA = function()
+		incrementMajorVersion();
+   	end,
+   	
+   	incrementB = function()
+		incrementMinorVersion();
+   	end,
+   	
+   	incrementC = function()
+		incrementCoreVersion();
+   	end,
+   	
+   	decrementA = function()
+		decrementMajorVersion();
+   	end,
+   	
+   	decrementB = function()
+		decrementMinorVersion();
+   	end,
+   	
+   	decrementC = function()
+		decrementCoreVersion();
+   	end,
+   	
+	changeVersion = function() 
+		hangeClientVersion();
+	end,
+
     -- Получение состояние режима мультиудара
     openAdminMenu = function()
         if EtherAdminPanel.instance then
