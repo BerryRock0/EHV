@@ -40,7 +40,7 @@ import zombie.vehicles.BaseVehicle;
 /**
  * Этот класс предоставляет API Ether для приложения.
  */
-public class EtherAPI implements IOnUIElementPostRenderListener
+public class EtherAPI
 {
     private Exposer exposer;
     private final EtherLuaMethods etherLuaMethods = new EtherLuaMethods();
