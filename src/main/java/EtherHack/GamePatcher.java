@@ -1,476 +1,297 @@
 package EtherHack;
 
-import EtherHack.utils.Logger;
+import EtherHack.Main;
 import EtherHack.utils.Info;
+import EtherHack.utils.Logger;
 import EtherHack.utils.Patch;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.*;
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.nio.file.CopyOption;
+import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.*;
-import java.util.jar.JarEntry;
+import java.nio.file.attribute.FileAttribute;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.FieldInsnNode;
+import org.objectweb.asm.tree.InsnList;
+import org.objectweb.asm.tree.InsnNode;
+import org.objectweb.asm.tree.JumpInsnNode;
+import org.objectweb.asm.tree.LabelNode;
+import org.objectweb.asm.tree.LdcInsnNode;
+import org.objectweb.asm.tree.MethodInsnNode;
+import org.objectweb.asm.tree.VarInsnNode;
 
-/**
- * Класс, отвечающий за установку и удаление чита из кодов игры
- */
 public class GamePatcher {
-
-    /**
-     * Список всех файлов, подлежащих инъекции
-     */
-    private final String[] patchFiles = new String[]{
-            "GameWindow.class", "inventory/ItemContainer.class", "ui/UIManager.class"
-    };
-
-    /**
-     * Название игровой папки с .class файлами
-     */
+    private final String[] patchFiles = new String[]{"GameWindow.class", "inventory/ItemContainer.class", "Lua/LuaEventManager.class", "Lua/LuaManager.class"};
     private final String gameClassFolder = "zombie";
+    private final String whiteListPathEtherFiles = "EtherHack";
 
-    /**
-     * Папки и файлы, которые нужно экспортировать в корневую директорию игры
-     */
-    private final String[] whiteListPathEtherFiles = new String[]{
-            "com/zwitserloot", "Class50", "EtherHack", "lombok", "org/objectweb"
-    };
-
-    /**
-     * Экспортирование файлов EtherHack в корневую директорию игры
-     */
     public void extractEtherHack() {
         try {
-            // Получаем местоположение запущенного JAR файла
             String jarFilePath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-
-            // Открываем текущий JAR-файл
-            try (JarFile jarFile = new JarFile(jarFilePath)) {
-                // Получаем все записи из JAR-файла
-                Enumeration<JarEntry> entries = jarFile.entries();
-
-                // Получаем текущую директорию
-                Path currentDirectory = Paths.get(System.getProperty("user.dir"));
-
-                // Проходим по каждой записи в JAR-файле
-                while (entries.hasMoreElements()) {
-                    JarEntry entry = entries.nextElement();
-
-                    // Проверяем, что запись находится в белом списке
-                    if (isInWhitelist(entry.getName())) {
-                        // Создаем путь для извлечения файла
-                        Path extractPath = currentDirectory.resolve(entry.getName());
-
-                        // Если запись - директория, создаем пустую директорию
-                        if (entry.isDirectory()) {
-                            Files.createDirectories(extractPath);
-                        } else {
-                            // Если запись - файл, копируем его содержимое
-                            try (InputStream inputStream = jarFile.getInputStream(entry)) {
+            Path currentDirectory = Paths.get(System.getProperty("user.dir"), new String[0]);
+            try (JarFile jarFile = new JarFile(jarFilePath);){
+                jarFile.stream().filter(entry -> entry.getName().startsWith("EtherHack")).forEach(entry -> {
+                    block9: {
+                        try {
+                            Path extractPath = currentDirectory.resolve(entry.getName());
+                            if (entry.isDirectory()) {
+                                Files.createDirectories(extractPath, new FileAttribute[0]);
+                                break block9;
+                            }
+                            Files.createDirectories(extractPath.getParent(), new FileAttribute[0]);
+                            try (InputStream inputStream = jarFile.getInputStream((ZipEntry)entry);){
                                 Files.copy(inputStream, extractPath, StandardCopyOption.REPLACE_EXISTING);
                             }
                         }
+                        catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
+                });
+                Logger.print("Extraction completed successfully");
             }
-
-            Logger.print("Extraction completed successfully");
-        } catch (IOException | URISyntaxException e) {
+        }
+        catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     *Проверяет, находится ли запись в белом списке.
-     * @param entryName путь и имя записи в JAR-файле
-     * @return {@code true}, если запись находится в белом списке, иначе {@code false}
-     */
-    private boolean isInWhitelist(String entryName) {
-        // Проверяем, что запись находится в белом списке
-        for (String whitelistEntry : whiteListPathEtherFiles) {
-            if (entryName.startsWith(whitelistEntry)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     *  Удаление всех экспортированных файлов EtherHack из директории игры
-     */
     public void uninstallEtherHackFiles() {
         Logger.print("Deleting all EtherHack files...");
         try {
-            // Получаем текущую директорию
-            Path currentDirectory = Paths.get(System.getProperty("user.dir"));
-
-            // Проходим по каждому элементу в белом списке
-            for (String deletePath : whiteListPathEtherFiles) {
-                Path targetPath = currentDirectory.resolve(deletePath);
-
-                // Удаляем папки и файлы, если они существуют
-                if (Files.exists(targetPath)) {
-                    if (Files.isDirectory(targetPath)) {
-                        deleteDirectory(targetPath);
-                    } else {
-                        Files.delete(targetPath);
-                    }
-                }
+            Path currentDirectory = Paths.get(System.getProperty("user.dir"), new String[0]);
+            Path targetPath = currentDirectory.resolve("EtherHack");
+            if (Files.exists(targetPath, new LinkOption[0])) {
+                Files.walk(targetPath, new FileVisitOption[0]).sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
             }
-
             Logger.print("Deletion EtherHack files completed successfully");
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (IOException except) {
+            except.printStackTrace();
         }
     }
 
-    /**
-    *
-     * Рекурсивно удаляет папку и ее содержимое.
-     * @param directoryPath путь к удаляемой папке
-     */
-    private void deleteDirectory(Path directoryPath) throws IOException {
-        // Рекурсивное удаление папки и ее содержимого
-        Files.walk(directoryPath)
-                .sorted(Comparator.reverseOrder())
-                .map(Path::toFile)
-                .forEach(File::delete);
-    }
-
-    /**
-     * Создает резервные копии игровых файлов, если они еще не существуют.
-     * Файлы будут сохранены с расширением .bkup в той же папке, что и оригиналы.
-     */
     public void backupGameFiles() {
-        Path currentPath = Paths.get("").toAbsolutePath();
-
-        for (int i = 0; i < patchFiles.length; i++) {
-            String iteration = "[" + (i + 1) + "/" + patchFiles.length + "]";
-            Logger.print("Creating a backup file '" + patchFiles[i] + "' " + iteration);
-
-            Path originalFilePath = Paths.get(currentPath.toString(), gameClassFolder, patchFiles[i]);
-
-            if (Files.exists(originalFilePath)) {
+        Path currentPath = Paths.get("", new String[0]).toAbsolutePath();
+        for (int i = 0; i < this.patchFiles.length; ++i) {
+            String iteration = "[" + (i + 1) + "/" + this.patchFiles.length + "]";
+            Logger.print("Creating a backup file '" + this.patchFiles[i] + "' " + iteration);
+            Path originalFilePath = Paths.get(currentPath.toString(), "zombie", this.patchFiles[i]);
+            if (Files.exists(originalFilePath, new LinkOption[0])) {
                 try {
-                    Path backupFilePath = Paths.get(originalFilePath.toString() + ".bkup");
-
-                    if (Files.exists(backupFilePath)) {
+                    Path backupFilePath = Paths.get(originalFilePath + ".bkup", new String[0]);
+                    if (Files.exists(backupFilePath, new LinkOption[0])) {
                         Logger.print("Backup of the file already exists. Skipping backup.");
-                    } else {
-                        Files.copy(originalFilePath, backupFilePath);
+                        continue;
                     }
-                } catch (IOException e) {
+                    Files.copy(originalFilePath, backupFilePath, new CopyOption[0]);
+                }
+                catch (IOException e) {
                     Logger.print("Error while creating backup file: " + e.getMessage());
                 }
-            } else {
-                Logger.print(patchFiles[i] + " file not found.");
+                continue;
             }
+            Logger.print(this.patchFiles[i] + " file not found.");
         }
-
         Logger.print("Backups of game files have been completed!");
     }
 
-    /**
-     * Внедрение в файл игрового окна
-     */
     public void patchGameWindow() {
-        Patch.injectIntoClass("zombie/GameWindow", "InitDisplay",true, method -> {
+        Patch.injectIntoClass("zombie/GameWindow", "InitDisplay", true, method -> {
+            AbstractInsnNode[] nodes;
             String oldTitle = "Project Zomboid";
             String newTitle = "Project Zomboid" + Info.CHEAT_WINDOW_TITLE_SUFFIX;
-
-            // Замена строки в методе
-            for (AbstractInsnNode insn : method.instructions.toArray()) {
-                if (insn instanceof LdcInsnNode ldcInsnNode) {
-                    if (ldcInsnNode.cst.equals(oldTitle)) {
-                        ldcInsnNode.cst = newTitle;
-                    }
-                }
+            for (AbstractInsnNode insn : nodes = method.instructions.toArray()) {
+                if (!(insn instanceof LdcInsnNode)) continue;
+                LdcInsnNode ldcInsnNode = (LdcInsnNode)insn;
+                if (!ldcInsnNode.cst.equals(oldTitle)) continue;
+                ldcInsnNode.cst = newTitle;
             }
-            // Внедрение вызова EtherMain.getInstance().initEther()
+        });
+        Patch.injectIntoClass("zombie/GameWindow", "init", true, method -> {
+            AbstractInsnNode insertionPoint = null;
+            for (AbstractInsnNode insn : method.instructions.toArray()) {
+                MethodInsnNode methodInsn;
+                if (!(insn instanceof MethodInsnNode) || (methodInsn = (MethodInsnNode)insn).getOpcode() != 184 || !methodInsn.owner.equals("zombie/Lua/LuaManager") || !methodInsn.name.equals("init")) continue;
+                insertionPoint = insn;
+                break;
+            }
+            if (insertionPoint == null) {
+                throw new IllegalStateException("Cannot find LuaManager.init() invocation in the method when patching the Game window");
+            }
+            InsnList initEtherLuaInstructions = new InsnList();
+            initEtherLuaInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherLuaCompiler", "getInstance", "()LEtherHack/Ether/EtherLuaCompiler;", false));
+            initEtherLuaInstructions.add(new MethodInsnNode(182, "EtherHack/Ether/EtherLuaCompiler", "init", "()V", false));
+            method.instructions.insert(insertionPoint, initEtherLuaInstructions);
+            AbstractInsnNode lastInsn = method.instructions.getLast();
+            if (lastInsn == null) {
+                throw new IllegalStateException("Could not find the end of the method when patching the Game window");
+            }
+            InsnList initLogoInstructions = new InsnList();
+            initLogoInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherLogo", "getInstance", "()LEtherHack/Ether/EtherLogo;", false));
+            initLogoInstructions.add(new MethodInsnNode(182, "EtherHack/Ether/EtherLogo", "init", "()V", false));
+            method.instructions.insertBefore(lastInsn, initLogoInstructions);
             InsnList initEtherInstructions = new InsnList();
-            initEtherInstructions.add(new MethodInsnNode(
-                    Opcodes.INVOKESTATIC,
-                    "EtherHack/Ether/EtherMain",
-                    "getInstance",
-                    "()LEtherHack/Ether/EtherMain;",
-                    false
-            ));
-            initEtherInstructions.add(new MethodInsnNode(
-                    Opcodes.INVOKEVIRTUAL,
-                    "EtherHack/Ether/EtherMain",
-                    "initEther",
-                    "()V",
-                    false
-            ));
-            method.instructions.insert(initEtherInstructions);
+            initEtherInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
+            initEtherInstructions.add(new MethodInsnNode(182, "EtherHack/Ether/EtherMain", "init", "()V", false));
+            method.instructions.insertBefore(lastInsn, initEtherInstructions);
         });
     }
 
-    /**
-     * Внедрение в файлы игровых предметов
-     */
     public void patchItemContainer() {
-        Patch.injectIntoClass("zombie/inventory/ItemContainer", "getWeight",false, method -> {
+        Patch.injectIntoClass("zombie/inventory/ItemContainer", "getWeight", false, method -> {
             InsnList newInstructions = new InsnList();
-
-            // Вставка проверки "this.parent instanceof IsoPlayer"
-            newInstructions.add(new VarInsnNode(Opcodes.ALOAD, 0));  // загрузить 'this'
-            newInstructions.add(new FieldInsnNode(Opcodes.GETFIELD, "zombie/inventory/ItemContainer", "parent", "Lzombie/characters/IsoGameCharacter;"));  // получить 'parent'
-            newInstructions.add(new TypeInsnNode(Opcodes.INSTANCEOF, "zombie/characters/IsoPlayer"));  // проверить, является ли 'parent' экземпляром 'IsoPlayer'
-
-            LabelNode ifLabel = new LabelNode();
-            newInstructions.add(new JumpInsnNode(Opcodes.IFEQ, ifLabel));  // если 'parent' не является экземпляром 'IsoPlayer', перейти к метке 'ifLabel'
-
-            // Вставка проверки "EtherMain.getInstance().etherAPI.isWeightBypass"
-            newInstructions.add(new MethodInsnNode(
-                    Opcodes.INVOKESTATIC,
-                    "EtherHack/Ether/EtherMain",
-                    "getInstance",
-                    "()LEtherHack/Ether/EtherMain;",
-                    false
-            ));
-            newInstructions.add(new FieldInsnNode(
-                    Opcodes.GETFIELD,
-                    "EtherHack/Ether/EtherMain",
-                    "etherAPI",
-                    "LEtherHack/Ether/EtherAPI;"
-            ));
-            newInstructions.add(new FieldInsnNode(
-                    Opcodes.GETFIELD,
-                    "EtherHack/Ether/EtherAPI",
-                    "isUnlimitedCarry",
-                    "Z"
-            ));
-
-            LabelNode returnLabel = new LabelNode();
-            newInstructions.add(new JumpInsnNode(Opcodes.IFEQ, returnLabel));  // если 'isInfiniteWeight' == 0 (false), перейти к метке 'returnLabel'
-
-            // Вставка "return 0;"
-            newInstructions.add(new InsnNode(Opcodes.ICONST_0));
-            newInstructions.add(new InsnNode(Opcodes.IRETURN));
-
-            // Метки для продолжения выполнения оригинального метода, если условие if не выполнено
-            newInstructions.add(ifLabel);
-            newInstructions.add(returnLabel);
-
-            // Вставить новые инструкции в начало метода
+            LabelNode carryOnLabel = new LabelNode();
+            newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
+            newInstructions.add(new JumpInsnNode(198, carryOnLabel));
+            newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
+            newInstructions.add(new JumpInsnNode(198, carryOnLabel));
+            newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "isUnlimitedCarry", "Z"));
+            newInstructions.add(new JumpInsnNode(153, carryOnLabel));
+            newInstructions.add(new InsnNode(3));
+            newInstructions.add(new InsnNode(172));
+            newInstructions.add(carryOnLabel);
             method.instructions.insert(newInstructions);
         });
-
-        Patch.injectIntoClass("zombie/inventory/ItemContainer", "getCapacityWeight",false, method -> {
+        Patch.injectIntoClass("zombie/inventory/ItemContainer", "getCapacityWeight", false, method -> {
             InsnList newInstructions = new InsnList();
-
-            // Вставка проверки "EtherMain.getInstance().etherAPI.isWeightBypass"
-            newInstructions.add(new MethodInsnNode(
-                    Opcodes.INVOKESTATIC,
-                    "EtherHack/Ether/EtherMain",
-                    "getInstance",
-                    "()LEtherHack/Ether/EtherMain;",
-                    false
-            ));
-            newInstructions.add(new FieldInsnNode(
-                    Opcodes.GETFIELD,
-                    "EtherHack/Ether/EtherMain",
-                    "etherAPI",
-                    "LEtherHack/Ether/EtherAPI;"
-            ));
-            newInstructions.add(new FieldInsnNode(
-                    Opcodes.GETFIELD,
-                    "EtherHack/Ether/EtherAPI",
-                    "isUnlimitedCarry",
-                    "Z"
-            ));
-
-            LabelNode returnLabel = new LabelNode();
-            newInstructions.add(new JumpInsnNode(Opcodes.IFEQ, returnLabel));  // если 'isInfiniteWeight' == 0 (false), перейти к метке 'returnLabel'
-
-            // Вставка "return 0;"
-            newInstructions.add(new InsnNode(Opcodes.FCONST_0));
-            newInstructions.add(new InsnNode(Opcodes.FRETURN));
-
-            // Метки для продолжения выполнения оригинального метода, если условие if не выполнено
-            newInstructions.add(returnLabel);
-
-            // Вставить новые инструкции в начало метода
+            LabelNode carryOnLabel = new LabelNode();
+            newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
+            newInstructions.add(new JumpInsnNode(198, carryOnLabel));
+            newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
+            newInstructions.add(new JumpInsnNode(198, carryOnLabel));
+            newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "isUnlimitedCarry", "Z"));
+            newInstructions.add(new JumpInsnNode(153, carryOnLabel));
+            newInstructions.add(new InsnNode(11));
+            newInstructions.add(new InsnNode(174));
+            newInstructions.add(carryOnLabel);
             method.instructions.insert(newInstructions);
         });
-
-        Patch.injectIntoClass("zombie/inventory/ItemContainer", "getContentsWeight",false, method -> {
+        Patch.injectIntoClass("zombie/inventory/ItemContainer", "getContentsWeight", false, method -> {
             InsnList newInstructions = new InsnList();
-
-            // Вставка проверки "EtherMain.getInstance().etherAPI.isWeightBypass"
-            newInstructions.add(new MethodInsnNode(
-                    Opcodes.INVOKESTATIC,
-                    "EtherHack/Ether/EtherMain",
-                    "getInstance",
-                    "()LEtherHack/Ether/EtherMain;",
-                    false
-            ));
-            newInstructions.add(new FieldInsnNode(
-                    Opcodes.GETFIELD,
-                    "EtherHack/Ether/EtherMain",
-                    "etherAPI",
-                    "LEtherHack/Ether/EtherAPI;"
-            ));
-            newInstructions.add(new FieldInsnNode(
-                    Opcodes.GETFIELD,
-                    "EtherHack/Ether/EtherAPI",
-                    "isUnlimitedCarry",
-                    "Z"
-            ));
-
-            LabelNode returnLabel = new LabelNode();
-            newInstructions.add(new JumpInsnNode(Opcodes.IFEQ, returnLabel));  // если 'isInfiniteWeight' == 0 (false), перейти к метке 'returnLabel'
-
-            // Вставка "return 0;"
-            newInstructions.add(new InsnNode(Opcodes.FCONST_0));
-            newInstructions.add(new InsnNode(Opcodes.FRETURN));
-
-            // Метки для продолжения выполнения оригинального метода, если условие if не выполнено
-            newInstructions.add(returnLabel);
-
-            // Вставить новые инструкции в начало метода
+            LabelNode carryOnLabel = new LabelNode();
+            newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
+            newInstructions.add(new JumpInsnNode(198, carryOnLabel));
+            newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
+            newInstructions.add(new JumpInsnNode(198, carryOnLabel));
+            newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "isUnlimitedCarry", "Z"));
+            newInstructions.add(new JumpInsnNode(153, carryOnLabel));
+            newInstructions.add(new InsnNode(11));
+            newInstructions.add(new InsnNode(174));
+            newInstructions.add(carryOnLabel);
             method.instructions.insert(newInstructions);
         });
     }
 
-
-    /**
-     * Внедрение в файл UIManager
-     */
-    public void patchUIManager() {
-        Patch.injectIntoClass("zombie/ui/UIManager", "render", true, method -> {
-            // Создание нового вызова метода PreRender
-            MethodInsnNode PreRenderHook = new MethodInsnNode(
-                    Opcodes.INVOKESTATIC,
-                    "EtherHack/hooks/OnUIElementPreRenderHook",
-                    "call",
-                    "()V",
-                    false
-            );
-
-            // Создание нового вызова метода PostRender
-            MethodInsnNode PostRenderHook = new MethodInsnNode(
-                    Opcodes.INVOKESTATIC,
-                    "EtherHack/hooks/OnUIElementPostRenderHook",
-                    "call",
-                    "()V",
-                    false
-            );
-
-            // Поиск вызова LuaEventManager.triggerEvent("OnPreUIDraw")
-            Patch.insertHookForEventTrigger(method, "OnPreUIDraw", PreRenderHook , true);
-
-            // Поиск вызова LuaEventManager.triggerEvent("OnPostUIDraw")
-            Patch.insertHookForEventTrigger(method, "OnPostUIDraw", PostRenderHook, false);
+    public void patchLuaEventManager() {
+        Patch.injectIntoClass("zombie/Lua/LuaEventManager", "triggerEvent", true, method -> {
+            InsnList toInject = new InsnList();
+            toInject.add(new VarInsnNode(25, 0));
+            toInject.add(new MethodInsnNode(184, "EtherHack/utils/EventSubscriber", "invokeSubscriber", "(Ljava/lang/String;)V", false));
+            method.instructions.insertBefore(method.instructions.get(0), toInject);
         });
     }
 
-    /**
-     * Проверяет, содержит ли хотя бы один из заданных файлов аннотацию @Injected.
-     * @return true, если аннотация @Injected найдена хотя бы в одном файле. false в противном случае.
-     */
+    public void patchLuaManager() {
+        Patch.injectIntoClass("zombie/Lua/LuaManager", "RunLua", true, method -> {
+            if (!method.desc.equals("(Ljava/lang/String;Z)Ljava/lang/Object;")) {
+                return;
+            }
+            InsnList newInstructions = new InsnList();
+            LabelNode endOfMethodLabel = new LabelNode();
+            newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherLuaCompiler", "getInstance", "()LEtherHack/Ether/EtherLuaCompiler;", false));
+            newInstructions.add(new VarInsnNode(25, 0));
+            newInstructions.add(new MethodInsnNode(182, "EtherHack/Ether/EtherLuaCompiler", "isShouldLuaCompile", "(Ljava/lang/String;)Z", false));
+            newInstructions.add(new JumpInsnNode(154, endOfMethodLabel));
+            newInstructions.add(new InsnNode(1));
+            newInstructions.add(new InsnNode(176));
+            newInstructions.add(endOfMethodLabel);
+            method.instructions.insert(newInstructions);
+        });
+    }
+
     public boolean checkInjectedAnnotations() {
-        return Arrays.stream(patchFiles)
-                .anyMatch(filePath -> Patch.isInjectedAnnotationPresent(filePath, gameClassFolder));
+        return Arrays.stream(this.patchFiles).anyMatch(filePath -> Patch.isInjectedAnnotationPresent(filePath, "zombie"));
     }
 
-    /**
-     * Проверяет наличие игровой папки и определенных файлов внутри.
-     * @return true, если игровая папка и все требуемые файлы присутствуют. false в противном случае.
-     */
     public boolean isGameFolder() {
-        Path gameFolderPath = Paths.get(gameClassFolder);
-
-        // Проверяем, существует ли папка игры
-        if (Files.exists(gameFolderPath) && Files.isDirectory(gameFolderPath)) {
-            // Если папка существует, проверяем наличие всех необходимых файлов
-            return Arrays.stream(patchFiles)
-                    .allMatch(fileName -> Files.exists(gameFolderPath.resolve(fileName)));
+        Path gameFolderPath = Paths.get("zombie", new String[0]);
+        if (Files.exists(gameFolderPath, new LinkOption[0]) && Files.isDirectory(gameFolderPath, new LinkOption[0])) {
+            return Arrays.stream(this.patchFiles).allMatch(fileName -> Files.exists(gameFolderPath.resolve((String)fileName), new LinkOption[0]));
         }
-
         return false;
     }
 
-    /**
-     * Патчинг игровых bytecode файлов игры
-     * для реализации собственного фунционала
-     */
     public void patchGame() {
         Logger.printCredits();
-
         Logger.print("Preparing to install the EtherHack...");
-
-        if (!isGameFolder()){
+        if (!this.isGameFolder()) {
             Logger.print("No game files were found in this directory. Place the cheat in the root folder of the game");
             return;
-        };
-
+        }
         Logger.print("Checking for injections in game files");
-
-        if (checkInjectedAnnotations()) {
+        if (this.checkInjectedAnnotations()) {
             Logger.print("Signs of interference were found in the game files. If you have installed this cheat before, run it with the '--uninstall' flag. Otherwise, check the integrity of the game files via Steam");
             return;
         }
         Logger.print("No signs of injections were found. Preparing for backup...");
-
-        backupGameFiles();
-
+        this.backupGameFiles();
         Logger.print("Preparation for injection into game file...");
-
-        patchGameWindow();
-
-        patchUIManager();
-
-        patchItemContainer();
-
+        this.patchGameWindow();
+        this.patchItemContainer();
+        this.patchLuaEventManager();
+        this.patchLuaManager();
         Patch.saveModifiedClasses();
-
-        Logger.print("Extracting EtherHack files to the current directory");
-
-        extractEtherHack();
-
+        Logger.print("The injections were completed!");
+        Logger.print("Extracting EtherHack files to the current directory...");
+        this.extractEtherHack();
         Logger.print("The cheat installation is complete, you can enter the game!");
     }
 
-    /**
-     * Восстановление оригинальных файлов игры
-     */
     public void restoreFiles() {
+        Logger.printCredits();
         Logger.print("Restoring files...");
-
-        Path currentPath = Paths.get("").toAbsolutePath();
-
-        for (int i = 0; i < patchFiles.length; i++) {
-            String fileName = patchFiles[i];
-            String iteration = "[" + (i + 1) + "/" + patchFiles.length + "]";
+        Path currentPath = Paths.get("", new String[0]).toAbsolutePath();
+        for (int i = 0; i < this.patchFiles.length; ++i) {
+            String fileName = this.patchFiles[i];
+            String iteration = "[" + (i + 1) + "/" + this.patchFiles.length + "]";
             Logger.print("Restoring the file '" + fileName + "' " + iteration);
-
-            Path originalFilePath = Paths.get(currentPath.toString(), gameClassFolder, patchFiles[i]);
-            Path backupFilePath = Paths.get(originalFilePath.toString() + ".bkup");
-
-            if (Files.exists(backupFilePath)) {
+            Path originalFilePath = Paths.get(currentPath.toString(), "zombie", this.patchFiles[i]);
+            Path backupFilePath = Paths.get(originalFilePath.toString() + ".bkup", new String[0]);
+            if (Files.exists(backupFilePath, new LinkOption[0])) {
                 try {
-                    if (Files.exists(originalFilePath)) {
+                    if (Files.exists(originalFilePath, new LinkOption[0])) {
                         Files.delete(originalFilePath);
                     }
-
-                    Files.move(backupFilePath, originalFilePath);
-                } catch (IOException e) {
-                    Logger.print("Error when restoring the game file '" + fileName +"': " + e.getMessage());
+                    Files.move(backupFilePath, originalFilePath, new CopyOption[0]);
                 }
-            } else {
-                Logger.print("Backup file '" + fileName + ".bkup' not found. Skipping restore");
+                catch (IOException e) {
+                    Logger.print("Error when restoring the game file '" + fileName + "': " + e.getMessage());
+                }
+                continue;
             }
+            Logger.print("Backup file '" + fileName + ".bkup' not found. Skipping restore");
         }
-
-        uninstallEtherHackFiles();
-
         Logger.print("Files restoration completed!");
+        this.uninstallEtherHackFiles();
     }
-
 }
