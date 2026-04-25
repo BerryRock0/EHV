@@ -92,7 +92,6 @@ public class EtherAPI
     public boolean isVisualsZombiesEnable;
     public boolean isVisualDrawToLocalPlayer;
     public boolean isVisualDrawPlayerNickname;
-    public boolean isVisualDrawCredits;
     public boolean isVisualDrawPlayerInfo;
     public boolean isVisualDrawLineToVehicle;
     public boolean isVisualDrawLineToPlayers;
@@ -153,7 +152,6 @@ public class EtherAPI
         config.setProperty("isVisualsZombiesEnable", Boolean.toString(this.isVisualsZombiesEnable));
         config.setProperty("isVisualDrawToLocalPlayer", Boolean.toString(this.isVisualDrawToLocalPlayer));
         config.setProperty("isVisualDrawPlayerNickname", Boolean.toString(this.isVisualDrawPlayerNickname));
-        config.setProperty("isVisualDrawCredits", Boolean.toString(this.isVisualDrawCredits));
         config.setProperty("isVisualDrawPlayerInfo", Boolean.toString(this.isVisualDrawPlayerInfo));
         config.setProperty("isVisualDrawLineToVehicle", Boolean.toString(this.isVisualDrawLineToVehicle));
         config.setProperty("isVisualDrawLineToPlayers", Boolean.toString(this.isVisualDrawLineToPlayers));
@@ -226,7 +224,6 @@ public class EtherAPI
         this.isVisualsZombiesEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsZombiesEnable", (boolean)false);
         this.isVisualDrawToLocalPlayer = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawToLocalPlayer", (boolean)false);
         this.isVisualDrawPlayerNickname = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawPlayerNickname", (boolean)false);
-        this.isVisualDrawCredits = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawCredits", (boolean)true);
         this.isVisualDrawPlayerInfo = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawPlayerInfo", (boolean)false);
         this.isVisualDrawLineToVehicle = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawLineToVehicle", (boolean)false);
         this.isVisualDrawLineToPlayers = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawLineToPlayers", (boolean)false);
@@ -291,7 +288,6 @@ public class EtherAPI
         this.isVisualsZombiesEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsZombiesEnable", (boolean)false);
         this.isVisualDrawToLocalPlayer = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawToLocalPlayer", (boolean)false);
         this.isVisualDrawPlayerNickname = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawPlayerNickname", (boolean)false);
-        this.isVisualDrawCredits = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawCredits", (boolean)true);
         this.isVisualDrawPlayerInfo = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawPlayerInfo", (boolean)false);
         this.isVisualDrawLineToVehicle = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawLineToVehicle", (boolean)false);
         this.isVisualDrawLineToPlayers = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawLineToPlayers", (boolean)false);
