@@ -8,7 +8,6 @@ import EtherHack.utils.Logger;
 public class EtherMain {
     private static EtherMain instance;
     public EtherTranslator etherTranslator;
-    public EtherCredits etherCredits;
     public EtherLuaManager etherLuaManager;
     public EtherAPI etherAPI;
 
