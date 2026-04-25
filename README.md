@@ -51,18 +51,6 @@ Also, if desired, you can provide [support <3]
 
 (**) - It only works when creating a character from the main menu, that is, points will not be added to the menu after death. Solution: after death, log out of the server and connect again.
 
-
-## Demo
-![1]
-![2]
-![3]
-![4]
-![5]
-![6]
-![7]
-![8]
-![9]
-
 ## Getting Started
 
 This section will provide information on how to get a local copy of the project up and running.
