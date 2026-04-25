@@ -208,31 +208,6 @@ public class GamePatcher {
             ));
             method.instructions.insert(initEtherInstructions);
         });
-
-        Patch.injectIntoClass("zombie/GameWindow", "init", true, method -> {
-            AbstractInsnNode lastInsn = method.instructions.getLast();
-            if (lastInsn.getOpcode() == Opcodes.RETURN) {
-                InsnList initEtherInstructions = new InsnList();
-                initEtherInstructions.add(new MethodInsnNode(
-                        Opcodes.INVOKESTATIC,
-                        "EtherHack/Ether/EtherLogo",
-                        "getInstance",
-                        "()LEtherHack/Ether/EtherLogo;",
-                        false
-                ));
-                initEtherInstructions.add(new MethodInsnNode(
-                        Opcodes.INVOKEVIRTUAL,
-                        "EtherHack/Ether/EtherLogo",
-                        "initLogoState",
-                        "()V",
-                        false
-                ));
-                method.instructions.insertBefore(lastInsn, initEtherInstructions);
-            } else {
-                throw new IllegalStateException("Cannot find RETURN instruction in the method");
-            }
-        });
-
     }
 
     /**
