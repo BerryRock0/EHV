@@ -137,10 +137,6 @@ public class GamePatcher {
             if (lastInsn == null) {
                 throw new IllegalStateException("Could not find the end of the method when patching the Game window");
             }
-            InsnList initLogoInstructions = new InsnList();
-            initLogoInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherLogo", "getInstance", "()LEtherHack/Ether/EtherLogo;", false));
-            initLogoInstructions.add(new MethodInsnNode(182, "EtherHack/Ether/EtherLogo", "init", "()V", false));
-            method.instructions.insertBefore(lastInsn, initLogoInstructions);
             InsnList initEtherInstructions = new InsnList();
             initEtherInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
             initEtherInstructions.add(new MethodInsnNode(182, "EtherHack/Ether/EtherMain", "init", "()V", false));
