@@ -12,6 +12,7 @@ import zombie.Lua.LuaManager;
 import zombie.ZomboidFileSystem;
 import zombie.characters.IsoPlayer;
 import zombie.core.Core;
+import zombie.core.GameVersion;
 import zombie.network.GameClient;
 
 /**
@@ -29,6 +30,8 @@ public class EtherAPI implements IOnUIElementPostRenderListener {
      * Включен ли режим бесконечной грузоподъемности
      */
     public boolean isUnlimitedCarry = false;
+
+    public static int a,b,c;
 
     /**
      * Конструктор класса EtherAPI.
@@ -182,5 +185,48 @@ public class EtherAPI implements IOnUIElementPostRenderListener {
                 }
             }
         }
+
+
+        @LuaMethod(name = "incrementMajorVersion", global = true)
+        public static void incrementMajorVersion()
+        {
+			a++;
+        }
+        
+        @LuaMethod(name = "incrementMinorVersion", global = true)
+        public static void incrementMinorVersion()
+        {
+			b++;
+        }
+        
+        @LuaMethod(name = "incrementCoreVersion", global = true)
+        public static void incrementCoreVersion()
+        {
+			c++;
+        }
+        
+        @LuaMethod(name = "decrementMajorVersion", global = true)
+        public static void decrementMajorVersion()
+        {
+			a--;
+        }
+        
+        @LuaMethod(name = "decrementMinorVersion", global = true)
+        public static void decrementMinorVersion()
+        {
+			b--;
+        }
+        
+        @LuaMethod(name = "decrementCoreVersion", global = true)
+        public static void decrementCoreVersion()
+        {
+			c--;
+        }
+
+        @LuaMethod(name = "changeClientVersion", global = true)
+        public static void changeClientVersion()
+        {
+            EtherAccess.getInstance().use(Core.class, "gameVersion", new GameVersion(a, b, Integer.toString(c)));
+        }        
     }
 }
