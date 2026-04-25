@@ -45,7 +45,7 @@ public class EtherAPI
     private Exposer exposer;
     private final EtherLuaMethods etherLuaMethods = new EtherLuaMethods();
     public HashMap<String, Texture> textureCache = new HashMap();
-    HashMap<String, float[]> originalWeaponStats = new HashMap();
+    public HashMap<String, float[]> originalWeaponStats = new HashMap();
     public Color mainUIAccentColor;
     public Color vehiclesUIColor;
     public Color zombiesUIColor;
@@ -322,7 +322,7 @@ public class EtherAPI
         if (localPlayer == null) {
             return;
         }
-        ArrayList inventoryItems = localPlayer.getInventory().getItems();
+        ArrayList<InventoryItem> inventoryItems = localPlayer.getInventory().getItems();
         if (inventoryItems != null && !inventoryItems.isEmpty()) {
             for (InventoryItem item : inventoryItems) {
                 String type;
@@ -342,7 +342,7 @@ public class EtherAPI
     }
 
     private void updateLocalPlayerFeatures() {
-        ArrayList inventoryItems;
+        ArrayList<InventoryItem> inventoryItems;
         HandWeapon weapon;
         IsoPlayer localPlayer = IsoPlayer.getInstance();
         if (localPlayer == null) {
@@ -506,12 +506,13 @@ public class EtherAPI
     }
 
     public void updateUltraPlayerVision() {
-        ArrayList players;
-        ArrayList zombies;
+        ArrayList<IsoPlayer> players;
+        ArrayList<IsoZombie> zombies;
+        
         if (!this.isVisualEnable360Vision) {
             return;
         }
-        ArrayList vehicles = IsoWorld.instance.getCell().getVehicles();
+        ArrayList<BaseVehicle> vehicles = IsoWorld.instance.getCell().getVehicles();
         if (vehicles != null && !vehicles.isEmpty()) {
             for (BaseVehicle vehicle : vehicles) {
                 vehicle.setAlpha(100.0f);
@@ -538,7 +539,7 @@ public class EtherAPI
         if (localPlayer == null) {
             return;
         }
-        ArrayList vehicles = IsoWorld.instance.getCell().getVehicles();
+        ArrayList<BaseVehicle> vehicles = IsoWorld.instance.getCell().getVehicles();
         float posLocalPlayerX = PlayerUtils.getScreenPositionX((IsoPlayer)localPlayer);
         float posLocalPlayerY = PlayerUtils.getScreenPositionY((IsoPlayer)localPlayer);
         float colorA = this.vehiclesUIColor.a;
@@ -573,7 +574,7 @@ public class EtherAPI
         if (localPlayer == null) {
             return;
         }
-        ArrayList zombies = IsoWorld.instance.getCell().getZombieList();
+        ArrayList<IsoZombie> zombies = IsoWorld.instance.getCell().getZombieList();
         float colorA = this.zombiesUIColor.a;
         float colorR = this.zombiesUIColor.r;
         float colorG = this.zombiesUIColor.g;
@@ -598,7 +599,7 @@ public class EtherAPI
         if (localPlayer == null) {
             return;
         }
-        ArrayList players = GameClient.instance.getPlayers();
+        ArrayList<IsoPlayer> players = GameClient.instance.getPlayers();
         float posLocalPlayerX = PlayerUtils.getScreenPositionX((IsoPlayer)localPlayer);
         float posLocalPlayerY = PlayerUtils.getScreenPositionY((IsoPlayer)localPlayer);
         float colorA = this.playersUIColor.a;
