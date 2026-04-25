@@ -108,10 +108,6 @@ function EtherVisualsPanel:createChildren()
     self:setScrollHeight(0);
     self:addScrollBars();
 
-    self:addCheckBox(getTranslate("UI_VisualsPanel_DrawCheatCredits"), function(isChecked)
-        toggleVisualDrawCredits(isChecked);
-    end, isVisualDrawCredits());
-
     self:addCheckBox(getTranslate("UI_VisualsPanel_IsVisualsEnable"), function(isChecked)
         toggleVisualsEnable(isChecked);
     end, isVisualsEnable());
