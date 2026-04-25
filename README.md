@@ -67,7 +67,7 @@ This tool requires:
 1. Download and install Java on your computer
 2. Make sure that the path to Java is set in your environment variables
 
-(For Windows: `WIN + X` -> `"System"` -> `"Advanced System Parameters"` -> `"Environment Variables"` -> `Double click on "Path"` -> `Insert path to java, for example "C:\Program Files\Java\jdk-20\bin"`)
+(For Windows: `WIN + X` -> `"System"` -> `"Advanced System Parameters"` -> `"Environment Variables"` -> `Double click on "Path"` -> `Insert path to java, for example "C:\Program Files\Java\jdk-17\bin"`)
 
 3. Clone the repository
 4. Open the project in the IDE and build the executable via Gradle `.jar` file
@@ -83,10 +83,6 @@ java -jar ./EtherHack-{yourVersion}.jar --install
 
 `{yourVersion}` - Specify your version of the cheat
 
-For example, for release 1.1, the command will look like this:
-```
-java -jar ./EtherHack-1.1.jar --install
-```
 ### Uninstallation
 Open the console in the root folder and run the following command:
 ```
@@ -94,11 +90,6 @@ java -jar ./EtherHack-{yourVersion}.jar --uninstall
 ```
 
 `{yourVersion}` - Specify your version of the cheat
-
-For example, for release 1.1, the command will look like this:
-```
-java -jar ./EtherHack-1.1.jar --uninstall
-```
 
 ## Usage
 
