@@ -6,6 +6,16 @@ require "ISUI/ISPanel"
 EtherVersionPanel = ISPanel:derive("EtherVersionPanel"); -- Наследование от ISPanel
 
 --*********************************************************
+--* Создание метки
+--*********************************************************
+function EtherSettingsPanel:addLabel(posX, posY, title)
+    local label = ISLabel:new(posX, posY + 3, getTextManager():getFontHeight(UIFont.Small), title, 1, 1, 1, 1, UIFont.Small, true)
+	self:addChild(label)
+    return label
+end
+
+
+--*********************************************************
 --* Обработка prerender
 --*********************************************************
 function EtherVersionPanel:prerender()
@@ -45,7 +55,7 @@ function EtherVersionPanel:createChildren()
 
     local changeButton = UIButton:new(self.entry.x + self.entry.width + 10, self.entry.y, 80, 24, getTranslate("UI_Settings_ConfigSave"), function ()
         local versionString = self.entry:getText();
-        if (configName ~= "") then
+        if (versionString ~= "") then
             changeVersion(versionString);
         end
     end)
