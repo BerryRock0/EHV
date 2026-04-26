@@ -3,12 +3,12 @@ require "ISUI/ISPanel"
 --*********************************************************
 --* Глобальные установки UI
 --*********************************************************
-EtherVisualsPanel = ISPanel:derive("EtherVisualsPanel"); -- Наследование от ISPanel
+EtherVersionPanel = ISPanel:derive("EtherVersionPanel"); -- Наследование от ISPanel
 
 --*********************************************************
 --* Обработка prerender
 --*********************************************************
-function EtherVisualsPanel:prerender()
+function EtherVersionPanel:prerender()
     self:setStencilRect(0,10,self:getWidth(),self:getHeight() - 20);
     ISPanel.prerender(self);
 end
@@ -16,7 +16,7 @@ end
 --*********************************************************
 --* Обработка render
 --*********************************************************
-function EtherVisualsPanel:render()
+function EtherVersionPanel:render()
     ISPanel.render(self);
     self:clearStencilRect();
 end
@@ -24,13 +24,13 @@ end
 --*********************************************************
 --* Обработка событий колесика мыши
 --*********************************************************
-function EtherVisualsPanel:onMouseWheel(del)
+function EtherVersionPanel:onMouseWheel(del)
 	self:setYScroll(self:getYScroll() - (del * 40));
 	return true;
 end
 
 
-function EtherVisualsPanel:createChildren()
+function EtherVersionPanel:createChildren()
     ISPanel.createChildren(self);
 
     self:setScrollChildren(true);
@@ -68,7 +68,7 @@ end
 --*********************************************************
 --* Создание нового экземпляра меню
 --*********************************************************
-function EtherVisualsPanel:new(posX, posY, width, height)
+function EtherVersionPanel:new(posX, posY, width, height)
     local menuTableData = {};
 
     menuTableData = ISPanel:new(posX, posY, width, height);
