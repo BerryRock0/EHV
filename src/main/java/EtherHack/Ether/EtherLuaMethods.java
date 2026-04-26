@@ -98,9 +98,9 @@ public final class EtherLuaMethods {
     }
 
     @LuaMethod(name="loopString", global=true)
-    public static String loopString(String string)
+    public static String loopString()
     {
-        return string;
+        return null;
     }
 
     @LuaMethod(name="loadConfig", global=true)
