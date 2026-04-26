@@ -28,7 +28,8 @@ local etherModules = {
     "EtherHack/lua/components/panels/EtherVisualsPanel.lua",
     "EtherHack/lua/components/panels/EtherMapPanel.lua",
     "EtherHack/lua/components/panels/EtherExploitPanel.lua",
-    "EtherHack/lua/components/panels/EtherSettingsPanel.lua"
+    "EtherHack/lua/components/panels/EtherSettingsPanel.lua",
+	"EtherHack/lua/components/panels/EtherVersionPanel.lua"
 }
 
 for _, module in ipairs(etherModules) do
