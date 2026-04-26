@@ -97,10 +97,10 @@ public final class EtherLuaMethods {
         return configFiles;
     }
 
-    @LuaMethod(name="loopString", global=true)
-    public static String loopString()
+    @LuaMethod(name="changeVersion", global = true)
+    public static changeVersion(String string)
     {
-        return null;
+        EtherMain.getInstance().etherApi.changeVersion(string);
     }
 
     @LuaMethod(name="loadConfig", global=true)
