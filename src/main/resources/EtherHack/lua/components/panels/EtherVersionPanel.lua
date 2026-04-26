@@ -64,13 +64,15 @@ function EtherVersionPanel:createChildren()
     self:setScrollHeight(0);
     self:addScrollBars();
 
-    self.entry = ISTextEntryBox:new(10, self.configs.y + self.configs.height + 10, self.width / 2 - 60, 24);
+	self:addLabel(10, 10, getTranslate("UI_Settings_VersionTitle"))
+	
+    self.entry = ISTextEntryBox:new(10, self.height + 10, self.width / 2 - 60, 24);
     self.entry.font = UIFont.Small;
     self.entry:initialise();
     self.entry:instantiate();
     self:addChild(self.entry);
 
-    local changeButton = UIButton:new(self.entry.x + self.entry.width + 10, self.entry.y, 80, 24, getTranslate("UI_Settings_ConfigSave"), function ()
+    local changeButton = UIButton:new(self.entry.x + self.entry.width + 10, self.entry.y, 80, 24, getTranslate("UI_Settings_VersionTitle"), function ()
         local versionString = self.entry:getText();
         if versionString ~= "" then
             changeVersion(versionString);
