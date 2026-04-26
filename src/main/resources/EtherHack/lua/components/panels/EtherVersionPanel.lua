@@ -37,7 +37,7 @@ function EtherVersionPanel:createChildren()
     self:setScrollHeight(0);
     self:addScrollBars();
 
-    self.entry = ISTextEntryBox:new(""), 10, self.configs.y + self.configs.height + 10, self.width / 2 - 60, 24);
+    self.entry = ISTextEntryBox:new("", 10, self.configs.y + self.configs.height + 10, self.width / 2 - 60, 24);
     self.entry.font = UIFont.Small;
     self.entry:initialise();
     self.entry:instantiate();
