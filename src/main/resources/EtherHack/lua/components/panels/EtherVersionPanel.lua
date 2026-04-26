@@ -8,7 +8,7 @@ EtherVersionPanel = ISPanel:derive("EtherVersionPanel"); -- Наследован
 --*********************************************************
 --* Создание метки
 --*********************************************************
-function EtherSettingsPanel:addLabel(posX, posY, title)
+function EtherVersionPanel:addLabel(posX, posY, title)
     local label = ISLabel:new(posX, posY + 3, getTextManager():getFontHeight(UIFont.Small), title, 1, 1, 1, 1, UIFont.Small, true)
 	self:addChild(label)
     return label
@@ -17,7 +17,7 @@ end
 --*********************************************************
 --* Создание кнопки
 --*********************************************************
-function EtherSettingsPanel:addButton(posX, posY, buttonTitle, onClick, isOnlyNotInGame)
+function EtherVersionPanel:addButton(posX, posY, buttonTitle, onClick, isOnlyNotInGame)
     local buttonWidth, buttonHeight = 130, 16;
     local button = UIButton:new(posX, posY, buttonWidth, buttonHeight, buttonTitle, onClick)
     button:initialise();
@@ -35,7 +35,7 @@ end
 --*********************************************************
 --* Создание слайдера
 --*********************************************************
-function EtherSettingsPanel:addSlider(posX, posY, width, height, value, minValue, maxValue, method)
+function EtherVersionPanel:addSlider(posX, posY, width, height, value, minValue, maxValue, method)
     local slider = UISlider:new(posX, posY, width, height, value, minValue, maxValue, method)
     slider:initialise();
     slider:instantiate();
@@ -46,7 +46,7 @@ end
 --*********************************************************
 --* Создание кнопки с заголовком
 --*********************************************************
-function EtherSettingsPanel:addButtonWithLabel(title, buttonTitle, func, isOnlyNotInGame)
+function EtherVersionPanel:addButtonWithLabel(title, buttonTitle, func, isOnlyNotInGame)
     local rows = self.rows;
     local buttonY = 200 + rows * 25;
 
@@ -60,7 +60,7 @@ end
 --*********************************************************
 --* Создание выбора цвета с заголовком
 --*********************************************************
-function EtherSettingsPanel:addColorPickerWithLabel(title, func, startColor)
+function EtherVersionPanel:addColorPickerWithLabel(title, func, startColor)
     local rows = self.rows;
     local buttonY = 200 + rows * 25;
 
@@ -83,7 +83,7 @@ end
 --*********************************************************
 --* Создание заголовка с двумя кнопками
 --*********************************************************
-function EtherSettingsPanel:addSliderWithLabel(title, sliderMethod, value, minValue, maxValue)
+function EtherVersionPanel:addSliderWithLabel(title, sliderMethod, value, minValue, maxValue)
     local rows = self.rows;
     local buttonY = 10 + rows * 25;
 
@@ -99,7 +99,7 @@ end
 --*********************************************************
 --* Добавление чекбоксов
 --*********************************************************
-function EtherSettingsPanel:addCheckBox(title, method, isSelected, isOnlyInGame)
+function EtherVersionPanel:addCheckBox(title, method, isSelected, isOnlyInGame)
     local rows = self.rows;
     local checkboxX = 15;
     local checkboxY = 10 + rows * 20;
@@ -124,7 +124,7 @@ end
 --*********************************************************
 --* Обновление панели
 --*********************************************************
-function EtherSettingsPanel:updatePanel()
+function EtherVersionPanel:updatePanel()
     for i=1, #self.checkBoxList do
         local item = self.checkBoxList[i];
         if item.isOnlyInGame and self.localPlayer == nil then
