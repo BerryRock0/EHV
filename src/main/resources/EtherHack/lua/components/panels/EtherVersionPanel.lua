@@ -14,6 +14,23 @@ function EtherSettingsPanel:addLabel(posX, posY, title)
     return label
 end
 
+--*********************************************************
+--* Обновление панели
+--*********************************************************
+function EtherSettingsPanel:updatePanel()
+    for i=1, #self.checkBoxList do
+        local item = self.checkBoxList[i];
+        if item.isOnlyInGame and self.localPlayer == nil then
+            item:setEnable(false);
+        end
+    end
+    for i=1, #self.buttonList do
+        local item = self.buttonList[i];
+        if item.isOnlyNotInGame and self.localPlayer ~= nil then
+            item:setEnable(false);
+        end
+    end
+end
 
 --*********************************************************
 --* Обработка prerender
@@ -55,7 +72,7 @@ function EtherVersionPanel:createChildren()
 
     local changeButton = UIButton:new(self.entry.x + self.entry.width + 10, self.entry.y, 80, 24, getTranslate("UI_Settings_ConfigSave"), function ()
         local versionString = self.entry:getText();
-        if (versionString ~= "") then
+        if versionString ~= "" then
             changeVersion(versionString);
         end
     end)
@@ -67,13 +84,15 @@ function EtherVersionPanel:createChildren()
     changeButton:setAnchorBottom(true);
     changeButton.update = function ()
         local text = self.entry:getText();
-        if (text ~= "") then
+        if text ~= "" then
             changeButton.isEnable = true;
         else
             changeButton.isEnable = false;
         end
     end
     self:addChild(changeButton)
+
+	self:updatePanel();
 end
 --*********************************************************
 --* Создание нового экземпляра меню
