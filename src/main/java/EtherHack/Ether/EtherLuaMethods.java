@@ -100,7 +100,7 @@ public final class EtherLuaMethods {
     @LuaMethod(name="changeVersion", global = true)
     public static void changeVersion(String string)
     {
-        EtherMain.getInstance().etherApi.changeVersion(string);
+        EtherMain.getInstance().etherAPI.changeVersion(string);
     }
 
     @LuaMethod(name="loadConfig", global=true)
