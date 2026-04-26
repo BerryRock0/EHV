@@ -97,6 +97,12 @@ public final class EtherLuaMethods {
         return configFiles;
     }
 
+    @LuaMethod(name="loopString", global=true)
+    public static String loopString(String string)
+    {
+        return string;
+    }
+
     @LuaMethod(name="loadConfig", global=true)
     public static void loadConfig(String configName) {
         EtherMain.getInstance().etherAPI.loadConfig(configName);
