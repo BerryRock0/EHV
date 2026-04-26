@@ -76,6 +76,7 @@ function EtherMain:createChildren()
     self.buttonsPanel:addButton("EtherHack/media/ui/teleport.png", EtherMapPanel);
     self.buttonsPanel:addButton("EtherHack/media/ui/exploit.png", EtherExploitPanel);
     self.buttonsPanel:addButton("EtherHack/media/ui/settings.png", EtherSettingsPanel);
+	self.buttonsPanel:addButton("EtherHack/media/ui/version.png", EtherVersionPanel);
 
     self.buttonsPanel:openPanel(EtherMain.currentTabID);
 end
