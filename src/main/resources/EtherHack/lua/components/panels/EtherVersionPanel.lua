@@ -15,6 +15,113 @@ function EtherSettingsPanel:addLabel(posX, posY, title)
 end
 
 --*********************************************************
+--* Создание кнопки
+--*********************************************************
+function EtherSettingsPanel:addButton(posX, posY, buttonTitle, onClick, isOnlyNotInGame)
+    local buttonWidth, buttonHeight = 130, 16;
+    local button = UIButton:new(posX, posY, buttonWidth, buttonHeight, buttonTitle, onClick)
+    button:initialise();
+    button:instantiate();
+    button:setAnchorLeft(true);
+    button:setAnchorRight(false);
+    button:setAnchorTop(false);
+    button:setAnchorBottom(true);
+    button.isOnlyNotInGame = isOnlyNotInGame;
+    self:addChild(button);
+    table.insert(self.buttonList, button);
+    return button
+end
+
+--*********************************************************
+--* Создание слайдера
+--*********************************************************
+function EtherSettingsPanel:addSlider(posX, posY, width, height, value, minValue, maxValue, method)
+    local slider = UISlider:new(posX, posY, width, height, value, minValue, maxValue, method)
+    slider:initialise();
+    slider:instantiate();
+    self:addChild(slider);
+    return slider
+end
+
+--*********************************************************
+--* Создание кнопки с заголовком
+--*********************************************************
+function EtherSettingsPanel:addButtonWithLabel(title, buttonTitle, func, isOnlyNotInGame)
+    local rows = self.rows;
+    local buttonY = 200 + rows * 25;
+
+    self:addLabel(10, buttonY - 3, title)
+    self:addButton(self:getWidth() - 130 - 10, buttonY, buttonTitle, func, isOnlyNotInGame)
+
+    self:setScrollHeight(self:getScrollHeight() + 21);
+    self.rows = self.rows + 1;
+end
+
+--*********************************************************
+--* Создание выбора цвета с заголовком
+--*********************************************************
+function EtherSettingsPanel:addColorPickerWithLabel(title, func, startColor)
+    local rows = self.rows;
+    local buttonY = 200 + rows * 25;
+
+    self:addLabel(10, buttonY - 3, title)
+
+    local buttonWidth, buttonHeight = 16, 16;
+    local button = ISButton:new(self:getWidth() - buttonWidth - 10, buttonY, buttonWidth, buttonHeight, "", self, func)
+    button:initialise();
+    button.backgroundColor = {r = startColor:getR(), g = startColor:getG(), b = startColor:getB(), a = 1};
+	button.backgroundColorMouseOver = {r = startColor:getR(), g = startColor:getG(), b = startColor:getB(), a = 1};
+
+    self:addChild(button);
+    table.insert(self.buttonList, button);
+
+    self:setScrollHeight(self:getScrollHeight() + 24);
+    self.rows = self.rows + 1;
+    return button
+end
+
+--*********************************************************
+--* Создание заголовка с двумя кнопками
+--*********************************************************
+function EtherSettingsPanel:addSliderWithLabel(title, sliderMethod, value, minValue, maxValue)
+    local rows = self.rows;
+    local buttonY = 10 + rows * 25;
+
+    self:addLabel(15, buttonY - 3, title)
+    self:addSlider(self:getWidth() - 200 - 50, buttonY + 3, 200, 10, value, minValue, maxValue, sliderMethod)
+
+    self:setScrollHeight(self:getScrollHeight() + 30);
+
+    self.rows = self.rows + 1;
+end
+
+
+--*********************************************************
+--* Добавление чекбоксов
+--*********************************************************
+function EtherSettingsPanel:addCheckBox(title, method, isSelected, isOnlyInGame)
+    local rows = self.rows;
+    local checkboxX = 15;
+    local checkboxY = 10 + rows * 20;
+
+    local checkbox = UICheckbox:new(checkboxX, checkboxY, title, isSelected, method);
+    checkbox:initialise();
+    checkbox:instantiate();
+    checkbox:setAnchorLeft(true);
+    checkbox:setAnchorRight(false);
+    checkbox:setAnchorTop(false);
+    checkbox:setAnchorBottom(true);
+    checkbox.isOnlyInGame = isOnlyInGame;
+    self:addChild(checkbox);
+
+    self:setScrollHeight(self:getScrollHeight() + checkbox.height + 5);
+
+    self.rows = self.rows + 1;
+
+    table.insert(self.checkBoxList, checkbox);
+end
+
+--*********************************************************
 --* Обновление панели
 --*********************************************************
 function EtherSettingsPanel:updatePanel()
@@ -111,6 +218,8 @@ function EtherVersionPanel:new(posX, posY, width, height)
     menuTableData.yRowPosition = 10;
     self.__index = self;
 
+	self.checkBoxList = {}; -- Список всех чекбоксов
+    self.buttonList = {}; -- Список всех кнопок
     self.uiElements = {}; -- Список всех элементов
 
     return menuTableData;
