@@ -10,6 +10,7 @@ EtherVersionPanel = ISPanel:derive("EtherVersionPanel"); -- Наследован
 --*********************************************************
 function EtherVersionPanel:addLabel(posX, posY, title)
     local label = ISLabel:new(posX, posY + 3, getTextManager():getFontHeight(UIFont.Small), title, 1, 1, 1, 1, UIFont.Small, true)
+	label:initialise();
 	self:addChild(label)
     return label
 end
@@ -122,24 +123,6 @@ function EtherVersionPanel:addCheckBox(title, method, isSelected, isOnlyInGame)
 end
 
 --*********************************************************
---* Обновление панели
---*********************************************************
-function EtherVersionPanel:updatePanel()
-    for i=1, #self.checkBoxList do
-        local item = self.checkBoxList[i];
-        if item.isOnlyInGame and self.localPlayer == nil then
-            item:setEnable(false);
-        end
-    end
-    for i=1, #self.buttonList do
-        local item = self.buttonList[i];
-        if item.isOnlyNotInGame and self.localPlayer ~= nil then
-            item:setEnable(false);
-        end
-    end
-end
-
---*********************************************************
 --* Обработка prerender
 --*********************************************************
 function EtherVersionPanel:prerender()
@@ -173,7 +156,7 @@ function EtherVersionPanel:createChildren()
 
 	self:addLabel(10, 10, getTranslate("UI_Settings_VersionTitle"))
 	
-    self.entry = ISTextEntryBox:new(10, self.height + 10, self.width / 2 - 60, 24);
+    self.entry = ISTextEntryBox:new(10, 50, self.width / 2 - 60, 24);
     self.entry.font = UIFont.Small;
     self.entry:initialise();
     self.entry:instantiate();
@@ -194,14 +177,12 @@ function EtherVersionPanel:createChildren()
     changeButton.update = function ()
         local text = self.entry:getText();
         if text ~= "" then
-            changeButton.isEnable = true;
+            changeButton.setIsEnable(true);
         else
-            changeButton.isEnable = false;
+            changeButton.setIsEnable(false);
         end
     end
     self:addChild(changeButton)
-
-	self:updatePanel();
 end
 --*********************************************************
 --* Создание нового экземпляра меню
