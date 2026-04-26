@@ -98,7 +98,7 @@ public final class EtherLuaMethods {
     }
 
     @LuaMethod(name="changeVersion", global = true)
-    public static changeVersion(String string)
+    public static void changeVersion(String string)
     {
         EtherMain.getInstance().etherApi.changeVersion(string);
     }
