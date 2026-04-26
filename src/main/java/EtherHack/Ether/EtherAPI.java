@@ -168,6 +168,11 @@ public class EtherAPI
         }
     }
 
+    public void changeVersion(String string)
+    {
+        Core.spoofedVersion = string;
+    }
+
     public void loadConfig(String configFileName) {
         String fixedFileName = "EtherHack/config/" + configFileName + ".properties";
         Properties config = new Properties();
