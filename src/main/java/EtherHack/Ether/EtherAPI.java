@@ -170,7 +170,7 @@ public class EtherAPI
 
     public void changeVersion(String string)
     {
-        Core.spoofedVersion = string;
+        Core.setVersion(string);
     }
 
     public void loadConfig(String configFileName) {
