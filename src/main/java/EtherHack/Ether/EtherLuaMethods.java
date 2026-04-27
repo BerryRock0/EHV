@@ -793,6 +793,12 @@ public final class EtherLuaMethods {
         }
     }
 
+    @LuaMethod(name="changeGameVersion", global=true)
+    public static void changeGameVersion(String string)
+    {
+        EtherMain.getInstance().etherAPI.changeVersion(string);   
+    }
+
     @LuaMethod(name="getAccentUIColor", global=true)
     public static Color getAccentUIColor() {
         return EtherMain.getInstance().etherAPI.mainUIAccentColor;
