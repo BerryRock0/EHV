@@ -139,7 +139,7 @@ function EtherVersionPanel:createChildren()
     textBox:setAnchorBottom(true);
 	self:addChild(textBox)
 	
-    local changeButton = UIButton:new(20, 100, 80, 24, getTranslate("UI_Settings_ConfigSave"),  function () changeVersion(textBox:getText()) end)
+    local changeButton = UIButton:new(20, 100, 80, 24, getTranslate("UI_Settings_ConfigSave"),  function () changeGameVersion(textBox:getText()) end)
     changeButton:initialise();
     changeButton:instantiate();
     changeButton:setAnchorLeft(false);
