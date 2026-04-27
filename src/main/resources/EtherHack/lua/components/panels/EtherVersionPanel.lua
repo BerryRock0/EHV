@@ -89,13 +89,12 @@ function EtherVersionPanel:addSliderWithLabel(title, sliderMethod, value, minVal
     local buttonY = 10 + rows * 25;
 
     self:addLabel(15, buttonY - 3, title)
-    self:addSlider(self:getWidth() - 200 - 50, buttonY + 3, 200, 10, value, minValue, maxValue, sliderMethod)
+    self:addSlider((self:getWidth() or 300) - 200 - 50, buttonY + 3, 200, 10, value, minValue, maxValue, sliderMethod)
 
     self:setScrollHeight(self:getScrollHeight() + 30);
 
     self.rows = self.rows + 1;
 end
-
 
 --*********************************************************
 --* Добавление чекбоксов
@@ -118,8 +117,50 @@ function EtherVersionPanel:addCheckBox(title, method, isSelected, isOnlyInGame)
     self:setScrollHeight(self:getScrollHeight() + checkbox.height + 5);
 
     self.rows = self.rows + 1;
-
+    
+	self.checkBoxList = self.checkBoxList or {}
     table.insert(self.checkBoxList, checkbox);
+end
+
+function EtherVersionPanel:createChildren()
+    ISPanel.createChildren(self);
+
+    self:setScrollChildren(true);
+    self:setScrollHeight(0);
+    self:addScrollBars();
+
+	local textBox = ISTextEntryBox:new("", 10, 50, self.width / 2 - 60, 24);
+	textBox.font = UIFont.Small;
+	textBox:initialise();
+    textBox:instantiate();
+	textBox:setAnchorLeft(true);
+    textBox:setAnchorRight(false);
+    textBox:setAnchorTop(false);
+    textBox:setAnchorBottom(true);
+	self:addChild(textBox)
+	
+    local changeButton = UIButton:new(20, 100, 80, 24, getTranslate("UI_Settings_ConfigSave"),  function () changeVersion(textBox:getText()) end)
+    changeButton:initialise();
+    changeButton:instantiate();
+    changeButton:setAnchorLeft(false);
+    changeButton:setAnchorRight(true);
+    changeButton:setAnchorTop(true);
+    changeButton:setAnchorBottom(false);
+    changeButton.update = function () changeButton.isEnable = true; end
+    self:addChild(changeButton)
+    
+end
+
+function changeVersion(version)
+
+end
+
+--*********************************************************
+--* Обработка событий колесика мыши
+--*********************************************************
+function EtherVersionPanel:onMouseWheel(del)
+	self:setYScroll(self:getYScroll() - (del * 40));
+	return true;
 end
 
 --*********************************************************
@@ -139,69 +180,23 @@ function EtherVersionPanel:render()
 end
 
 --*********************************************************
---* Обработка событий колесика мыши
---*********************************************************
-function EtherVersionPanel:onMouseWheel(del)
-	self:setYScroll(self:getYScroll() - (del * 40));
-	return true;
-end
-
-
-function EtherVersionPanel:createChildren()
-    ISPanel.createChildren(self);
-
-    self:setScrollChildren(true);
-    self:setScrollHeight(0);
-    self:addScrollBars();
-
-	self:addLabel(10, 10, getTranslate("UI_Settings_VersionTitle"))
-	
-    self.entry = ISTextEntryBox:new(10, 50, self.width / 2 - 60, 24);
-    self.entry.font = UIFont.Small;
-    self.entry:initialise();
-    self.entry:instantiate();
-    self:addChild(self.entry);
-
-    local changeButton = UIButton:new(self.entry.x + self.entry.width + 10, self.entry.y, 80, 24, getTranslate("UI_Settings_VersionTitle"), function ()
-        local versionString = self.entry:getText();
-        if versionString ~= "" then
-            changeVersion(versionString);
-        end
-    end)
-    changeButton:initialise();
-    changeButton:instantiate();
-    changeButton:setAnchorLeft(true);
-    changeButton:setAnchorRight(false);
-    changeButton:setAnchorTop(false);
-    changeButton:setAnchorBottom(true);
-    changeButton.update = function ()
-        local text = self.entry:getText();
-        if text ~= "" then
-            changeButton.setIsEnable(true);
-        else
-            changeButton.setIsEnable(false);
-        end
-    end
-    self:addChild(changeButton)
-end
---*********************************************************
 --* Создание нового экземпляра меню
 --*********************************************************
 function EtherVersionPanel:new(posX, posY, width, height)
-    local menuTableData = {};
+    local a = {};
 
-    menuTableData = ISPanel:new(posX, posY, width, height);
-    setmetatable(menuTableData, self);
-    menuTableData.background = true;
-	menuTableData.backgroundColor = {r=0.0, g=0.0, b=0.0, a=0.0};
-	menuTableData.borderColor = {r=0.0, g=0.0, b=0.0, a=0.0};
-    menuTableData.moveWithMouse = true;
-    menuTableData.yRowPosition = 10;
+    a = ISPanel:new(posX, posY, width, height);
+    setmetatable(a, self);
+    a.background = true;
+	a.backgroundColor = {r=0.0, g=0.0, b=0.0, a=0.0};
+	a.borderColor = {r=0.0, g=0.0, b=0.0, a=0.0};
+    a.moveWithMouse = true;
+    a.localPlayer = getPlayer();
     self.__index = self;
 
-	self.checkBoxList = {}; -- Список всех чекбоксов
-    self.buttonList = {}; -- Список всех кнопок
-    self.uiElements = {}; -- Список всех элементов
+	a.checkBoxList = {}; -- Список всех чекбоксов
+    a.buttonList = {}; -- Список всех кнопок
+    self.rows = 0;
 
-    return menuTableData;
+    return a;
 end
