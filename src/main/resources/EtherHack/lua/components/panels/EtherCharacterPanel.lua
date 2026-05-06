@@ -58,9 +58,7 @@ function EtherCharacterPanel:createChildren()
     self:setScrollHeight(0)
     self:addScrollBars();
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_MultiHitZombies"), function(isChecked)
-        toggleMultiHitZombies(isChecked);
-    end, isMultiHitZombies(), false);
+
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_ZombieDontAttack"), function(isChecked)
         toggleZombieDontAttack(isChecked);
@@ -94,6 +92,22 @@ function EtherCharacterPanel:createChildren()
         toggleNightVision(isChecked);
     end, isEnableNightVision(), false);
 
+    self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysAiming"), function(isChecked)
+        toggleAlwaysAiming(isChecked);
+    end, isAlwaysAiming(), false);
+	
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysCritical"), function(isChecked)
+        toggleAlwaysCritical(isChecked);
+    end, isAlwaysCritical(), false);
+	
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysKnockdown"), function(isChecked)
+        toggleAlwaysKnockdown(isChecked);
+    end, isAlwaysKnockdown(), false);
+	
+    self:addCheckBox(getTranslate("UI_CharacterPanel_MultiHitZombies"), function(isChecked)
+        toggleMultiHitZombies(isChecked);
+    end, isMultiHitZombies(), false);
+	
     self:addCheckBox(getTranslate("UI_CharacterPanel_InstantKill"), function(isChecked)
         toggleExtraDamage(isChecked);
         if(not isChecked) then
