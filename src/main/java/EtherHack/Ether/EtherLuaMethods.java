@@ -36,8 +36,7 @@ public final class EtherLuaMethods {
 
     @LuaMethod(name="setZombieUIColor", global=true)
     public static void setZombieUIColor(float r, float g, float b) {
-        Color color;
-        EtherMain.getInstance().etherAPI.zombiesUIColor = color = new Color(r, g, b);
+        EtherMain.getInstance().etherAPI.zombiesUIColor = new Color(r, g, b);
     }
 
     @LuaMethod(name="getVehicleUIColor", global=true)
@@ -47,8 +46,7 @@ public final class EtherLuaMethods {
 
     @LuaMethod(name="setVehicleUIColor", global=true)
     public static void setVehicleUIColor(float r, float g, float b) {
-        Color color;
-        EtherMain.getInstance().etherAPI.vehiclesUIColor = color = new Color(r, g, b);
+        EtherMain.getInstance().etherAPI.vehiclesUIColor = new Color(r, g, b);
     }
 
     @LuaMethod(name="getPlayersUIColor", global=true)
@@ -58,14 +56,12 @@ public final class EtherLuaMethods {
 
     @LuaMethod(name="setPlayersUIColor", global=true)
     public static void setPlayersUIColor(float r, float g, float b) {
-        Color color;
-        EtherMain.getInstance().etherAPI.playersUIColor = color = new Color(r, g, b);
+        EtherMain.getInstance().etherAPI.playersUIColor = new Color(r, g, b);
     }
 
     @LuaMethod(name="setAccentUIColor", global=true)
     public static void setAccentUIColor(float r, float g, float b) {
-        Color color;
-        EtherMain.getInstance().etherAPI.mainUIAccentColor = color = new Color(r, g, b);
+        EtherMain.getInstance().etherAPI.mainUIAccentColor = new Color(r, g, b);
     }
 
     @LuaMethod(name="deleteConfig", global=true)
