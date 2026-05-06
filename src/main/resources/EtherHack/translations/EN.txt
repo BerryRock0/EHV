@@ -21,6 +21,10 @@
 	UI_InformationPanel_AntiCheatStatus_Enable = "Enabled",
 	UI_InformationPanel_AntiCheatStatus_Disable = "Disabled",
 
+
+	UI_CharacterPanel_AlwaysKnockdown = "Always Knockdown",
+	UI_CharacterPanel_AlwaysAiming = "No Aim Delay",
+	UI_CharacterPanel_AlwaysCritical = "Always Critical",
 	UI_CharacterPanel_MultiHitZombies = "Multi-Hit on zombies",
 	UI_CharacterPanel_ZombieDontAttack = "Zombies do not attack the player",
 	UI_CharacterPanel_InstantKill = "Instant Kill mode",
