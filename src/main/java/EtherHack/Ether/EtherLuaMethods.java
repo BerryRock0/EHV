@@ -93,12 +93,6 @@ public final class EtherLuaMethods {
         return configFiles;
     }
 
-    @LuaMethod(name="changeVersion", global = true)
-    public static void changeVersion(String string)
-    {
-        EtherMain.getInstance().etherAPI.changeVersion(string);
-    }
-
     @LuaMethod(name="loadConfig", global=true)
     public static void loadConfig(String configName) {
         EtherMain.getInstance().etherAPI.loadConfig(configName);
