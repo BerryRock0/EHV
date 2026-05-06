@@ -38,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@v5
       with:
           name: Artifact
-          path: /build/EtherHack-2.7.jar
+          path: ./build/EtherHack-2.7.jar
