@@ -212,7 +212,7 @@ public final class EtherLuaMethods {
     }
 
     @LuaMethod(name="isAlwaysAiming", global=true)
-    public static void isAlwaysAiming() {
+    public static boolean isAlwaysAiming() {
         return EtherMain.getInstance().etherAPI.isAlwaysAiming;
     }
     
