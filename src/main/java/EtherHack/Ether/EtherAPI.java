@@ -50,6 +50,9 @@ public class EtherAPI
     public Color vehiclesUIColor;
     public Color zombiesUIColor;
     public Color playersUIColor;
+    public boolean isAlwaysKnockdown;
+    public boolean isAlwaysCritical;
+    public boolean isAlwaysAiming;
     public boolean isPlayerInSafeTeleported;
     public boolean isMultiHitZombies;
     public boolean isExtraDamage;
@@ -104,10 +107,14 @@ public class EtherAPI
     public void saveConfig(String configFileName) {
         String fixedFileName = "EtherHack/config/" + configFileName + ".properties";
         Properties config = new Properties();
+        //config.setProperty("", Boolean.toString(this.));
         config.setProperty("mainUIAccentColor", ColorUtils.colorToString((Color)this.mainUIAccentColor));
         config.setProperty("vehiclesUIColor", ColorUtils.colorToString((Color)this.vehiclesUIColor));
         config.setProperty("zombiesUIColor", ColorUtils.colorToString((Color)this.zombiesUIColor));
         config.setProperty("playersUIColor", ColorUtils.colorToString((Color)this.playersUIColor));
+        config.setProperty("isAlwaysKnockdown", Boolean.toString(this.isAlwaysKnockdown));
+        config.setProperty("isAlwaysAiming", Boolean.toString(this.isAlwaysAiming));
+        config.setProperty("isAlwaysCritical", Boolean.toString(this.isAlwaysCritical));
         config.setProperty("isPlayerInSafeTeleported", Boolean.toString(this.isPlayerInSafeTeleported));
         config.setProperty("isMultiHitZombies", Boolean.toString(this.isMultiHitZombies));
         config.setProperty("isPlayerInSafeTeleported", Boolean.toString(this.isPlayerInSafeTeleported));
@@ -178,10 +185,14 @@ public class EtherAPI
             Logger.printLog((String)"The config file was not found. Loading canceled.");
             return;
         }
+        //this. = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"", (boolean)false);
         this.mainUIAccentColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"mainUIAccentColor", (Color)new Color(56, 239, 125));
         this.vehiclesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"vehiclesUIColor", (Color)new Color(150, 150, 200));
         this.zombiesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"zombiesUIColor", (Color)new Color(255, 150, 100));
         this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
+        this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysKnockdown", (boolean)false);
+        this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysAiming", (boolean)false);
+        this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysCritical", (boolean)false);
         this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isPlayerInSafeTeleported", (boolean)false);
         this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMultiHitZombies", (boolean)false);
         this.isExtraDamage = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isExtraDamage", (boolean)false);
@@ -242,10 +253,14 @@ public class EtherAPI
         catch (IOException e) {
             Logger.printLog((String)"Startup file not found. Loading default settings.");
         }
+        //this. = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"", (boolean)false);
         this.mainUIAccentColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"mainUIAccentColor", (Color)new Color(56, 239, 125));
         this.vehiclesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"vehiclesUIColor", (Color)new Color(150, 150, 200));
         this.zombiesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"zombiesUIColor", (Color)new Color(255, 150, 100));
         this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
+        this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysKnockdown", (boolean)false);
+        this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysAiming", (boolean)false);
+        this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysCritical", (boolean)false);
         this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isPlayerInSafeTeleported", (boolean)false);
         this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMultiHitZombies", (boolean)false);
         this.isExtraDamage = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isExtraDamage", (boolean)false);
@@ -337,147 +352,155 @@ public class EtherAPI
         }
     }
 
-    private void updateLocalPlayerFeatures() {
+    private void updateLocalPlayerFeatures()
+    {
         ArrayList<InventoryItem> inventoryItems;
-        HandWeapon weapon;
         IsoPlayer localPlayer = IsoPlayer.getInstance();
-        if (localPlayer == null) {
-            return;
-        }
         InventoryItem playerItem = localPlayer.getPrimaryHandItem();
-        if (this.isExtraDamage && playerItem != null && (playerItem.getStringItemType().equals("RangedWeapon") || playerItem.getStringItemType().equals("MeleeWeapon")) && playerItem instanceof HandWeapon) {
-            weapon = (HandWeapon)playerItem;
-            String weaponType = weapon.getFullType();
-            if (!this.originalWeaponStats.containsKey(weaponType)) {
+        HandWeapon weapon = (HandWeapon)playerItem;
+        String weaponType = weapon.getFullType();
+
+        if (localPlayer == null)
+            return;
+        
+        if (this.isExtraDamage && playerItem != null && (playerItem.getStringItemType().equals("RangedWeapon") || playerItem.getStringItemType().equals("MeleeWeapon")) && playerItem instanceof HandWeapon)
+        {
+            if (!this.originalWeaponStats.containsKey(weaponType))
                 this.originalWeaponStats.put(weaponType, new float[]{weapon.getExtraDamage(), weapon.getMaxDamage(), weapon.getMinDamage(), weapon.getMaxRange(), weapon.getMinRange(), weapon.getHitChance(), weapon.getCritDmgMultiplier()});
-            }
-            weapon.setExtraDamage(100000.0f);
-            weapon.setMaxDamage(1000000.0f);
-            weapon.setMinDamage(1000000.0f);
-            weapon.setMaxRange(10000.0f);
-            weapon.setMinRange(0.0f);
-            weapon.setHitChance(100);
-            weapon.setCritDmgMultiplier(100000.0f);
         }
-        if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies) {
+        
+        if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies)
             SandboxOptions.instance.set("MultiHitZombies", (Object)this.isMultiHitZombies);
-        }
-        if (localPlayer.isTimedActionInstantCheat() != this.isTimedActionCheat) {
+
+        if (localPlayer.isTimedActionInstantCheat() != this.isTimedActionCheat)
             localPlayer.setTimedActionInstantCheat(this.isTimedActionCheat);
-        }
-        if (localPlayer.isWearingNightVisionGoggles() != this.isEnableNightVision) {
+
+        if (localPlayer.isWearingNightVisionGoggles() != this.isEnableNightVision)
             localPlayer.setWearingNightVisionGoggles(this.isEnableNightVision);
-        }
-        if (localPlayer.isGodMod() != this.isEnableGodMode) {
+
+        if (localPlayer.isGodMod() != this.isEnableGodMode)
             localPlayer.setGodMod(this.isEnableGodMode);
-        }
-        if (localPlayer.isNoClip() != this.isEnableNoclip) {
+
+        if (localPlayer.isNoClip() != this.isEnableNoclip)
             localPlayer.setNoClip(this.isEnableNoclip);
-        }
-        if (localPlayer.isInvisible() != this.isEnableInvisible) {
+
+        if (localPlayer.isInvisible() != this.isEnableInvisible)
             localPlayer.setInvisible(this.isEnableInvisible);
-        }
-        if (localPlayer.isZombiesDontAttack() != this.isZombieDontAttack) {
+
+        if (localPlayer.isZombiesDontAttack() != this.isZombieDontAttack)
             localPlayer.setZombiesDontAttack(this.isZombieDontAttack);
+
+        if (playerItem != null && playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
+        {
+            if(this.isNoRecoil)
+                weapon.setRecoilDelay(0);
+            
+            if(this.isAlwaysCritical)
+                weapon.setCriticalChance(100.0f);
+            
+            if(this.isAlwaysAiming)
+                weapon.setAimingTime(0);
+            
+            if(this.isAlwaysKnockdown)
+                weapon.setAlwaysKnockdown(true);
         }
-        if (this.isNoRecoil && playerItem != null && playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon) {
-            weapon = (HandWeapon)playerItem;
-            weapon.setRecoilDelay(0);
-            weapon.setCriticalChance(100.0f);
-            weapon.setAlwaysKnockdown(true);
-            weapon.setAimingTime(0);
-        }
-        if (this.isUnlimitedAmmo && playerItem != null && playerItem.getStringItemType().equals("RangedWeapon")) {
+        
+        if (this.isUnlimitedAmmo && playerItem != null && playerItem.getStringItemType().equals("RangedWeapon"))
             playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
-        }
-        if (this.isUnlimitedCondition && playerItem != null) {
-            if (playerItem.getHaveBeenRepaired() > 1) {
+        
+        if (this.isUnlimitedCondition && playerItem != null)
+        {
+            if (playerItem.getHaveBeenRepaired() > 1)
                 playerItem.setHaveBeenRepaired(1);
-            }
+
             playerItem.setCondition(playerItem.getConditionMax());
         }
-        if (this.isAutoRepairItems && (inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty()) {
-            for (InventoryItem item : inventoryItems) {
-                if (item == null) continue;
-                if (item.isBroken()) {
+        if (this.isAutoRepairItems && (inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty())
+        {
+            for (InventoryItem item : inventoryItems)
+            {
+                if (item == null)
+                    continue;
+                
+                if (item.isBroken())
                     item.setBroken(false);
-                }
+                
                 item.setHaveBeenRepaired(1);
-                if (item.getVisual() != null) {
-                    for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i) {
+                if (item.getVisual() != null)
+                    for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i)
+                    {
                         item.getVisual().removeHole(i);
                         item.getVisual().removeDirt();
                         item.getVisual().removeBlood();
                     }
-                }
                 item.setWet(false);
                 item.setInfected(false);
                 item.setCondition(item.getConditionMax());
             }
         }
-        if (this.isUnlimitedEndurance) {
+        if (this.isUnlimitedEndurance)
             localPlayer.getStats().setEndurance(1.0f);
-        }
-        if (this.isDisableFatigue) {
+
+        if (this.isDisableFatigue) 
             localPlayer.getStats().setFatigue(0.0f);
-        }
-        if (this.isDisableHunger) {
+
+        if (this.isDisableHunger) 
             localPlayer.getStats().setHunger(0.0f);
-        }
-        if (this.isDisableThirst) {
+
+        if (this.isDisableThirst) 
             localPlayer.getStats().setThirst(0.0f);
-        }
-        if (this.isDisableDrunkenness) {
+
+        if (this.isDisableDrunkenness)
             localPlayer.getStats().setDrunkenness(0.0f);
-        }
-        if (this.isDisableAnger) {
+
+        if (this.isDisableAnger)
             localPlayer.getStats().setAnger(0.0f);
-        }
-        if (this.isDisableFear) {
+
+        if (this.isDisableFear)
             localPlayer.getStats().setFear(0.0f);
-        }
-        if (this.isDisablePain) {
+
+        if (this.isDisablePain)
             localPlayer.getStats().setPain(0.0f);
-        }
-        if (this.isDisablePanic) {
+    
+        if (this.isDisablePanic)
             localPlayer.getStats().setPanic(0.0f);
-        }
-        if (this.isDisableMorale) {
+    
+        if (this.isDisableMorale)
             localPlayer.getStats().setMorale(1.0f);
-        }
-        if (this.isDisableStress) {
+    
+        if (this.isDisableStress)
             localPlayer.getStats().setStress(0.0f);
-        }
-        if (this.isDisableSickness) {
+    
+        if (this.isDisableSickness)
             localPlayer.getStats().setSickness(0.0f);
-        }
-        if (this.isDisableStressFromCigarettes) {
+    
+        if (this.isDisableStressFromCigarettes)
             localPlayer.getStats().setStressFromCigarettes(0.0f);
-        }
-        if (this.isDisableSanity) {
+    
+        if (this.isDisableSanity)
             localPlayer.getStats().setSanity(1.0f);
-        }
-        if (this.isDisableBoredomLevel) {
+    
+        if (this.isDisableBoredomLevel)
             localPlayer.getBodyDamage().setBoredomLevel(0.0f);
-        }
-        if (this.isDisableUnhappynessLevel) {
+    
+        if (this.isDisableUnhappynessLevel)
             localPlayer.getBodyDamage().setUnhappynessLevel(0.0f);
-        }
-        if (this.isDisableWetness) {
+    
+        if (this.isDisableWetness)
             localPlayer.getBodyDamage().setWetness(0.0f);
-        }
-        if (this.isDisableInfectionLevel) {
+
+        if (this.isDisableInfectionLevel)
             localPlayer.getBodyDamage().setInfectionLevel(0.0f);
-        }
-        if (this.isDisableFakeInfectionLevel) {
+
+        if (this.isDisableFakeInfectionLevel)
             localPlayer.getBodyDamage().setFakeInfectionLevel(0.0f);
-        }
-        if (this.isOptimalCalories) {
+
+        if (this.isOptimalCalories)
             localPlayer.getNutrition().setCalories(1200.0f);
-        }
-        if (this.isOptimalWeight) {
+
+        if (this.isOptimalWeight)
             localPlayer.getNutrition().setWeight(80.0);
-        }
+
     }
 
     private void bypassDebugMode() {
