@@ -201,6 +201,36 @@ public final class EtherLuaMethods {
         return EtherLuaCompiler.getInstance().isBlockCompileLuaWithBadWords;
     }
 
+    @LuaMethod(name="isAlwaysKnockdown", global=true)
+    public static boolean isAlwaysKnockdown() {
+        return EtherMain.getInstance().etherAPI.isAlwaysKnockdown;        
+    }
+    
+    @LuaMethod(name="toggleAlwaysKnockdown", global=true)
+    public static void toggleAlwaysKnockdown(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isAlwaysKnockdown = isToggled;
+    }
+
+    @LuaMethod(name="isAlwaysAiming", global=true)
+    public static void isAlwaysAiming() {
+        return EtherMain.getInstance().etherAPI.isAlwaysAiming;
+    }
+    
+    @LuaMethod(name="toggleAlwaysAiming", global=true)
+    public static void toggleAlwaysAiming(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isAlwaysAiming = isToggled;        
+    }
+
+    @LuaMethod(name="isAlwaysCritical", global=true)
+    public static boolean isAlwaysCritical() {
+        return EtherMain.getInstance().etherAPI.isAlwaysCritical;
+    }
+    
+    @LuaMethod(name="toggleAlwaysCritical", global=true)
+    public static void toggleAlwaysCritical(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isAlwaysCritical = isToggled;
+    }
+
     @LuaMethod(name="toggleBlockCompileLuaWithBadWords", global=true)
     public static void toggleBlockCompileLuaWithBadWords(boolean isToggled) {
         EtherLuaCompiler.getInstance().isBlockCompileLuaWithBadWords = isToggled;
