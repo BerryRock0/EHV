@@ -37,5 +37,5 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v5
       with:
-          name: Artifact
+          name: EtherHack
           path: ./build/EtherHack-2.7.jar
