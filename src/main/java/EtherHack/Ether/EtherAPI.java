@@ -655,7 +655,12 @@ public class EtherAPI
 
     @SubscribeLuaEvent(eventName="OnRenderTick")
     public void updateAPI() {
-        this.updateLocalPlayerFeatures();
-        this.bypassDebugMode();
+        try
+        {
+            this.bypassDebugMode();
+            this.updateLocalPlayerFeatures();
+        }
+        catch(Exception e)
+        {}
     }
 }
