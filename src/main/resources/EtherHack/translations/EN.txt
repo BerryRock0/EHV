@@ -41,6 +41,7 @@
 	UI_CharacterPanel_UnlimitedCarry = "Unlimited carry",
 	UI_CharacterPanel_UnlimitedEndurance = "Unlimited endurance",
 	UI_CharacterPanel_DisableJam = "Disable gun jam",
+	UI_CharacterPanel_DisableSpentRoundChamber = "Disable gun spend round",
 	UI_CharacterPanel_DisableRecoil = "Disable recoil",
 	UI_CharacterPanel_DisableFatigue = "Disable fatigue",
 	UI_CharacterPanel_DisableHunger = "Disable hunger",
