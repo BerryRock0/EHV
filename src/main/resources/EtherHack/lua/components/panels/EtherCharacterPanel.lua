@@ -95,6 +95,10 @@ function EtherCharacterPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRack"), function(isChecked)
         toggleAlwaysRack(isChecked);
     end, isAlwaysRack(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRoundChamber"), function(isChecked)
+        toggleAlwaysRoundChamber(isChecked);
+    end, isAlwaysRoundChamber(), false);
 	
     self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysAiming"), function(isChecked)
         toggleAlwaysAiming(isChecked);
