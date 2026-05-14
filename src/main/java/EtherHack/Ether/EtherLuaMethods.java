@@ -316,6 +316,16 @@ public final class EtherLuaMethods {
         EtherMain.getInstance().etherAPI.isNoRecoil = isToggled;
     }
 
+    @LuaMethod(name="isNoJam", global=true)
+    public static boolean isNoJam() {
+        return EtherMain.getInstance().etherAPI.isNoJam;
+    }
+
+    @LuaMethod(name="toggleNoJam", global=true)
+    public static void toggleNoJam(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isNoJam = isToggled;
+    }
+
     @LuaMethod(name="isAutoRepairItems", global=true)
     public static boolean isAutoRepairItems() {
         return EtherMain.getInstance().etherAPI.isAutoRepairItems;
