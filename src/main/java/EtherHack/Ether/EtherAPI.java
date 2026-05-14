@@ -397,7 +397,7 @@ public class EtherAPI
         if (playerItem != null && playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
         {
             if (this.isNoJam)
-                playerItem.setJamGunChance(0.0f);
+                weapon.setJammed(false);
             
             if(this.isAlwaysKnockdown)
                 weapon.setAlwaysKnockdown(true);
