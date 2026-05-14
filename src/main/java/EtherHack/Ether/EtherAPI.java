@@ -418,7 +418,7 @@ public class EtherAPI
                 weapon.setJammed(false);
             
             if(this.isNoSpentRoundChamber)
-                weapon.setSpendRoundChambered(false);
+                weapon.setSpentRoundChambered(false);
             
             if(this.isAlwaysAiming)
                 weapon.setAimingTime(0);
