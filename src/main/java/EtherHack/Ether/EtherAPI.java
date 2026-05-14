@@ -63,6 +63,7 @@ public class EtherAPI
     public boolean isEnableNightVision;
     public boolean isZombieDontAttack;
     public boolean isNoRecoil;
+    public boolean isNoJam;
     public boolean isBypassDebugMode;
     public boolean isUnlimitedCarry;
     public boolean isUnlimitedCondition;
@@ -127,6 +128,7 @@ public class EtherAPI
         config.setProperty("isEnableNightVision", Boolean.toString(this.isEnableNightVision));
         config.setProperty("isZombieDontAttack", Boolean.toString(this.isZombieDontAttack));
         config.setProperty("isNoRecoil", Boolean.toString(this.isNoRecoil));
+        config.setProperty("isNoJam", Boolean.toString(this.isNoJam));
         config.setProperty("isBypassDebugMode", Boolean.toString(this.isBypassDebugMode));
         config.setProperty("isUnlimitedCarry", Boolean.toString(this.isUnlimitedCarry));
         config.setProperty("isUnlimitedCondition", Boolean.toString(this.isUnlimitedCondition));
@@ -203,6 +205,7 @@ public class EtherAPI
         this.isEnableNightVision = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableNightVision", (boolean)false);
         this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isZombieDontAttack", (boolean)false);
         this.isNoRecoil = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoRecoil", (boolean)false);
+        this.isNoJam = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoJam", (boolean)false);
         this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isBypassDebugMode", (boolean)false);
         this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCarry", (boolean)false);
         this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCondition", (boolean)false);
@@ -271,6 +274,7 @@ public class EtherAPI
         this.isEnableNightVision = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableNightVision", (boolean)false);
         this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isZombieDontAttack", (boolean)false);
         this.isNoRecoil = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoRecoil", (boolean)false);
+        this.isNoJam = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoJam", (boolean)false);
         this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isBypassDebugMode", (boolean)false);
         this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCarry", (boolean)false);
         this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCondition", (boolean)false);
@@ -392,8 +396,11 @@ public class EtherAPI
 
         if (playerItem != null && playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
         {
-            if(this.isNoRecoil)
-                weapon.setRecoilDelay(0);
+            if (this.isNoJam)
+                playerItem.setJamGunChance(0.0f);
+            
+            if(this.isAlwaysKnockdown)
+                weapon.setAlwaysKnockdown(true);
             
             if(this.isAlwaysCritical)
                 weapon.setCriticalChance(100.0f);
@@ -401,13 +408,13 @@ public class EtherAPI
             if(this.isAlwaysAiming)
                 weapon.setAimingTime(0);
             
-            if(this.isAlwaysKnockdown)
-                weapon.setAlwaysKnockdown(true);
+            if(this.isNoRecoil)
+                weapon.setRecoilDelay(0);
+
+            if (this.isUnlimitedAmmo)
+                playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
         }
-        
-        if (this.isUnlimitedAmmo && playerItem != null && playerItem.getStringItemType().equals("RangedWeapon"))
-            playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
-        
+
         if (this.isUnlimitedCondition && playerItem != null)
         {
             if (playerItem.getHaveBeenRepaired() > 1)
