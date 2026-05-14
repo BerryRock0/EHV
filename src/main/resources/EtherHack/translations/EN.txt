@@ -22,6 +22,7 @@
 	UI_InformationPanel_AntiCheatStatus_Disable = "Disabled",
 
 	UI_CharacterPanel_AlwaysRack = "Always rack",
+	UI_CharacterPanel_AlwaysRoundChamber = "Always round in chamber",
 	UI_CharacterPanel_AlwaysKnockdown = "Always Knockdown",
 	UI_CharacterPanel_AlwaysAiming = "No Aim Delay",
 	UI_CharacterPanel_AlwaysCritical = "Always Critical",
