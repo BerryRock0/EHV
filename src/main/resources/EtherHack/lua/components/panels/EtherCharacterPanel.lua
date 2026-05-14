@@ -135,6 +135,10 @@ function EtherCharacterPanel:createChildren()
         toggleAutoRepairItems(isChecked);
     end, isAutoRepairItems(), false);
 
+    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableJam"), function(isChecked)
+        toggleNoJam(isChecked)
+    end, isNoJam(), false);
+	
     self:addCheckBox(getTranslate("UI_CharacterPanel_DisableRecoil"), function(isChecked)
         toggleNoRecoil(isChecked)
     end, isNoRecoil(), false);
