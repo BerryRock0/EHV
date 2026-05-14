@@ -50,6 +50,7 @@ public class EtherAPI
     public Color vehiclesUIColor;
     public Color zombiesUIColor;
     public Color playersUIColor;
+    public boolean isAlwaysRack;
     public boolean isAlwaysKnockdown;
     public boolean isAlwaysCritical;
     public boolean isAlwaysAiming;
@@ -64,6 +65,7 @@ public class EtherAPI
     public boolean isZombieDontAttack;
     public boolean isNoRecoil;
     public boolean isNoJam;
+    public boolean isNoSpentRoundChamber;
     public boolean isBypassDebugMode;
     public boolean isUnlimitedCarry;
     public boolean isUnlimitedCondition;
@@ -113,6 +115,7 @@ public class EtherAPI
         config.setProperty("vehiclesUIColor", ColorUtils.colorToString((Color)this.vehiclesUIColor));
         config.setProperty("zombiesUIColor", ColorUtils.colorToString((Color)this.zombiesUIColor));
         config.setProperty("playersUIColor", ColorUtils.colorToString((Color)this.playersUIColor));
+        config.setProperty("isAlwaysRack", Boolean.toString(this.isAlwaysRack));
         config.setProperty("isAlwaysKnockdown", Boolean.toString(this.isAlwaysKnockdown));
         config.setProperty("isAlwaysAiming", Boolean.toString(this.isAlwaysAiming));
         config.setProperty("isAlwaysCritical", Boolean.toString(this.isAlwaysCritical));
@@ -127,8 +130,10 @@ public class EtherAPI
         config.setProperty("isEnableInvisible", Boolean.toString(this.isEnableInvisible));
         config.setProperty("isEnableNightVision", Boolean.toString(this.isEnableNightVision));
         config.setProperty("isZombieDontAttack", Boolean.toString(this.isZombieDontAttack));
+        config.setProperty("isAlwaysRack", Boolean.toString(this.isNoJam));
         config.setProperty("isNoRecoil", Boolean.toString(this.isNoRecoil));
         config.setProperty("isNoJam", Boolean.toString(this.isNoJam));
+        config.setProperty("isNoSpentRoundChamber", Boolean.toString(this.isNoSpentRoundChamber));
         config.setProperty("isBypassDebugMode", Boolean.toString(this.isBypassDebugMode));
         config.setProperty("isUnlimitedCarry", Boolean.toString(this.isUnlimitedCarry));
         config.setProperty("isUnlimitedCondition", Boolean.toString(this.isUnlimitedCondition));
@@ -192,6 +197,7 @@ public class EtherAPI
         this.vehiclesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"vehiclesUIColor", (Color)new Color(150, 150, 200));
         this.zombiesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"zombiesUIColor", (Color)new Color(255, 150, 100));
         this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
+        this.isAlwaysRack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRack", (boolean)false);
         this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysKnockdown", (boolean)false);
         this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysAiming", (boolean)false);
         this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysCritical", (boolean)false);
@@ -206,6 +212,7 @@ public class EtherAPI
         this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isZombieDontAttack", (boolean)false);
         this.isNoRecoil = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoRecoil", (boolean)false);
         this.isNoJam = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoJam", (boolean)false);
+        this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoSpentRoundChamber", (boolean)false);
         this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isBypassDebugMode", (boolean)false);
         this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCarry", (boolean)false);
         this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCondition", (boolean)false);
@@ -261,6 +268,7 @@ public class EtherAPI
         this.vehiclesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"vehiclesUIColor", (Color)new Color(150, 150, 200));
         this.zombiesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"zombiesUIColor", (Color)new Color(255, 150, 100));
         this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
+        this.isAlwaysRack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRack", (boolean)false);
         this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysKnockdown", (boolean)false);
         this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysAiming", (boolean)false);
         this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysCritical", (boolean)false);
@@ -275,6 +283,7 @@ public class EtherAPI
         this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isZombieDontAttack", (boolean)false);
         this.isNoRecoil = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoRecoil", (boolean)false);
         this.isNoJam = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoJam", (boolean)false);
+        this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoSpentRoundChamber", (boolean)false);
         this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isBypassDebugMode", (boolean)false);
         this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCarry", (boolean)false);
         this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCondition", (boolean)false);
@@ -396,14 +405,20 @@ public class EtherAPI
 
         if (playerItem != null && playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
         {
-            if (this.isNoJam)
-                weapon.setJammed(false);
-            
             if(this.isAlwaysKnockdown)
                 weapon.setAlwaysKnockdown(true);
             
             if(this.isAlwaysCritical)
                 weapon.setCriticalChance(100.0f);
+            
+            if(this.isAlwaysRack)
+                weapon.setRackAfterShoot(true);
+            
+            if(this.isNoJam)
+                weapon.setJammed(false);
+            
+            if(this.isNoSpentRoundChamber)
+                weapon.setSpendRoundChambered(false);
             
             if(this.isAlwaysAiming)
                 weapon.setAimingTime(0);
