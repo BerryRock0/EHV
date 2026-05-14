@@ -201,6 +201,16 @@ public final class EtherLuaMethods {
         return EtherLuaCompiler.getInstance().isBlockCompileLuaWithBadWords;
     }
 
+    @LuaMethod(name="isAlwaysRack", global=true)
+    public static boolean isAlwaysKnockdown() {
+        return EtherMain.getInstance().etherAPI.isAlwaysRack;        
+    }
+    
+    @LuaMethod(name="toggleAlwaysRack", global=true)
+    public static void toggleAlwaysKnockdown(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isAlwaysRack = isToggled;
+    }
+
     @LuaMethod(name="isAlwaysKnockdown", global=true)
     public static boolean isAlwaysKnockdown() {
         return EtherMain.getInstance().etherAPI.isAlwaysKnockdown;        
@@ -324,6 +334,16 @@ public final class EtherLuaMethods {
     @LuaMethod(name="toggleNoJam", global=true)
     public static void toggleNoJam(boolean isToggled) {
         EtherMain.getInstance().etherAPI.isNoJam = isToggled;
+    }
+
+    @LuaMethod(name="isNoSpentRoundChamber", global=true)
+    public static boolean isNoSpentRoundChamber() {
+        return EtherMain.getInstance().etherAPI.isNoSpentRoundChamber;
+    }
+
+    @LuaMethod(name="toggleNoSpentRoundChamber", global=true)
+    public static void toggleNoSpentRoundChamber(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isNoSpentRoundChamber = isToggled;
     }
 
     @LuaMethod(name="isAutoRepairItems", global=true)
