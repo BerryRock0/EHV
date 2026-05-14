@@ -51,6 +51,7 @@ public class EtherAPI
     public Color zombiesUIColor;
     public Color playersUIColor;
     public boolean isAlwaysRack;
+    public boolean isAlwaysRoundChamber;
     public boolean isAlwaysKnockdown;
     public boolean isAlwaysCritical;
     public boolean isAlwaysAiming;
@@ -116,6 +117,7 @@ public class EtherAPI
         config.setProperty("zombiesUIColor", ColorUtils.colorToString((Color)this.zombiesUIColor));
         config.setProperty("playersUIColor", ColorUtils.colorToString((Color)this.playersUIColor));
         config.setProperty("isAlwaysRack", Boolean.toString(this.isAlwaysRack));
+        config.setProperty("isAlwaysRoundChamber", Boolean.toString(this.isAlwaysRoundChamber));
         config.setProperty("isAlwaysKnockdown", Boolean.toString(this.isAlwaysKnockdown));
         config.setProperty("isAlwaysAiming", Boolean.toString(this.isAlwaysAiming));
         config.setProperty("isAlwaysCritical", Boolean.toString(this.isAlwaysCritical));
@@ -198,6 +200,7 @@ public class EtherAPI
         this.zombiesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"zombiesUIColor", (Color)new Color(255, 150, 100));
         this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
         this.isAlwaysRack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRack", (boolean)false);
+        this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRoundChamber", (boolean)false);
         this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysKnockdown", (boolean)false);
         this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysAiming", (boolean)false);
         this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysCritical", (boolean)false);
@@ -269,6 +272,7 @@ public class EtherAPI
         this.zombiesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"zombiesUIColor", (Color)new Color(255, 150, 100));
         this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
         this.isAlwaysRack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRack", (boolean)false);
+        this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRoundChamber", (boolean)false);
         this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysKnockdown", (boolean)false);
         this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysAiming", (boolean)false);
         this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysCritical", (boolean)false);
@@ -416,6 +420,9 @@ public class EtherAPI
             
             if(this.isNoJam)
                 weapon.setJammed(false);
+            
+            if(this.isAlwaysRoundChamber)
+                weapon.setRoundChambered(true);
             
             if(this.isNoSpentRoundChamber)
                 weapon.setSpentRoundChambered(false);
