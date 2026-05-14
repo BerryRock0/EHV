@@ -92,6 +92,10 @@ function EtherCharacterPanel:createChildren()
         toggleNightVision(isChecked);
     end, isEnableNightVision(), false);
 
+    self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRack"), function(isChecked)
+        toggleAlwaysRack(isChecked);
+    end, isAlwaysRack(), false);
+	
     self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysAiming"), function(isChecked)
         toggleAlwaysAiming(isChecked);
     end, isAlwaysAiming(), false);
@@ -135,6 +139,10 @@ function EtherCharacterPanel:createChildren()
         toggleAutoRepairItems(isChecked);
     end, isAutoRepairItems(), false);
 
+    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableSpentRoundChamber"), function(isChecked)
+        toggleNoSpentRoundChamber(isChecked)
+    end, isNoSpentRoundChamber(), false);
+	
     self:addCheckBox(getTranslate("UI_CharacterPanel_DisableJam"), function(isChecked)
         toggleNoJam(isChecked)
     end, isNoJam(), false);
