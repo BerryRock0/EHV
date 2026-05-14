@@ -202,12 +202,12 @@ public final class EtherLuaMethods {
     }
 
     @LuaMethod(name="isAlwaysRack", global=true)
-    public static boolean isAlwaysKnockdown() {
+    public static boolean isAlwaysRack() {
         return EtherMain.getInstance().etherAPI.isAlwaysRack;        
     }
     
     @LuaMethod(name="toggleAlwaysRack", global=true)
-    public static void toggleAlwaysKnockdown(boolean isToggled) {
+    public static void toggleAlwaysRack(boolean isToggled) {
         EtherMain.getInstance().etherAPI.isAlwaysRack = isToggled;
     }
 
