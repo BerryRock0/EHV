@@ -65,6 +65,7 @@ public class EtherAPI
     public boolean isEnableNightVision;
     public boolean isZombieDontAttack;
     public boolean isNoRecoil;
+    public boolean isNoReload;
     public boolean isNoJam;
     public boolean isNoSpentRoundChamber;
     public boolean isBypassDebugMode;
@@ -134,6 +135,7 @@ public class EtherAPI
         config.setProperty("isZombieDontAttack", Boolean.toString(this.isZombieDontAttack));
         config.setProperty("isAlwaysRack", Boolean.toString(this.isNoJam));
         config.setProperty("isNoRecoil", Boolean.toString(this.isNoRecoil));
+        config.setProperty("isNoReload", Boolean.toString(this.isNoReload));
         config.setProperty("isNoJam", Boolean.toString(this.isNoJam));
         config.setProperty("isNoSpentRoundChamber", Boolean.toString(this.isNoSpentRoundChamber));
         config.setProperty("isBypassDebugMode", Boolean.toString(this.isBypassDebugMode));
@@ -214,6 +216,7 @@ public class EtherAPI
         this.isEnableNightVision = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableNightVision", (boolean)false);
         this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isZombieDontAttack", (boolean)false);
         this.isNoRecoil = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoRecoil", (boolean)false);
+        this.isNoReload = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoReload", (boolean)false);
         this.isNoJam = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoJam", (boolean)false);
         this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoSpentRoundChamber", (boolean)false);
         this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isBypassDebugMode", (boolean)false);
@@ -286,6 +289,7 @@ public class EtherAPI
         this.isEnableNightVision = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableNightVision", (boolean)false);
         this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isZombieDontAttack", (boolean)false);
         this.isNoRecoil = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoRecoil", (boolean)false);
+        this.isNoReload = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoReload", (boolean)false);
         this.isNoJam = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoJam", (boolean)false);
         this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoSpentRoundChamber", (boolean)false);
         this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isBypassDebugMode", (boolean)false);
@@ -432,6 +436,9 @@ public class EtherAPI
             
             if(this.isNoRecoil)
                 weapon.setRecoilDelay(0);
+            
+            if(this.isNoReload)
+                weapon.setReloadTime(0);
 
             if (this.isUnlimitedAmmo)
                 playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
