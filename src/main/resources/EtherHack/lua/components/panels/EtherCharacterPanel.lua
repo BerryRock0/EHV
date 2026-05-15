@@ -155,6 +155,10 @@ function EtherCharacterPanel:createChildren()
         toggleNoRecoil(isChecked)
     end, isNoRecoil(), false);
 
+	self:addCheckBox(getTranslate("UI_CharacterPanel_DisableReload"), function(isChecked)
+        toggleNoReload(isChecked)
+    end, isNoReload(), false);
+
     self:addCheckBox(getTranslate("UI_CharacterPanel_DisableFatigue"), function(isChecked)
         toggleDisableFatigue(isChecked);
     end, isDisableFatigue(), false);
