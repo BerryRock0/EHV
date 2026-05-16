@@ -50,13 +50,13 @@ public class EtherAPI
     public Color vehiclesUIColor;
     public Color zombiesUIColor;
     public Color playersUIColor;
-   /* public Color survivorsUIColor;
+    public Color survivorsUIColor;
     public Color remoteSurvivorsUIColor;
     public Color itemsUIColor;
     public Color worldItemsUIColor;
     public Color pushablesUIColor;
     public Color buildingsUIColor;
-    public Color roomsUIColor; */
+    public Color roomsUIColor;
     public boolean isAlwaysRack;
     public boolean isAlwaysRoundChamber;
     public boolean isAlwaysKnockdown;
@@ -115,13 +115,13 @@ public class EtherAPI
     public boolean isMapDrawAllPlayers;
     public boolean isMapDrawVehicles;
     public boolean isMapDrawZombies;
-   /* public boolean isMapDrawBuildings;
+    public boolean isMapDrawBuildings;
     public boolean isMapDrawSurvivors;
     public boolean isMapDrawRemoteSurvivors;
     public boolean isMapDrawPushables;
     public boolean isMapDrawItems;
     public boolean isMapDrawWorldItems;
-    public boolean isMapDrawRooms; */
+    public boolean isMapDrawRooms;
 
     public void saveConfig(String configFileName) {
         String fixedFileName = "EtherHack/config/" + configFileName + ".properties";
@@ -131,13 +131,13 @@ public class EtherAPI
         config.setProperty("vehiclesUIColor", ColorUtils.colorToString((Color)this.vehiclesUIColor));
         config.setProperty("zombiesUIColor", ColorUtils.colorToString((Color)this.zombiesUIColor));
         config.setProperty("playersUIColor", ColorUtils.colorToString((Color)this.playersUIColor));
-   /*     config.setProperty("survivorsUIColor", ColorUtils.colorToString((Color)this.survivorsUIColor));
+        config.setProperty("survivorsUIColor", ColorUtils.colorToString((Color)this.survivorsUIColor));
         config.setProperty("remoteSurvivorsUIColor", ColorUtils.colorToString((Color)this.remoteSurvivorsUIColor));
         config.setProperty("pushablesUIColor", ColorUtils.colorToString((Color)this.pushablesUIColor));
         config.setProperty("roomsUIColor", ColorUtils.colorToString((Color)this.roomsUIColor));
         config.setProperty("itemsUIColor", ColorUtils.colorToString((Color)this.itemsUIColor));
         config.setProperty("worldItemsUIColor", ColorUtils.colorToString((Color)this.worldItemsUIColor));
-        config.setProperty("buildingsUIColor", ColorUtils.colorToString((Color)this.buildingsUIColor)); */
+        config.setProperty("buildingsUIColor", ColorUtils.colorToString((Color)this.buildingsUIColor));
         config.setProperty("isAlwaysRack", Boolean.toString(this.isAlwaysRack));
         config.setProperty("isAlwaysRoundChamber", Boolean.toString(this.isAlwaysRoundChamber));
         config.setProperty("isAlwaysKnockdown", Boolean.toString(this.isAlwaysKnockdown));
@@ -199,13 +199,13 @@ public class EtherAPI
         config.setProperty("isMapDrawAllPlayers", Boolean.toString(this.isMapDrawAllPlayers));
         config.setProperty("isMapDrawVehicles", Boolean.toString(this.isMapDrawVehicles));
         config.setProperty("isMapDrawZombies", Boolean.toString(this.isMapDrawZombies));
-      /*  config.setProperty("isMapDrawBuildings", Boolean.toString(this.isMapDrawBuildings));
+        config.setProperty("isMapDrawBuildings", Boolean.toString(this.isMapDrawBuildings));
         config.setProperty("isMapDrawItems", Boolean.toString(this.isMapDrawItems));
         config.setProperty("isMapDrawWorldItems", Boolean.toString(this.isMapDrawWorldItems));
         config.setProperty("isMapDrawPushables", Boolean.toString(this.isMapDrawPushables));
         config.setProperty("isMapDrawRooms", Boolean.toString(this.isMapDrawRooms));
         config.setProperty("isMapDrawSurvivors", Boolean.toString(this.isMapDrawSurvivors));
-        config.setProperty("isMapDrawRemoteSurvivors", Boolean.toString(this.isMapDrawRemoteSurvivors)); */
+        config.setProperty("isMapDrawRemoteSurvivors", Boolean.toString(this.isMapDrawRemoteSurvivors));
         try (FileOutputStream out = new FileOutputStream(fixedFileName);){
             config.store(out, null);
         }
@@ -229,13 +229,13 @@ public class EtherAPI
         this.vehiclesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"vehiclesUIColor", (Color)new Color(150, 150, 200));
         this.zombiesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"zombiesUIColor", (Color)new Color(255, 150, 100));
         this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
-  /*      this.survivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"survivorsUIColor", (Color)new Color(0, 0, 0));
+        this.survivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"survivorsUIColor", (Color)new Color(0, 0, 0));
         this.remoteSurvivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"remoteSurvivorsUIColor", (Color)new Color(0, 0, 0));
         this.itemsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"itemsUIColor", (Color)new Color(0, 0, 0));
         this.worldItemsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"worldItemsUIColor", (Color)new Color(0, 0, 0));
         this.roomsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"roomsUIColor", (Color)new Color(0, 0, 0));
         this.buildingsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"buildingsUIColor", (Color)new Color(0, 0, 0));
-        this.pushablesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"pushablesUIColor", (Color)new Color(0, 0, 0)); */
+        this.pushablesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"pushablesUIColor", (Color)new Color(0, 0, 0));
         this.isAlwaysRack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRack", (boolean)false);
         this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRoundChamber", (boolean)false);
         this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysKnockdown", (boolean)false);
@@ -294,13 +294,13 @@ public class EtherAPI
         this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawAllPlayers", (boolean)false);
         this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawVehicles", (boolean)false);
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawZombies", (boolean)false);
-  /*      this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawSurvivors", (boolean)false);
+        this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawSurvivors", (boolean)false);
         this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRemoteSurvivors", (boolean)false);
         this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRooms", (boolean)false);
         this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawBuildings", (boolean)false);
         this.isMapDrawItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawItems", (boolean)false);
         this.isMapDrawWorldItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawWorldItems", (boolean)false);
-        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawPushables", (boolean)false); */
+        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawPushables", (boolean)false);
     }
 
     private void initStartupConfig() {
@@ -316,13 +316,13 @@ public class EtherAPI
         this.vehiclesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"vehiclesUIColor", (Color)new Color(150, 150, 200));
         this.zombiesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"zombiesUIColor", (Color)new Color(255, 150, 100));
         this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
-    /*    this.survivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"survivorsUIColor", (Color)new Color(0, 0, 0));
+        this.survivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"survivorsUIColor", (Color)new Color(0, 0, 0));
         this.remoteSurvivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"remoteSurvivorsUIColor", (Color)new Color(0, 0, 0));
         this.itemsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"itemsUIColor", (Color)new Color(0, 0, 0));
         this.worldItemsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"worldItemsUIColor", (Color)new Color(0, 0, 0));
         this.roomsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"roomsUIColor", (Color)new Color(0, 0, 0));
         this.buildingsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"buildingsUIColor", (Color)new Color(0, 0, 0));
-        this.pushablesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"pushablesUIColor", (Color)new Color(0, 0, 0)); */
+        this.pushablesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"pushablesUIColor", (Color)new Color(0, 0, 0));
         this.isAlwaysRack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRack", (boolean)false);
         this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRoundChamber", (boolean)false);
         this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysKnockdown", (boolean)false);
@@ -381,13 +381,13 @@ public class EtherAPI
         this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawAllPlayers", (boolean)false);
         this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawVehicles", (boolean)false);
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawZombies", (boolean)false);
- /*       this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawSurvivors", (boolean)false);
+        this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawSurvivors", (boolean)false);
         this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRemoteSurvivors", (boolean)false);
         this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRooms", (boolean)false);
         this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawBuildings", (boolean)false);
         this.isMapDrawItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawItems", (boolean)false);
         this.isMapDrawWorldItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawWorldItems", (boolean)false);
-        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawPushables", (boolean)false); */
+        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawPushables", (boolean)false);
     }
 
     public EtherAPI() {
