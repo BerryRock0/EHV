@@ -141,8 +141,8 @@ function EtherMapPanel:createChildren()
     self:addCheckBox(getTranslate("UI_Map_DrawVehicles"), function (isChecked)
         toggleMapDrawVehicles(isChecked)
     end, isMapDrawVehicles())
-	
---[[	self:addCheckBox(getTranslate("UI_Map_DrawSurvivors"), function (isChecked)
+
+	self:addCheckBox(getTranslate("UI_Map_DrawSurvivors"), function (isChecked)
         toggleMapDrawSurvivors(isChecked)
     end, isMapDrawSurvivors())
 
@@ -150,18 +150,11 @@ function EtherMapPanel:createChildren()
         toggleMapDrawRemoteSurvivors(isChecked)
     end, isMapDrawRemoteSurvivors())	
 
-	self:addCheckBox(getTranslate("UI_Map_DrawItems"), function (isChecked)
-        toggleMapDrawItems(isChecked)
-    end, isMapDrawItems())
-
-	self:addCheckBox(getTranslate("UI_Map_DrawWorldItems"), function (isChecked)
-        toggleMapDrawWorldItems(isChecked)
-    end, isMapDrawWorldItems())
-
 	self:addCheckBox(getTranslate("UI_Map_DrawPushables"), function (isChecked)
         toggleMapDrawPushables(isChecked)
     end, isMapDrawPushables())
-
+	
+--[[	
 	self:addCheckBox(getTranslate("UI_Map_DrawBuildings"), function (isChecked)
         toggleMapDrawBuildings(isChecked)
     end, isMapDrawBuildings())
