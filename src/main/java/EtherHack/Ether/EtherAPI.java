@@ -108,6 +108,7 @@ public class EtherAPI
     public boolean isMapDrawAllPlayers;
     public boolean isMapDrawVehicles;
     public boolean isMapDrawZombies;
+    public boolean isMapDrawOthers;
 
     public void saveConfig(String configFileName) {
         String fixedFileName = "EtherHack/config/" + configFileName + ".properties";
@@ -178,6 +179,7 @@ public class EtherAPI
         config.setProperty("isMapDrawAllPlayers", Boolean.toString(this.isMapDrawAllPlayers));
         config.setProperty("isMapDrawVehicles", Boolean.toString(this.isMapDrawVehicles));
         config.setProperty("isMapDrawZombies", Boolean.toString(this.isMapDrawZombies));
+        config.setProperty("isMapDrawOthers", Boolean.toString(this.isMapDrawOthers));
         try (FileOutputStream out = new FileOutputStream(fixedFileName);){
             config.store(out, null);
         }
