@@ -52,8 +52,6 @@ public class EtherAPI
     public Color playersUIColor;
     public Color survivorsUIColor;
     public Color remoteSurvivorsUIColor;
-    public Color itemsUIColor;
-    public Color worldItemsUIColor;
     public Color pushablesUIColor;
     public Color buildingsUIColor;
     public Color roomsUIColor;
@@ -135,8 +133,6 @@ public class EtherAPI
         config.setProperty("remoteSurvivorsUIColor", ColorUtils.colorToString((Color)this.remoteSurvivorsUIColor));
         config.setProperty("pushablesUIColor", ColorUtils.colorToString((Color)this.pushablesUIColor));
         config.setProperty("roomsUIColor", ColorUtils.colorToString((Color)this.roomsUIColor));
-        config.setProperty("itemsUIColor", ColorUtils.colorToString((Color)this.itemsUIColor));
-        config.setProperty("worldItemsUIColor", ColorUtils.colorToString((Color)this.worldItemsUIColor));
         config.setProperty("buildingsUIColor", ColorUtils.colorToString((Color)this.buildingsUIColor));
         config.setProperty("isAlwaysRack", Boolean.toString(this.isAlwaysRack));
         config.setProperty("isAlwaysRoundChamber", Boolean.toString(this.isAlwaysRoundChamber));
@@ -200,8 +196,6 @@ public class EtherAPI
         config.setProperty("isMapDrawVehicles", Boolean.toString(this.isMapDrawVehicles));
         config.setProperty("isMapDrawZombies", Boolean.toString(this.isMapDrawZombies));
         config.setProperty("isMapDrawBuildings", Boolean.toString(this.isMapDrawBuildings));
-        config.setProperty("isMapDrawItems", Boolean.toString(this.isMapDrawItems));
-        config.setProperty("isMapDrawWorldItems", Boolean.toString(this.isMapDrawWorldItems));
         config.setProperty("isMapDrawPushables", Boolean.toString(this.isMapDrawPushables));
         config.setProperty("isMapDrawRooms", Boolean.toString(this.isMapDrawRooms));
         config.setProperty("isMapDrawSurvivors", Boolean.toString(this.isMapDrawSurvivors));
@@ -231,8 +225,6 @@ public class EtherAPI
         this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
         this.survivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"survivorsUIColor", (Color)new Color(0, 0, 0));
         this.remoteSurvivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"remoteSurvivorsUIColor", (Color)new Color(0, 0, 0));
-        this.itemsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"itemsUIColor", (Color)new Color(0, 0, 0));
-        this.worldItemsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"worldItemsUIColor", (Color)new Color(0, 0, 0));
         this.roomsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"roomsUIColor", (Color)new Color(0, 0, 0));
         this.buildingsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"buildingsUIColor", (Color)new Color(0, 0, 0));
         this.pushablesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"pushablesUIColor", (Color)new Color(0, 0, 0));
@@ -298,8 +290,6 @@ public class EtherAPI
         this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRemoteSurvivors", (boolean)false);
         this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRooms", (boolean)false);
         this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawBuildings", (boolean)false);
-        this.isMapDrawItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawItems", (boolean)false);
-        this.isMapDrawWorldItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawWorldItems", (boolean)false);
         this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawPushables", (boolean)false);
     }
 
@@ -318,8 +308,6 @@ public class EtherAPI
         this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
         this.survivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"survivorsUIColor", (Color)new Color(0, 0, 0));
         this.remoteSurvivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"remoteSurvivorsUIColor", (Color)new Color(0, 0, 0));
-        this.itemsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"itemsUIColor", (Color)new Color(0, 0, 0));
-        this.worldItemsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"worldItemsUIColor", (Color)new Color(0, 0, 0));
         this.roomsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"roomsUIColor", (Color)new Color(0, 0, 0));
         this.buildingsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"buildingsUIColor", (Color)new Color(0, 0, 0));
         this.pushablesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"pushablesUIColor", (Color)new Color(0, 0, 0));
@@ -385,8 +373,6 @@ public class EtherAPI
         this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRemoteSurvivors", (boolean)false);
         this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRooms", (boolean)false);
         this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawBuildings", (boolean)false);
-        this.isMapDrawItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawItems", (boolean)false);
-        this.isMapDrawWorldItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawWorldItems", (boolean)false);
         this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawPushables", (boolean)false);
     }
 
