@@ -64,7 +64,89 @@ function UIMap:render()
 	self:suspendStencil()
     self:clampStencilRectToParent(0, 0, self:getWidth(), self:getHeight())
 
-	--Buildings rendering
+
+	--Zombie rendering
+	if isMapDrawZombies() then
+		local zombies = getCell():getZombieList()
+		for i=1,zombies:size() do
+			local zombie = zombies:get(i-1)
+
+			local x = self.mapAPI:worldToUIX(zombie:getX(), zombie:getY());
+			local y = self.mapAPI:worldToUIY(zombie:getX(), zombie:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.zombieColor.a, self.zombieColor.r, self.zombieColor.g, self.zombieColor.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+
+	-- Car rendering
+	if isMapDrawVehicles() then
+		local vehicles = getCell():getVehicles()
+		for i=1,vehicles:size() do
+			local vehicle = vehicles:get(i-1)
+
+			local x = self.mapAPI:worldToUIX(vehicle:getX(), vehicle:getY());
+			local y = self.mapAPI:worldToUIY(vehicle:getX(), vehicle:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.vehicleColor.a, self.vehicleColor.r, self.vehicleColor.g, self.vehicleColor.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+			if self.mapAPI:getWorldScale() > 5 then
+			self:drawTextCentre(vehicle:getScriptName(), x + 1, y + 6, 0.0, 0.0, 0.0, 1.0, UIFont.Small);
+			self:drawTextCentre(vehicle:getScriptName(), x, y + 5, 1.0, 1.0, 1.0, 1.0, UIFont.Small);
+		end
+		end
+	end
+
+	-- Other players rendering
+	if isMapDrawAllPlayers() then
+		local players = getOnlinePlayers()
+
+		if players ~= nil then
+			for i=1,players:size() do
+				local player = players:get(i-1)
+				if player ~= self.localPlayer then
+					local x = self.mapAPI:worldToUIX(player:getX(), player:getY());
+					local y = self.mapAPI:worldToUIY(player:getX(), player:getY());
+
+					local size = 125 / self.mapAPI:getWorldScale()
+					size = clamp(size, 2, 5)
+
+					self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.playerColor.a, self.playerColor.r, self.playerColor.g, self.playerColor.b);
+					self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+					if self.mapAPI:getWorldScale() > 1 then
+						self:drawTextCentre(player:getUsername(), x + 1, y + 6, 0.0, 0.0, 0.0, 1.0, UIFont.Small);
+						self:drawTextCentre(player:getUsername(), x, y + 5, 1.0, 1.0, 1.0, 1.0, UIFont.Small);
+					end
+				end
+			end
+		end
+	end
+
+	--Local player rendering
+	if isMapDrawLocalPlayer() then
+		local player = self.localPlayer;
+		
+		local x = self.mapAPI:worldToUIX(player:getX(), player:getY());
+		local y = self.mapAPI:worldToUIY(player:getX(), player:getY());
+	
+		local size = 125 / self.mapAPI:getWorldScale()
+		size = clamp(size, 2, 5)
+	
+		self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.localPlayerColor.a, self.localPlayerColor.r, self.localPlayerColor.g, self.localPlayerColor.b);
+		self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		if self.mapAPI:getWorldScale() > 1 then
+			self:drawTextCentre(player:getUsername(), x + 1, y + 6, 0.0, 0.0, 0.0, 1.0, UIFont.Small);
+			self:drawTextCentre(player:getUsername(), x, y + 5, 1.0, 1.0, 1.0, 1.0, UIFont.Small);
+		end
+	end
+
+/*	--Buildings rendering
 	if isMapDrawBuildings then
 		local buildings = getCell():getBuildingList()
 		for i=1, buildings:size() do
@@ -175,88 +257,7 @@ function UIMap:render()
 			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.worldItemColor.a, self.worldItemColor.r, self.worldItemColor.g, self.worldItemColor.b);
 			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
 		end
-	end
-
-	--Zombie rendering
-	if isMapDrawZombies() then
-		local zombies = getCell():getZombieList()
-		for i=1,zombies:size() do
-			local zombie = zombies:get(i-1)
-
-			local x = self.mapAPI:worldToUIX(zombie:getX(), zombie:getY());
-			local y = self.mapAPI:worldToUIY(zombie:getX(), zombie:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.zombieColor.a, self.zombieColor.r, self.zombieColor.g, self.zombieColor.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		end
-	end
-
-	-- Car rendering
-	if isMapDrawVehicles() then
-		local vehicles = getCell():getVehicles()
-		for i=1,vehicles:size() do
-			local vehicle = vehicles:get(i-1)
-
-			local x = self.mapAPI:worldToUIX(vehicle:getX(), vehicle:getY());
-			local y = self.mapAPI:worldToUIY(vehicle:getX(), vehicle:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.vehicleColor.a, self.vehicleColor.r, self.vehicleColor.g, self.vehicleColor.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-			if self.mapAPI:getWorldScale() > 5 then
-			self:drawTextCentre(vehicle:getScriptName(), x + 1, y + 6, 0.0, 0.0, 0.0, 1.0, UIFont.Small);
-			self:drawTextCentre(vehicle:getScriptName(), x, y + 5, 1.0, 1.0, 1.0, 1.0, UIFont.Small);
-		end
-		end
-	end
-
-	-- Other players rendering
-	if isMapDrawAllPlayers() then
-		local players = getOnlinePlayers()
-
-		if players ~= nil then
-			for i=1,players:size() do
-				local player = players:get(i-1)
-				if player ~= self.localPlayer then
-					local x = self.mapAPI:worldToUIX(player:getX(), player:getY());
-					local y = self.mapAPI:worldToUIY(player:getX(), player:getY());
-
-					local size = 125 / self.mapAPI:getWorldScale()
-					size = clamp(size, 2, 5)
-
-					self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.playerColor.a, self.playerColor.r, self.playerColor.g, self.playerColor.b);
-					self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-					if self.mapAPI:getWorldScale() > 1 then
-						self:drawTextCentre(player:getUsername(), x + 1, y + 6, 0.0, 0.0, 0.0, 1.0, UIFont.Small);
-						self:drawTextCentre(player:getUsername(), x, y + 5, 1.0, 1.0, 1.0, 1.0, UIFont.Small);
-					end
-				end
-			end
-		end
-	end
-
-	--Local player rendering
-	if isMapDrawLocalPlayer() then
-		local player = self.localPlayer;
-		
-		local x = self.mapAPI:worldToUIX(player:getX(), player:getY());
-		local y = self.mapAPI:worldToUIY(player:getX(), player:getY());
-	
-		local size = 125 / self.mapAPI:getWorldScale()
-		size = clamp(size, 2, 5)
-	
-		self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.localPlayerColor.a, self.localPlayerColor.r, self.localPlayerColor.g, self.localPlayerColor.b);
-		self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		if self.mapAPI:getWorldScale() > 1 then
-			self:drawTextCentre(player:getUsername(), x + 1, y + 6, 0.0, 0.0, 0.0, 1.0, UIFont.Small);
-			self:drawTextCentre(player:getUsername(), x, y + 5, 1.0, 1.0, 1.0, 1.0, UIFont.Small);
-		end
-	end
+	end */
 
 	self:clearStencilRect()
     self:resumeStencil()
