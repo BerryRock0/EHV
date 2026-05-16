@@ -142,7 +142,7 @@ function EtherMapPanel:createChildren()
         toggleMapDrawVehicles(isChecked)
     end, isMapDrawVehicles())
 	
-/*	self:addCheckBox(getTranslate("UI_Map_DrawSurvivors"), function (isChecked)
+	self:addCheckBox(getTranslate("UI_Map_DrawSurvivors"), function (isChecked)
         toggleMapDrawSurvivors(isChecked)
     end, isMapDrawSurvivors())
 
@@ -168,7 +168,7 @@ function EtherMapPanel:createChildren()
 
 	self:addCheckBox(getTranslate("UI_Map_DrawRooms"), function (isChecked)
         toggleMapDrawRooms(isChecked)
-    end, isMapDrawRooms()) */
+    end, isMapDrawRooms())
 end
 --*********************************************************
 --* Создание нового экземпляра меню
