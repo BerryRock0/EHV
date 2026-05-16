@@ -79,26 +79,6 @@ public final class EtherLuaMethods {
         EtherMain.getInstance().etherAPI.remoteSurvivorsUIColor = new Color(r, g, b);
     }
 
-    @LuaMethod(name="getItemUIColor", global=true)
-    public static Color getItemUIColor() {
-        return EtherMain.getInstance().etherAPI.itemsUIColor;
-    }
-
-    @LuaMethod(name="setItemUIColor", global=true)
-    public static void setItemUIColor(float r, float g, float b) {
-        EtherMain.getInstance().etherAPI.itemsUIColor = new Color(r, g, b);
-    }
-    
-    @LuaMethod(name="getWorldItemUIColor", global=true)
-    public static Color getWorldUIColor() {
-        return EtherMain.getInstance().etherAPI.worldItemsUIColor;
-    }
-
-    @LuaMethod(name="setWorldItemUIColor", global=true)
-    public static void setWorldUIColor(float r, float g, float b) {
-        EtherMain.getInstance().etherAPI.worldItemsUIColor = new Color(r, g, b);
-    }
-
     @LuaMethod(name="getRoomUIColor", global=true)
     public static Color getRoomUIColor() {
         return EtherMain.getInstance().etherAPI.roomsUIColor;
