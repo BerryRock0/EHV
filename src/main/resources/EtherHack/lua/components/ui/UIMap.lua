@@ -146,55 +146,6 @@ function UIMap:render()
 		end
 	end
 
-/*	--Buildings rendering
-	if isMapDrawBuildings then
-		local buildings = getCell():getBuildingList()
-		for i=1, buildings:size() do
-			local building = .get(i-1)
-			local x = self.mapAPI:worldToUIX(building:getX(), building:getY());
-			local y = self.mapAPI:worldToUIY(building:getX(), building:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.Color.a, self.Color.r, self.Color.g, self.Color.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		end
-	end
-
-	--Rooms rendering
-	if isMapDrawRooms then
-		local rooms = getCell():get()
-		for i=1, rooms:size() do
-			local room = rooms.get(i-1)
-			local x = self.mapAPI:worldToUIX(room:getX(), room:getY());
-			local y = self.mapAPI:worldToUIY(room:getX(), room:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.roomColor.a, self.roomColor.r, self.roomColor.g, self.roomColor.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		end
-	end
-
-	
-	--Pushables rendering
-	if isMapDrawPushables then
-		local pushables = getCell():getPushableObjectList()
-		for i=1, pushables:size() do
-			local pushable = pushables.get(i-1)
-			local x = self.mapAPI:worldToUIX(pushable:getX(), pushable:getY());
-			local y = self.mapAPI:worldToUIY(pushable:getX(), pushable:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.pushableColor.a, self.pushableColor.r, self.pushableColor.g, self.pushableColor.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		end
-	end
-
 	--Survivors rendering
 	if isMapDrawSurvivors then
 		local survivors = getCell():getSurvivorList()
@@ -227,34 +178,50 @@ function UIMap:render()
 		end
 	end	
 
-	--Item rendering
-	if isMapDrawItems then
-		local items = getCell():getProcessItems()
-		for i=1, items:size() do
-			local item = items.get(i-1)
-			local x = self.mapAPI:worldToUIX(item:getX(), item:getY());
-			local y = self.mapAPI:worldToUIY(item:getX(), item:getY());
+	--Pushables rendering
+	if isMapDrawPushables then
+		local pushables = getCell():getPushableObjectList()
+		for i=1, pushables:size() do
+			local pushable = pushables.get(i-1)
+			local x = self.mapAPI:worldToUIX(pushable:getX(), pushable:getY());
+			local y = self.mapAPI:worldToUIY(pushable:getX(), pushable:getY());
 
 			local size = 125 / self.mapAPI:getWorldScale()
 			size = clamp(size, 2, 5)
 
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.itemColor.a, self.itemColor.r, self.itemColor.g, self.itemColor.b);
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.pushableColor.a, self.pushableColor.r, self.pushableColor.g, self.pushableColor.b);
 			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
 		end
 	end
 
-	--World items rendering
-	if isMapDrawWorldItems then
-		local worldItems = getCell():getProcessWorldItems()
-		for i=1, worldItems:size() do
-			local worldItem = worldItems.get(i-1)
-			local x = self.mapAPI:worldToUIX(worldItem:getX(), worldItem:getY());
-			local y = self.mapAPI:worldToUIY(worldItem:getX(), worldItem:getY());
+/*	--Buildings rendering
+	if isMapDrawBuildings then
+		local buildings = getCell():getBuildingList()
+		for i=1, buildings:size() do
+			local building = .get(i-1)
+			local x = self.mapAPI:worldToUIX(building:getX(), building:getY());
+			local y = self.mapAPI:worldToUIY(building:getX(), building:getY());
 
 			local size = 125 / self.mapAPI:getWorldScale()
 			size = clamp(size, 2, 5)
 
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.worldItemColor.a, self.worldItemColor.r, self.worldItemColor.g, self.worldItemColor.b);
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.Color.a, self.Color.r, self.Color.g, self.Color.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+
+	--Rooms rendering
+	if isMapDrawRooms then
+		local rooms = getCell():get()
+		for i=1, rooms:size() do
+			local room = rooms.get(i-1)
+			local x = self.mapAPI:worldToUIX(room:getX(), room:getY());
+			local y = self.mapAPI:worldToUIY(room:getX(), room:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.roomColor.a, self.roomColor.r, self.roomColor.g, self.roomColor.b);
 			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
 		end
 	end */
