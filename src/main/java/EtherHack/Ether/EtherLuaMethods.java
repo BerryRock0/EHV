@@ -451,6 +451,16 @@ public final class EtherLuaMethods {
         EtherMain.getInstance().etherAPI.isVisualDrawLineToVehicle = isToggled;
     }
 
+    @LuaMethod(name="isMapDrawOthers", global=true)
+    public static boolean isMapDrawOthers() {
+        return EtherMain.getInstance().etherAPI.isMapDrawOthers;
+    }
+
+    @LuaMethod(name="toggleMapDrawOthers", global=true)
+    public static void toggleMapDrawOthers(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isMapDrawOthers = isToggled;
+    }
+    
     @LuaMethod(name="isMapDrawZombies", global=true)
     public static boolean isMapDrawZombies() {
         return EtherMain.getInstance().etherAPI.isMapDrawZombies;
