@@ -125,16 +125,24 @@ function EtherMapPanel:createChildren()
     self:addButtonWithLabel(getTranslate("UI_Map_MiniMapOpenLabel"), getTranslate("UI_Map_MiniMapOpenButton"), function ()
         UIMovableMiniMap.openPanel()
     end)
+	
+	self:addCheckBox(getTranslate("UI_Map_DrawZombies"), function (isChecked)
+        toggleMapDrawZombies(isChecked)
+    end, isMapDrawZombies())
+	
+    self:addCheckBox(getTranslate("UI_Map_DrawOtherPlayers"), function (isChecked)
+        toggleMapDrawAllPlayers(isChecked)
+    end, isMapDrawAllPlayers())
 
     self:addCheckBox(getTranslate("UI_Map_DrawLocalPlayer"), function (isChecked)
         toggleMapDrawLocalPlayer(isChecked)
     end, isMapDrawLocalPlayer())
 
-    self:addCheckBox(getTranslate("UI_Map_DrawOtherPlayers"), function (isChecked)
-        toggleMapDrawAllPlayers(isChecked)
-    end, isMapDrawAllPlayers())
-
-	self:addCheckBox(getTranslate("UI_Map_DrawSurvivors"), function (isChecked)
+    self:addCheckBox(getTranslate("UI_Map_DrawVehicles"), function (isChecked)
+        toggleMapDrawVehicles(isChecked)
+    end, isMapDrawVehicles())
+	
+/*	self:addCheckBox(getTranslate("UI_Map_DrawSurvivors"), function (isChecked)
         toggleMapDrawSurvivors(isChecked)
     end, isMapDrawSurvivors())
 
@@ -142,14 +150,6 @@ function EtherMapPanel:createChildren()
         toggleMapDrawRemoteSurvivors(isChecked)
     end, isMapDrawRemoteSurvivors())	
 
-	self:addCheckBox(getTranslate("UI_Map_DrawZombies"), function (isChecked)
-        toggleMapDrawZombies(isChecked)
-    end, isMapDrawZombies())
-
-    self:addCheckBox(getTranslate("UI_Map_DrawVehicles"), function (isChecked)
-        toggleMapDrawVehicles(isChecked)
-    end, isMapDrawVehicles())
-	
 	self:addCheckBox(getTranslate("UI_Map_DrawItems"), function (isChecked)
         toggleMapDrawItems(isChecked)
     end, isMapDrawItems())
@@ -168,7 +168,7 @@ function EtherMapPanel:createChildren()
 
 	self:addCheckBox(getTranslate("UI_Map_DrawRooms"), function (isChecked)
         toggleMapDrawRooms(isChecked)
-    end, isMapDrawRooms())
+    end, isMapDrawRooms()) */
 end
 --*********************************************************
 --* Создание нового экземпляра меню
