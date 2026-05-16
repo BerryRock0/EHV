@@ -298,7 +298,7 @@ function EtherSettingsPanel:createChildren()
         picker:initialise()
         picker.pickedTarget = self
         picker.resetFocusTo = self
-        picker:setInitialColor(get?UIColor());
+        picker:setInitialColor(getSurvivorUIColor());
         picker.pickedFunc = function (target, color, mouseUp)
             self.survivorColors.backgroundColor = {r = getSurvivorUIColor():getR(), g = getSurvivorUIColor():getG(), b = getSurvivorUIColor():getB(), a = 1.0};
             setSurvivorUIColor(color.r, color.g, color.b);
@@ -337,7 +337,7 @@ function EtherSettingsPanel:createChildren()
         picker:initialise()
         picker.pickedTarget = self
         picker.resetFocusTo = self
-        picker:setInitialColor(get?UIColor());
+        picker:setInitialColor(getWorldItemUIColor());
         picker.pickedFunc = function (target, color, mouseUp)
             self.worldItemColors.backgroundColor = {r = getWorldItemUIColor():getR(), g = getWorldItemUIColor():getG(), b = getWorldItemUIColor():getB(), a = 1.0};
             setWorldItemUIColor(color.r, color.g, color.b);
@@ -350,7 +350,7 @@ function EtherSettingsPanel:createChildren()
         picker:initialise()
         picker.pickedTarget = self
         picker.resetFocusTo = self
-        picker:setInitialColor(get?UIColor());
+        picker:setInitialColor(getPushableUIColor());
         picker.pickedFunc = function (target, color, mouseUp)
             self.pushableColors.backgroundColor = {r = getPushableUIColor():getR(), g = getPushableUIColor():getG(), b = getPushableUIColor():getB(), a = 1.0};
             setPushableUIColor(color.r, color.g, color.b);
