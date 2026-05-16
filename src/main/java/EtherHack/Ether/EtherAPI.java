@@ -51,7 +51,7 @@ public class EtherAPI
     public Color zombiesUIColor;
     public Color playersUIColor;
     public Color survivorsUIColor;
-    public Color remoteSurvovorsUIColor;
+    public Color remoteSurvivorsUIColor;
     public Color itemsUIColor;
     public Color worldItemsUIColor;
     public Color pushablesUIColor;
