@@ -199,7 +199,7 @@ public class EtherAPI
         config.setProperty("isMapDrawAllPlayers", Boolean.toString(this.isMapDrawAllPlayers));
         config.setProperty("isMapDrawVehicles", Boolean.toString(this.isMapDrawVehicles));
         config.setProperty("isMapDrawZombies", Boolean.toString(this.isMapDrawZombies));
-        config.setProperty("isMapDrawBuildings", Boolean.toString(this.isMapDraw));
+        config.setProperty("isMapDrawBuildings", Boolean.toString(this.isMapDrawBuildings));
         config.setProperty("isMapDrawItems", Boolean.toString(this.isMapDrawItems));
         config.setProperty("isMapDrawWorldItems", Boolean.toString(this.isMapDrawWorldItems));
         config.setProperty("isMapDrawPushables", Boolean.toString(this.isMapDrawPushables));
