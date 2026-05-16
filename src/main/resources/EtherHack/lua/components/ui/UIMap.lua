@@ -1,12 +1,12 @@
 UIMap = ISWorldMap:derive("UIMap")
 
 --*********************************************************
---* Создание дочерних элементов
+--* Сreating child elements
 --*********************************************************
 function UIMap:createChildren() end
 
 --*********************************************************
---* Восстановление настроек
+--* Restore settings
 --*********************************************************
 function UIMap:restoreSettings()
 	if not MainScreen.instance or not MainScreen.instance.inGame then return end
@@ -30,13 +30,13 @@ function UIMap:restoreSettings()
 end
 
 --*********************************************************
---* Отрисовка символов
+--* Symbol rendering
 --*********************************************************
 function UIMap:onToggleSymbols() 
 
 end
 --*********************************************************
---* Ограничение значений
+--* Limit values
 --*********************************************************
 local function clamp(val, lower, upper)
     if lower > upper then lower, upper = upper, lower end
@@ -57,14 +57,127 @@ function UIMap:prerender()
 	end
 end
 --*********************************************************
---* Отрисовка
+--* Rendering
 --*********************************************************
 function UIMap:render() 
 	
 	self:suspendStencil()
-    self:clampStencilRectToParent(0, 0, self:getWidth(), self:getHeight() )
+    self:clampStencilRectToParent(0, 0, self:getWidth(), self:getHeight())
 
-	-- Отрисовка зомби
+	--Buildings rendering
+	if isMapDrawBuildings then
+		local buildings = getCell():getBuildingList()
+		for i=1, buildings:size() do
+			local building = .get(i-1)
+			local x = self.mapAPI:worldToUIX(building:getX(), building:getY());
+			local y = self.mapAPI:worldToUIY(building:getX(), building:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.Color.a, self.Color.r, self.Color.g, self.Color.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+
+	--Rooms rendering
+	if isMapDrawRooms then
+		local rooms = getCell():get()
+		for i=1, rooms:size() do
+			local room = rooms.get(i-1)
+			local x = self.mapAPI:worldToUIX(room:getX(), room:getY());
+			local y = self.mapAPI:worldToUIY(room:getX(), room:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.roomColor.a, self.roomColor.r, self.roomColor.g, self.roomColor.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+
+	
+	--Pushables rendering
+	if isMapDrawPushables then
+		local pushables = getCell():getPushableObjectList()
+		for i=1, pushables:size() do
+			local pushable = pushables.get(i-1)
+			local x = self.mapAPI:worldToUIX(pushable:getX(), pushable:getY());
+			local y = self.mapAPI:worldToUIY(pushable:getX(), pushable:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.pushableColor.a, self.pushableColor.r, self.pushableColor.g, self.pushableColor.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+
+	--Survivors rendering
+	if isMapDrawSurvivors then
+		local survivors = getCell():getSurviorList()
+		for i=1, survivors:size() do
+			local survivor = survivors.get(i-1)
+			local x = self.mapAPI:worldToUIX(survivor:getX(), survivor:getY());
+			local y = self.mapAPI:worldToUIY(survivor:getX(), survivor:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.survivorColor.a, self.survivorColor.r, self.survivorColor.g, self.survivorColor.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+
+	--Remote survivors rendering
+	if isMapDrawRemoteSurvivors then
+		local remoteSurvivors = getCell():getRemoteSurvivorList()
+		for i=1, remoteSurvivors:size() do
+			local remoteSurvivor = remoteSurvivors.get(i-1)
+			local x = self.mapAPI:worldToUIX(remoteSurvivor:getX(), remoteSurvivor:getY());
+			local y = self.mapAPI:worldToUIY(remoteSurvivor:getX(), remoteSurvivor:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.remoteSurvivorColor.a, self.remoteSurvivorColor.r, self.remoteSurvivorColor.g, self.remoteSurvivorColor.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end	
+
+	--Item rendering
+	if isMapDrawItems then
+		local items = getCell():getProcessItems()
+		for i=1, items:size() do
+			local item = items.get(i-1)
+			local x = self.mapAPI:worldToUIX(item:getX(), item:getY());
+			local y = self.mapAPI:worldToUIY(item:getX(), item:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.itemColor.a, self.itemColor.r, self.itemColor.g, self.itemColor.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+
+	--World items rendering
+	if isMapDrawWorldItems then
+		local worldItems = getCell():getProcessWorldItems()
+		for i=1, worldItems:size() do
+			local worldItem = worldItems.get(i-1)
+			local x = self.mapAPI:worldToUIX(worldItem:getX(), worldItem:getY());
+			local y = self.mapAPI:worldToUIY(worldItem:getX(), worldItem:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.worldItemColor.a, self.worldItemColor.r, self.worldItemColor.g, self.worldItemColor.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+
+	--Zombie rendering
 	if isMapDrawZombies() then
 		local zombies = getCell():getZombieList()
 		for i=1,zombies:size() do
@@ -81,7 +194,7 @@ function UIMap:render()
 		end
 	end
 
-	-- Отрисовка машин
+	-- Car rendering
 	if isMapDrawVehicles() then
 		local vehicles = getCell():getVehicles()
 		for i=1,vehicles:size() do
@@ -102,7 +215,7 @@ function UIMap:render()
 		end
 	end
 
-	-- Отрисовка других игроков
+	-- Other players rendering
 	if isMapDrawAllPlayers() then
 		local players = getOnlinePlayers()
 
@@ -127,7 +240,7 @@ function UIMap:render()
 		end
 	end
 
-	-- Отрисовка локального игрока
+	--Local player rendering
 	if isMapDrawLocalPlayer() then
 		local player = self.localPlayer;
 		
@@ -150,14 +263,14 @@ function UIMap:render()
 end
 
 --*********************************************************
---* Нажатие джойстиком
+--* Joystick click
 --*********************************************************
 function UIMap:onJoypadDown()
 
 end
 
 --*********************************************************
---* ЛКМ - нажатие клавиши
+--* LMB - key press
 --*********************************************************
 function UIMap:onMouseDown(x, y)
 	self.dragging = true
@@ -173,7 +286,7 @@ function UIMap:onMouseDown(x, y)
 end
 
 --*********************************************************
---* Движение мыши
+--* Mouse move
 --*********************************************************
 function UIMap:onMouseMove(dx, dy)
 	if self.dragging then
@@ -191,14 +304,14 @@ function UIMap:onMouseMove(dx, dy)
 end
 
 --*********************************************************
---* Движение мыши вне карты
+--* Mouse move off the map
 --*********************************************************
 function UIMap:onMouseMoveOutside(dx, dy)
 	return self:onMouseMove(dx, dy)
 end
 
 --*********************************************************
---* ЛКМ - поднятие клавиши
+--* LMB - key lifting
 --*********************************************************
 function UIMap:onMouseUp(x, y)
 	self.dragging = false
@@ -206,7 +319,7 @@ function UIMap:onMouseUp(x, y)
 end
 
 --*********************************************************
---* ЛКМ - поднятие клавиши мыши вне карты
+--* LMB - lifting mouse key off the map
 --*********************************************************
 function UIMap:onMouseUpOutside(x, y)
 	self.dragging = false
@@ -214,7 +327,7 @@ function UIMap:onMouseUpOutside(x, y)
 end
 
 --*********************************************************
---* Движение колесика мыши
+--* Mouse wheel move
 --*********************************************************
 function UIMap:onMouseWheel(del)
 	self.mapAPI:zoomAt(self:getMouseX(), self:getMouseY(), del)
@@ -222,14 +335,14 @@ function UIMap:onMouseWheel(del)
 end
 
 --*********************************************************
---* ПКМ - нажатие клавиши
+--* RMB - key press
 --*********************************************************
 function UIMap:onRightMouseDown(x, y)
 	return false
 end
 
 --*********************************************************
---* ПКМ - поднятие клавиши
+--* RMB - key lifting
 --*********************************************************
 function UIMap:onRightMouseUp(x, y) 
 	local context = ISContextMenu.get(0, x + self:getAbsoluteX(), y + self:getAbsoluteY())
@@ -249,7 +362,7 @@ function UIMap:onRightMouseUp(x, y)
 end
 
 --*********************************************************
---* Безопасная телепортация
+--* Safe teleportation
 --*********************************************************
 function UIMap:onTeleport(x, y) 
 	if isPlayerInSafeTeleported() then
@@ -259,7 +372,7 @@ function UIMap:onTeleport(x, y)
 	safePlayerTeleport(x, y);
 end
 --*********************************************************
---* Создание нового экземпляра
+--* Create new instance
 --*********************************************************
 function UIMap:new(x, y, width, height)
 	local uiTableData = {}
@@ -269,12 +382,18 @@ function UIMap:new(x, y, width, height)
 	self.__index = self
 
 	uiTableData.localPlayer = getPlayer();
-	uiTableData.localPlayerColor = {r = 0.5, g = 1.0, b = 0.5, a = 1.0}
-	uiTableData.playerColor = {r = 1.0, g = 0.2, b = 0.2, a = 1.0}
-	uiTableData.vehicleColor = {r = 0.2, g = 0.2, b = 1.0, a = 1.0}
-	uiTableData.zombieColor = {r = 1.0, g = 0.5, b = 0.3, a = 1.0}
+	uiTableData.localPlayerColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.playerColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.vehicleColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.zombieColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.roomColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.buildingColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.pushableColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.worldItemColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.itemColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.survivorColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.remoteSurvivorColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
 	uiTableData.centerByPlayer = false;
-
 
 	return uiTableData
 end
