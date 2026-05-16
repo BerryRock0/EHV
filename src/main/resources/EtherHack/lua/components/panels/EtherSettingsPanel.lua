@@ -293,6 +293,99 @@ function EtherSettingsPanel:createChildren()
         picker:addToUIManager();
     end, getZombieUIColor())
 
+
+    self.Colors = self:addColorPickerWithLabel(getTranslate("UI_Settings_Color"), function ()
+        local picker = ISColorPicker:new(getMouseX(), getMouseY())
+        picker:initialise()
+        picker.pickedTarget = self
+        picker.resetFocusTo = self
+        picker:setInitialColor(get?UIColor());
+        picker.pickedFunc = function (target, color, mouseUp)
+            self.zombieColors.backgroundColor = {r = get?UIColor():getR(), g = get?UIColor():getG(), b = get?UIColor():getB(), a = 1.0};
+            set?UIColor(color.r, color.g, color.b);
+        end;
+        picker:addToUIManager();
+    end, get?UIColor())
+
+    self.Colors = self:addColorPickerWithLabel(getTranslate("UI_Settings_Color"), function ()
+        local picker = ISColorPicker:new(getMouseX(), getMouseY())
+        picker:initialise()
+        picker.pickedTarget = self
+        picker.resetFocusTo = self
+        picker:setInitialColor(get?UIColor());
+        picker.pickedFunc = function (target, color, mouseUp)
+            self.zombieColors.backgroundColor = {r = get?UIColor():getR(), g = get?UIColor():getG(), b = get?UIColor():getB(), a = 1.0};
+            set?UIColor(color.r, color.g, color.b);
+        end;
+        picker:addToUIManager();
+    end, get?UIColor())
+
+    self.Colors = self:addColorPickerWithLabel(getTranslate("UI_Settings_Color"), function ()
+        local picker = ISColorPicker:new(getMouseX(), getMouseY())
+        picker:initialise()
+        picker.pickedTarget = self
+        picker.resetFocusTo = self
+        picker:setInitialColor(get?UIColor());
+        picker.pickedFunc = function (target, color, mouseUp)
+            self.zombieColors.backgroundColor = {r = get?UIColor():getR(), g = get?UIColor():getG(), b = get?UIColor():getB(), a = 1.0};
+            set?UIColor(color.r, color.g, color.b);
+        end;
+        picker:addToUIManager();
+    end, get?UIColor())
+
+    self.Colors = self:addColorPickerWithLabel(getTranslate("UI_Settings_Color"), function ()
+        local picker = ISColorPicker:new(getMouseX(), getMouseY())
+        picker:initialise()
+        picker.pickedTarget = self
+        picker.resetFocusTo = self
+        picker:setInitialColor(get?UIColor());
+        picker.pickedFunc = function (target, color, mouseUp)
+            self.zombieColors.backgroundColor = {r = get?UIColor():getR(), g = get?UIColor():getG(), b = get?UIColor():getB(), a = 1.0};
+            set?UIColor(color.r, color.g, color.b);
+        end;
+        picker:addToUIManager();
+    end, get?UIColor())
+
+    self.Colors = self:addColorPickerWithLabel(getTranslate("UI_Settings_Color"), function ()
+        local picker = ISColorPicker:new(getMouseX(), getMouseY())
+        picker:initialise()
+        picker.pickedTarget = self
+        picker.resetFocusTo = self
+        picker:setInitialColor(get?UIColor());
+        picker.pickedFunc = function (target, color, mouseUp)
+            self.zombieColors.backgroundColor = {r = get?UIColor():getR(), g = get?UIColor():getG(), b = get?UIColor():getB(), a = 1.0};
+            set?UIColor(color.r, color.g, color.b);
+        end;
+        picker:addToUIManager();
+    end, get?UIColor())
+
+    self.Colors = self:addColorPickerWithLabel(getTranslate("UI_Settings_Color"), function ()
+        local picker = ISColorPicker:new(getMouseX(), getMouseY())
+        picker:initialise()
+        picker.pickedTarget = self
+        picker.resetFocusTo = self
+        picker:setInitialColor(get?UIColor());
+        picker.pickedFunc = function (target, color, mouseUp)
+            self.zombieColors.backgroundColor = {r = get?UIColor():getR(), g = get?UIColor():getG(), b = get?UIColor():getB(), a = 1.0};
+            set?UIColor(color.r, color.g, color.b);
+        end;
+        picker:addToUIManager();
+    end, get?UIColor())
+
+    self.Colors = self:addColorPickerWithLabel(getTranslate("UI_Settings_Color"), function ()
+        local picker = ISColorPicker:new(getMouseX(), getMouseY())
+        picker:initialise()
+        picker.pickedTarget = self
+        picker.resetFocusTo = self
+        picker:setInitialColor(get?UIColor());
+        picker.pickedFunc = function (target, color, mouseUp)
+            self.zombieColors.backgroundColor = {r = get?UIColor():getR(), g = get?UIColor():getG(), b = get?UIColor():getB(), a = 1.0};
+            set?UIColor(color.r, color.g, color.b);
+        end;
+        picker:addToUIManager();
+    end, get?UIColor())
+
+
     self:addButtonWithLabel(getTranslate("UI_Settings_ResetLuaLabel"), getTranslate("UI_Settings_ResetLuaButton"), function ()
         getCore():ResetLua("default", "Force")
     end, true);
