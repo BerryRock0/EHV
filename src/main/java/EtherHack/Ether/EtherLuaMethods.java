@@ -59,7 +59,7 @@ public final class EtherLuaMethods {
         EtherMain.getInstance().etherAPI.playersUIColor = new Color(r, g, b);
     }
 
-    @LuaMethod(name="getSurvivorUIColor", global=true)
+/*    @LuaMethod(name="getSurvivorUIColor", global=true)
     public static Color getSurvivorUIColor() {
         return EtherMain.getInstance().etherAPI.survivorsUIColor;
     }
@@ -127,7 +127,7 @@ public final class EtherLuaMethods {
     @LuaMethod(name="setPushableUIColor", global=true)
     public static void setPushableUIColor(float r, float g, float b) {
         EtherMain.getInstance().etherAPI.pushablesUIColor = new Color(r, g, b);
-    }
+    } */
     
     @LuaMethod(name="getAccentUIColor", global=true)
     public static Color getAccentUIColor() {
