@@ -108,7 +108,13 @@ public class EtherAPI
     public boolean isMapDrawAllPlayers;
     public boolean isMapDrawVehicles;
     public boolean isMapDrawZombies;
-    public boolean isMapDrawOthers;
+    public boolean isMapDrawBuildings;
+    public boolean isMapDrawSurvivors;
+    public boolean isMapDrawRemoteSurvivors;
+    public boolean isMapDrawPushables;
+    public boolean isMapDrawItems;
+    public boolean isMapDrawWorldItems;
+    public boolean isMapDrawRooms;
 
     public void saveConfig(String configFileName) {
         String fixedFileName = "EtherHack/config/" + configFileName + ".properties";
@@ -179,7 +185,13 @@ public class EtherAPI
         config.setProperty("isMapDrawAllPlayers", Boolean.toString(this.isMapDrawAllPlayers));
         config.setProperty("isMapDrawVehicles", Boolean.toString(this.isMapDrawVehicles));
         config.setProperty("isMapDrawZombies", Boolean.toString(this.isMapDrawZombies));
-        config.setProperty("isMapDrawOthers", Boolean.toString(this.isMapDrawOthers));
+        config.setProperty("isMapDrawBuildings", Boolean.toString(this.isMapDraw));
+        config.setProperty("isMapDrawItems", Boolean.toString(this.isMapDrawItems));
+        config.setProperty("isMapDrawWorldItems", Boolean.toString(this.isMapDrawWorldItems));
+        config.setProperty("isMapDrawPushables", Boolean.toString(this.isMapDrawPushables));
+        config.setProperty("isMapDrawRooms", Boolean.toString(this.isMapDrawRooms));
+        config.setProperty("isMapDrawSurvivors", Boolean.toString(this.isMapDrawSurvivors));
+        config.setProperty("isMapDrawRemoteSurvivors", Boolean.toString(this.isMapDrawRemoteSurvivors));
         try (FileOutputStream out = new FileOutputStream(fixedFileName);){
             config.store(out, null);
         }
@@ -261,6 +273,13 @@ public class EtherAPI
         this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawAllPlayers", (boolean)false);
         this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawVehicles", (boolean)false);
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawZombies", (boolean)false);
+        this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawSurvivors", (boolean)false);
+        this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRemoteSurvivors", (boolean)false);
+        this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRooms", (boolean)false);
+        this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawBuildings", (boolean)false);
+        this.isMapDrawItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawItems", (boolean)false);
+        this.isMapDrawWorldItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawWorldItems", (boolean)false);
+        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawPushables", (boolean)false);
     }
 
     private void initStartupConfig() {
@@ -334,6 +353,13 @@ public class EtherAPI
         this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawAllPlayers", (boolean)false);
         this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawVehicles", (boolean)false);
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawZombies", (boolean)false);
+        this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawSurvivors", (boolean)false);
+        this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRemoteSurvivors", (boolean)false);
+        this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRooms", (boolean)false);
+        this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawBuildings", (boolean)false);
+        this.isMapDrawItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawItems", (boolean)false);
+        this.isMapDrawWorldItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawWorldItems", (boolean)false);
+        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawPushables", (boolean)false);
     }
 
     public EtherAPI() {
