@@ -59,11 +59,86 @@ public final class EtherLuaMethods {
         EtherMain.getInstance().etherAPI.playersUIColor = new Color(r, g, b);
     }
 
+    @LuaMethod(name="getSurvivorUIColor", global=true)
+    public static Color getSurvivorUIColor() {
+        return EtherMain.getInstance().etherAPI.survivorsUIColor;
+    }
+
+    @LuaMethod(name="setSurvivorUIColor", global=true)
+    public static void setSurvivorUIColor(float r, float g, float b) {
+        EtherMain.getInstance().etherAPI.survivorsUIColor = new Color(r, g, b);
+    }
+
+    @LuaMethod(name="getRemoteSurvivorUIColor", global=true)
+    public static Color getRemoteSurvivorUIColor() {
+        return EtherMain.getInstance().etherAPI.remoteSurvivorsUIColor;
+    }
+
+    @LuaMethod(name="setRemoteSurvivorUIColor", global=true)
+    public static void setRemoteSurvivorUIColor(float r, float g, float b) {
+        EtherMain.getInstance().etherAPI.remoteSurvivorsUIColor = new Color(r, g, b);
+    }
+
+    @LuaMethod(name="getItemUIColor", global=true)
+    public static Color getItemUIColor() {
+        return EtherMain.getInstance().etherAPI.itemsUIColor;
+    }
+
+    @LuaMethod(name="setItemUIColor", global=true)
+    public static void setItemUIColor(float r, float g, float b) {
+        EtherMain.getInstance().etherAPI.itemsUIColor = new Color(r, g, b);
+    }
+    
+    @LuaMethod(name="getWorldItemUIColor", global=true)
+    public static Color getWorldUIColor() {
+        return EtherMain.getInstance().etherAPI.worldItemsUIColor;
+    }
+
+    @LuaMethod(name="setWorldItemUIColor", global=true)
+    public static void setWorldUIColor(float r, float g, float b) {
+        EtherMain.getInstance().etherAPI.worldItemsUIColor = new Color(r, g, b);
+    }
+
+    @LuaMethod(name="getRoomUIColor", global=true)
+    public static Color getRoomUIColor() {
+        return EtherMain.getInstance().etherAPI.roomsUIColor;
+    }
+
+    @LuaMethod(name="setRoomUIColor", global=true)
+    public static void setRoomUIColor(float r, float g, float b) {
+        EtherMain.getInstance().etherAPI.roomsUIColor = new Color(r, g, b);
+    }
+
+    @LuaMethod(name="getBuildingUIColor", global=true)
+    public static Color getBuildingUIColor() {
+        return EtherMain.getInstance().etherAPI.buildingsUIColor;
+    }
+
+    @LuaMethod(name="setBuildingUIColor", global=true)
+    public static void setBuildingUIColor(float r, float g, float b) {
+        EtherMain.getInstance().etherAPI.buildingsUIColor = new Color(r, g, b);
+    }
+    
+    @LuaMethod(name="getPushableUIColor", global=true)
+    public static Color getPushableUIColor() {
+        return EtherMain.getInstance().etherAPI.pushablesUIColor;
+    }
+
+    @LuaMethod(name="setPushableUIColor", global=true)
+    public static void setPushableUIColor(float r, float g, float b) {
+        EtherMain.getInstance().etherAPI.pushablesUIColor = new Color(r, g, b);
+    }
+    
+    @LuaMethod(name="getAccentUIColor", global=true)
+    public static Color getAccentUIColor() {
+        return EtherMain.getInstance().etherAPI.mainUIAccentColor;
+    }
+    
     @LuaMethod(name="setAccentUIColor", global=true)
     public static void setAccentUIColor(float r, float g, float b) {
         EtherMain.getInstance().etherAPI.mainUIAccentColor = new Color(r, g, b);
     }
-
+    
     @LuaMethod(name="deleteConfig", global=true)
     public static void deleteConfig(String configName) {
         Path configFilePath = Paths.get("EtherHack/config/" + configName + ".properties", new String[0]);
@@ -871,10 +946,5 @@ public final class EtherLuaMethods {
             p.accessLevel = "admin";
             p.accessLevel.equals("admin");
         }
-    }
-
-    @LuaMethod(name="getAccentUIColor", global=true)
-    public static Color getAccentUIColor() {
-        return EtherMain.getInstance().etherAPI.mainUIAccentColor;
     }
 }
