@@ -197,7 +197,7 @@ function UIMap:render()
 
 	--Survivors rendering
 	if isMapDrawSurvivors then
-		local survivors = getCell():getSurviorList()
+		local survivors = getCell():getSurvivorList()
 		for i=1, survivors:size() do
 			local survivor = survivors.get(i-1)
 			local x = self.mapAPI:worldToUIX(survivor:getX(), survivor:getY());
