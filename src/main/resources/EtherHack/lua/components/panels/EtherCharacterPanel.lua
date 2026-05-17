@@ -231,6 +231,10 @@ function EtherCharacterPanel:createChildren()
         toggleDisableFakeInfectionLevel(isChecked);
     end, isDisableFakeInfectionLevel(), false);
 
+    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableFire"), function(isChecked)
+        toggleDisableFire(isChecked);
+    end, isDisableFire(), false);
+
     self:addCheckBox(getTranslate("UI_CharacterPanel_OptimalCalories"), function(isChecked)
         toggleOptimalCalories(isChecked);
     end, isOptimalCalories(), false);
