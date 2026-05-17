@@ -97,6 +97,7 @@ public class EtherAPI
     public boolean isDisableWetness;
     public boolean isDisableInfectionLevel;
     public boolean isDisableFakeInfectionLevel;
+    public boolean isDisableFire;
     public boolean isOptimalCalories;
     public boolean isOptimalWeight;
     public boolean isVisualsEnable;
@@ -178,6 +179,7 @@ public class EtherAPI
         config.setProperty("isDisableUnhappynessLevel", Boolean.toString(this.isDisableUnhappynessLevel));
         config.setProperty("isDisableWetness", Boolean.toString(this.isDisableWetness));
         config.setProperty("isDisableInfectionLevel", Boolean.toString(this.isDisableInfectionLevel));
+        config.setProperty("isDisableFire", Boolean.toString(this.isDisableFire));
         config.setProperty("isDisableFakeInfectionLevel", Boolean.toString(this.isDisableFakeInfectionLevel));
         config.setProperty("isOptimalCalories", Boolean.toString(this.isOptimalCalories));
         config.setProperty("isOptimalWeight", Boolean.toString(this.isOptimalWeight));
@@ -270,6 +272,7 @@ public class EtherAPI
         this.isDisableWetness = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableWetness", (boolean)false);
         this.isDisableInfectionLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableInfectionLevel", (boolean)false);
         this.isDisableFakeInfectionLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFakeInfectionLevel", (boolean)false);
+        this.isDisableFire = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFire", (boolean)false);
         this.isOptimalCalories = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isOptimalCalories", (boolean)false);
         this.isOptimalWeight = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isOptimalWeight", (boolean)false);
         this.isVisualsEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsEnable", (boolean)false);
@@ -353,6 +356,7 @@ public class EtherAPI
         this.isDisableWetness = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableWetness", (boolean)false);
         this.isDisableInfectionLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableInfectionLevel", (boolean)false);
         this.isDisableFakeInfectionLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFakeInfectionLevel", (boolean)false);
+        this.isDisableFire = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFire", (boolean)false);
         this.isOptimalCalories = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isOptimalCalories", (boolean)false);
         this.isOptimalWeight = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isOptimalWeight", (boolean)false);
         this.isVisualsEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsEnable", (boolean)false);
@@ -572,6 +576,9 @@ public class EtherAPI
 
         if (this.isDisableFakeInfectionLevel)
             localPlayer.getBodyDamage().setFakeInfectionLevel(0.0f);
+
+        if (this.isDisableFire)
+            localPlayer.setOnFire(false);
 
         if (this.isOptimalCalories)
             localPlayer.getNutrition().setCalories(1200.0f);
