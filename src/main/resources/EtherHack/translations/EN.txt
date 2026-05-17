@@ -63,6 +63,7 @@
 	UI_CharacterPanel_DisableWetness = "Disable wetness",
 	UI_CharacterPanel_DisableInfectionLevel = "Disable infection",
 	UI_CharacterPanel_DisableFakeInfectionLevel = "Disable fake infection",
+	UI_CharacterPanel_DisableFire = "Disable fire",
 	UI_CharacterPanel_OptimalCalories = "Maintain optimal calories",
 	UI_CharacterPanel_OptimalWeight = "Maintain optimal weight",
 
