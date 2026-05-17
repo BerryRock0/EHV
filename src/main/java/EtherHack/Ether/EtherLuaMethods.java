@@ -891,9 +891,14 @@ public final class EtherLuaMethods {
         return EtherMain.getInstance().etherAPI.isDisableFakeInfectionLevel;
     }
 
-    @LuaMethod(name="toggleOptimalCalories", global=true)
-    public static void toggleOptimalCalories(boolean isToggled) {
-        EtherMain.getInstance().etherAPI.isOptimalCalories = isToggled;
+    @LuaMethod(name="isDisableFire", global=true)
+    public static boolean isDisableFire() {
+        return EtherMain.getInstance().etherAPI.isDisableFire;
+    }
+    
+    @LuaMethod(name="toggleDisableFire", global=true)
+    public static void toggleDisableFire(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isDisableFire = isToggled;
     }
 
     @LuaMethod(name="isOptimalCalories", global=true)
@@ -901,9 +906,9 @@ public final class EtherLuaMethods {
         return EtherMain.getInstance().etherAPI.isOptimalCalories;
     }
 
-    @LuaMethod(name="toggleOptimalWeight", global=true)
-    public static void toggleOptimalWeight(boolean isToggled) {
-        EtherMain.getInstance().etherAPI.isOptimalWeight = isToggled;
+    @LuaMethod(name="toggleOptimalCalories", global=true)
+    public static void toggleOptimalCalories(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isOptimalCalories = isToggled;
     }
 
     @LuaMethod(name="isOptimalWeight", global=true)
@@ -911,14 +916,19 @@ public final class EtherLuaMethods {
         return EtherMain.getInstance().etherAPI.isOptimalWeight;
     }
 
-    @LuaMethod(name="toggleEnableUnlimitedCarry", global=true)
-    public static void toggleEnableUnlimitedCarry(boolean isToggled) {
-        EtherMain.getInstance().etherAPI.isUnlimitedCarry = isToggled;
+    @LuaMethod(name="toggleOptimalWeight", global=true)
+    public static void toggleOptimalWeight(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isOptimalWeight = isToggled;
     }
 
     @LuaMethod(name="isEnableUnlimitedCarry", global=true)
     public static boolean isEnableUnlimitedCarry() {
         return EtherMain.getInstance().etherAPI.isUnlimitedCarry;
+    }
+
+    @LuaMethod(name="toggleEnableUnlimitedCarry", global=true)
+    public static void toggleEnableUnlimitedCarry(boolean isToggled) {
+        EtherMain.getInstance().etherAPI.isUnlimitedCarry = isToggled;
     }
 
     @LuaMethod(name="getAntiCheat12Status", global=true)
