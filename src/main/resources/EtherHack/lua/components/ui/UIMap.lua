@@ -179,7 +179,7 @@ function UIMap:render()
 	end	
 
 	--Pushables rendering
-	if isMapDrawPushables then
+	if isMapDrawPushables() then
 		local pushables = getCell():getPushableObjectList()
 		for i=1, pushables:size() do
 			local pushable = pushables.get(i-1)
