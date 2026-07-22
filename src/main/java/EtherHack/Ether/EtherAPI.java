@@ -174,7 +174,6 @@ public class EtherAPI
         config.setProperty("isUnlimitedCondition", Boolean.toString(this.isUnlimitedCondition));
         config.setProperty("isUnlimitedEndurance", Boolean.toString(this.isUnlimitedEndurance));
         config.setProperty("isUnlimitedAmmo", Boolean.toString(this.isUnlimitedAmmo));
-        config.setProperty("isAutoRepairItems", Boolean.toString(this.isAutoRepairItems));
         config.setProperty("isDisableFatigue", Boolean.toString(this.isDisableFatigue));
         config.setProperty("isDisableHunger", Boolean.toString(this.isDisableHunger));
         config.setProperty("isDisableThirst", Boolean.toString(this.isDisableThirst));
