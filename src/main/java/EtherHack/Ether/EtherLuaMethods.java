@@ -206,6 +206,9 @@ public final class EtherLuaMethods {
     @LuaMethod(name="isAlwaysRoundChamber",global=true)public static boolean isAlwaysRoundChamber(){return EtherMain.getInstance().etherAPI.isAlwaysRoundChamber;}
     @LuaMethod(name="toggleAlwaysRoundChamber",global=true)public static void toggleAlwaysRoundChamber(boolean isToggled){EtherMain.getInstance().etherAPI.isAlwaysRoundChamber = isToggled;}
 
+    @LuaMethod(name="isAlwaysRepaired", global=true) public static boolean isAlwaysRepaired() {return EtherMain.getInstance().etherAPI.isAlwaysRepaired;}
+    @LuaMethod(name="toggleAlwaysRepaired", global=true) public static void toggleAlwaysRepaired(boolean isToggled) {EtherMain.getInstance().etherAPI.isAlwaysRepaired = isToggled;}
+
     @LuaMethod(name="isAlwaysKnockdown",global=true)public static boolean isAlwaysKnockdown(){return EtherMain.getInstance().etherAPI.isAlwaysKnockdown;}
     @LuaMethod(name="toggleAlwaysKnockdown",global=true)public static void toggleAlwaysKnockdown(boolean isToggled){EtherMain.getInstance().etherAPI.isAlwaysKnockdown = isToggled;}
 
