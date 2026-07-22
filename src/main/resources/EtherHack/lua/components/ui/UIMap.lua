@@ -194,7 +194,7 @@ function UIMap:render()
 		end
 	end
 
-/*	--Buildings rendering
+	--Buildings rendering
 	if isMapDrawBuildings then
 		local buildings = getCell():getBuildingList()
 		for i=1, buildings:size() do
@@ -224,7 +224,7 @@ function UIMap:render()
 			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.roomColor.a, self.roomColor.r, self.roomColor.g, self.roomColor.b);
 			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
 		end
-	end */
+	end
 
 	self:clearStencilRect()
     self:resumeStencil()
