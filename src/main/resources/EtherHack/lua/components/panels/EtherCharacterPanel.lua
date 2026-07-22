@@ -156,6 +156,10 @@ function EtherCharacterPanel:createChildren()
 	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiInfected"), function(isChecked)
         toggleNoInfected(isChecked);
     end, isNoInfected(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRepaired"), function(isChecked)
+        toggleAlwaysRepaired(isChecked);
+    end, isAlwaysRepaired(), false);
 	
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCarry"), function(isChecked)
         toggleEnableUnlimitedCarry(isChecked);
@@ -172,7 +176,6 @@ function EtherCharacterPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCondition"), function(isChecked)
         toggleUnlimitedCondition(isChecked);
     end, isUnlimitedCondition(), false);
-
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_DisableFatigue"), function(isChecked)
         toggleDisableFatigue(isChecked);
