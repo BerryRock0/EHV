@@ -147,7 +147,7 @@ function UIMap:render()
 	end
 
 	--Survivors rendering
-	if isMapDrawSurvivors then
+	if isMapDrawSurvivors() then
 		local survivors = getCell():getSurvivorList()
 		for i=1, survivors:size() do
 			local survivor = survivors.get(i-1)
@@ -163,7 +163,7 @@ function UIMap:render()
 	end
 
 	--Remote survivors rendering
-	if isMapDrawRemoteSurvivors then
+	if isMapDrawRemoteSurvivors() then
 		local remoteSurvivors = getCell():getRemoteSurvivorList()
 		for i=1, remoteSurvivors:size() do
 			local remoteSurvivor = remoteSurvivors.get(i-1)
