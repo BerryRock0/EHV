@@ -212,7 +212,7 @@ function UIMap:render()
 
 	--Rooms rendering
 	if isMapDrawRooms() then
-		local rooms = getCell():get()
+		local rooms = getCell():getRoomList()
 		for i=1, rooms:size() do
 			local room = rooms.get(i-1)
 			local x = self.mapAPI:worldToUIX(room:getX(), room:getY());
