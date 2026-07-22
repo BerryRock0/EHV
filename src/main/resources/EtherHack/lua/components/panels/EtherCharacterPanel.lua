@@ -58,11 +58,56 @@ function EtherCharacterPanel:createChildren()
     self:setScrollHeight(0)
     self:addScrollBars();
 
+    self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRack"), function(isChecked)
+        toggleAlwaysRack(isChecked);
+    end, isAlwaysRack(), false);
 
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRoundChamber"), function(isChecked)
+        toggleAlwaysRoundChamber(isChecked);
+    end, isAlwaysRoundChamber(), false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_ZombieDontAttack"), function(isChecked)
-        toggleZombieDontAttack(isChecked);
-    end, isZombieDontAttack(), false);
+    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableSpentRoundChamber"), function(isChecked)
+        toggleNoSpentRoundChamber(isChecked)
+    end, isNoSpentRoundChamber(), false);
+
+    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableJam"), function(isChecked)
+        toggleNoJam(isChecked)
+    end, isNoJam(), false);
+	
+    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableRecoil"), function(isChecked)
+        toggleNoRecoil(isChecked)
+    end, isNoRecoil(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_DisableReload"), function(isChecked)
+        toggleNoReload(isChecked)
+    end, isNoReload(), false);
+
+    self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysAiming"), function(isChecked)
+        toggleAlwaysAiming(isChecked);
+    end, isAlwaysAiming(), false);
+	
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysCritical"), function(isChecked)
+        toggleAlwaysCritical(isChecked);
+    end, isAlwaysCritical(), false);
+	
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysKnockdown"), function(isChecked)
+        toggleAlwaysKnockdown(isChecked);
+    end, isAlwaysKnockdown(), false);
+	
+    self:addCheckBox(getTranslate("UI_CharacterPanel_MultiHitZombies"), function(isChecked)
+        toggleMultiHitZombies(isChecked);
+    end, isMultiHitZombies(), false);
+	
+    self:addCheckBox(getTranslate("UI_CharacterPanel_InstantKill"), function(isChecked)
+        toggleExtraDamage(isChecked);
+        if(not isChecked) then
+            resetWeaponsStats()
+        end
+    end, isExtraDamage(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_NightVision"), function(isChecked)
+        toggleNightVision(isChecked);
+    end, isEnableNightVision(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_BuildCheat"), function(isChecked)
         ISBuildMenu.cheat = isChecked;
@@ -88,41 +133,30 @@ function EtherCharacterPanel:createChildren()
         toggleInvisible(isChecked);
     end, isEnableInvisible(), false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_NightVision"), function(isChecked)
-        toggleNightVision(isChecked);
-    end, isEnableNightVision(), false);
+    self:addCheckBox(getTranslate("UI_CharacterPanel_ZombieDontAttack"), function(isChecked)
+        toggleZombieDontAttack(isChecked);
+    end, isZombieDontAttack(), false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRack"), function(isChecked)
-        toggleAlwaysRack(isChecked);
-    end, isAlwaysRack(), false);
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiWet"), function(isChecked)
+        toggleNoWet(isChecked);
+    end, isNoWet(), false);
 
-	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysRoundChamber"), function(isChecked)
-        toggleAlwaysRoundChamber(isChecked);
-    end, isAlwaysRoundChamber(), false);
-	
-    self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysAiming"), function(isChecked)
-        toggleAlwaysAiming(isChecked);
-    end, isAlwaysAiming(), false);
-	
-	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysCritical"), function(isChecked)
-        toggleAlwaysCritical(isChecked);
-    end, isAlwaysCritical(), false);
-	
-	self:addCheckBox(getTranslate("UI_CharacterPanel_AlwaysKnockdown"), function(isChecked)
-        toggleAlwaysKnockdown(isChecked);
-    end, isAlwaysKnockdown(), false);
-	
-    self:addCheckBox(getTranslate("UI_CharacterPanel_MultiHitZombies"), function(isChecked)
-        toggleMultiHitZombies(isChecked);
-    end, isMultiHitZombies(), false);
-	
-    self:addCheckBox(getTranslate("UI_CharacterPanel_InstantKill"), function(isChecked)
-        toggleExtraDamage(isChecked);
-        if(not isChecked) then
-            resetWeaponsStats()
-        end
-    end, isExtraDamage(), false);
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiHoled"), function(isChecked)
+        toggleNoHoled(isChecked);
+    end, isNoHoled(), false);
 
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiDirted"), function(isChecked)
+        toggleNoDirted(isChecked);
+    end, isNoDirted(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiBlooded"), function(isChecked)
+        toggleNoBlooded(isChecked);
+    end, isNoBlooded(), false);
+
+	self:addCheckBox(getTranslate("UI_CharacterPanel_AntiInfected"), function(isChecked)
+        toggleNoInfected(isChecked);
+    end, isNoInfected(), false);
+	
     self:addCheckBox(getTranslate("UI_CharacterPanel_UnlimitedCarry"), function(isChecked)
         toggleEnableUnlimitedCarry(isChecked);
     end, isEnableUnlimitedCarry(), false);
@@ -139,25 +173,6 @@ function EtherCharacterPanel:createChildren()
         toggleUnlimitedCondition(isChecked);
     end, isUnlimitedCondition(), false);
 
-    self:addCheckBox(getTranslate("UI_CharacterPanel_AutoRepairsItems"), function(isChecked)
-        toggleAutoRepairItems(isChecked);
-    end, isAutoRepairItems(), false);
-
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableSpentRoundChamber"), function(isChecked)
-        toggleNoSpentRoundChamber(isChecked)
-    end, isNoSpentRoundChamber(), false);
-	
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableJam"), function(isChecked)
-        toggleNoJam(isChecked)
-    end, isNoJam(), false);
-	
-    self:addCheckBox(getTranslate("UI_CharacterPanel_DisableRecoil"), function(isChecked)
-        toggleNoRecoil(isChecked)
-    end, isNoRecoil(), false);
-
-	self:addCheckBox(getTranslate("UI_CharacterPanel_DisableReload"), function(isChecked)
-        toggleNoReload(isChecked)
-    end, isNoReload(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_DisableFatigue"), function(isChecked)
         toggleDisableFatigue(isChecked);
