@@ -57,6 +57,7 @@ public class EtherAPI
     public Color roomsUIColor;
     public boolean isAlwaysRack;
     public boolean isAlwaysRoundChamber;
+    public boolean isAlwaysRepaired;
     public boolean isAlwaysKnockdown;
     public boolean isAlwaysCritical;
     public boolean isAlwaysAiming;
@@ -73,12 +74,17 @@ public class EtherAPI
     public boolean isNoReload;
     public boolean isNoJam;
     public boolean isNoSpentRoundChamber;
+    public boolean isNoBroken;
+    public boolean isNoInfected;
+    public boolean isNoWet;
+    public boolean isNoHoled;
+    public boolean isNoDirted;
+    public boolean isNoBlooded;
     public boolean isBypassDebugMode;
     public boolean isUnlimitedCarry;
     public boolean isUnlimitedCondition;
     public boolean isUnlimitedEndurance;
     public boolean isUnlimitedAmmo;
-    public boolean isAutoRepairItems;
     public boolean isDisableFatigue;
     public boolean isDisableHunger;
     public boolean isDisableThirst;
@@ -137,6 +143,7 @@ public class EtherAPI
         config.setProperty("buildingsUIColor", ColorUtils.colorToString((Color)this.buildingsUIColor));
         config.setProperty("isAlwaysRack", Boolean.toString(this.isAlwaysRack));
         config.setProperty("isAlwaysRoundChamber", Boolean.toString(this.isAlwaysRoundChamber));
+        config.setProperty("isAlwaysRepaired", Boolean.toString(this.isAlwaysRepaired));
         config.setProperty("isAlwaysKnockdown", Boolean.toString(this.isAlwaysKnockdown));
         config.setProperty("isAlwaysAiming", Boolean.toString(this.isAlwaysAiming));
         config.setProperty("isAlwaysCritical", Boolean.toString(this.isAlwaysCritical));
@@ -156,6 +163,12 @@ public class EtherAPI
         config.setProperty("isNoReload", Boolean.toString(this.isNoReload));
         config.setProperty("isNoJam", Boolean.toString(this.isNoJam));
         config.setProperty("isNoSpentRoundChamber", Boolean.toString(this.isNoSpentRoundChamber));
+        config.setProperty("isNoBroken", Boolean.toString(this.isNoBroken));
+        config.setProperty("isNoInfected", Boolean.toString(this.isNoInfected));
+        config.setProperty("isNoWet", Boolean.toString(this.isNoWet)); 
+        config.setProperty("isNoHoled", Boolean.toString(this.isNoHoled));
+        config.setProperty("isNoDirted", Boolean.toString(this.isNoDirted));
+        config.setProperty("isNoBlooded", Boolean.toString(this.isNoBlooded));
         config.setProperty("isBypassDebugMode", Boolean.toString(this.isBypassDebugMode));
         config.setProperty("isUnlimitedCarry", Boolean.toString(this.isUnlimitedCarry));
         config.setProperty("isUnlimitedCondition", Boolean.toString(this.isUnlimitedCondition));
@@ -221,79 +234,85 @@ public class EtherAPI
             return;
         }
         //this. = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"", (boolean)false);
-        this.mainUIAccentColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"mainUIAccentColor", (Color)new Color(56, 239, 125));
-        this.vehiclesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"vehiclesUIColor", (Color)new Color(150, 150, 200));
-        this.zombiesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"zombiesUIColor", (Color)new Color(255, 150, 100));
-        this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
-        this.survivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"survivorsUIColor", (Color)new Color(0, 0, 0));
-        this.remoteSurvivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"remoteSurvivorsUIColor", (Color)new Color(0, 0, 0));
-        this.roomsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"roomsUIColor", (Color)new Color(0, 0, 0));
-        this.buildingsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"buildingsUIColor", (Color)new Color(0, 0, 0));
-        this.pushablesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"pushablesUIColor", (Color)new Color(0, 0, 0));
-        this.isAlwaysRack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRack", (boolean)false);
-        this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRoundChamber", (boolean)false);
-        this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysKnockdown", (boolean)false);
-        this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysAiming", (boolean)false);
-        this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysCritical", (boolean)false);
-        this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isPlayerInSafeTeleported", (boolean)false);
-        this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMultiHitZombies", (boolean)false);
-        this.isExtraDamage = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isExtraDamage", (boolean)false);
-        this.isTimedActionCheat = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isTimedActionCheat", (boolean)false);
-        this.isEnableGodMode = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableGodMode", (boolean)false);
-        this.isEnableNoclip = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableNoclip", (boolean)false);
-        this.isEnableInvisible = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableInvisible", (boolean)false);
-        this.isEnableNightVision = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableNightVision", (boolean)false);
-        this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isZombieDontAttack", (boolean)false);
-        this.isNoRecoil = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoRecoil", (boolean)false);
-        this.isNoReload = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoReload", (boolean)false);
-        this.isNoJam = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoJam", (boolean)false);
-        this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoSpentRoundChamber", (boolean)false);
-        this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isBypassDebugMode", (boolean)false);
-        this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCarry", (boolean)false);
-        this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCondition", (boolean)false);
-        this.isUnlimitedEndurance = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedEndurance", (boolean)false);
-        this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedAmmo", (boolean)false);
-        this.isAutoRepairItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAutoRepairItems", (boolean)false);
-        this.isDisableFatigue = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFatigue", (boolean)false);
-        this.isDisableHunger = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableHunger", (boolean)false);
-        this.isDisableThirst = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableThirst", (boolean)false);
-        this.isDisableDrunkenness = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableDrunkenness", (boolean)false);
-        this.isDisableAnger = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableAnger", (boolean)false);
-        this.isDisableFear = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFear", (boolean)false);
-        this.isDisablePain = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisablePain", (boolean)false);
-        this.isDisablePanic = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisablePanic", (boolean)false);
-        this.isDisableMorale = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableMorale", (boolean)false);
-        this.isDisableStress = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableStress", (boolean)false);
-        this.isDisableSickness = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableSickness", (boolean)false);
-        this.isDisableStressFromCigarettes = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableStressFromCigarettes", (boolean)false);
-        this.isDisableSanity = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableSanity", (boolean)false);
-        this.isDisableBoredomLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableBoredomLevel", (boolean)false);
-        this.isDisableUnhappynessLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableUnhappynessLevel", (boolean)false);
-        this.isDisableWetness = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableWetness", (boolean)false);
-        this.isDisableInfectionLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableInfectionLevel", (boolean)false);
-        this.isDisableFakeInfectionLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFakeInfectionLevel", (boolean)false);
-        this.isDisableFire = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFire", (boolean)false);
-        this.isOptimalCalories = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isOptimalCalories", (boolean)false);
-        this.isOptimalWeight = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isOptimalWeight", (boolean)false);
-        this.isVisualsEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsEnable", (boolean)false);
-        this.isVisualsPlayersEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsPlayersEnable", (boolean)false);
-        this.isVisualsVehiclesEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsVehiclesEnable", (boolean)false);
-        this.isVisualsZombiesEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsZombiesEnable", (boolean)false);
-        this.isVisualDrawToLocalPlayer = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawToLocalPlayer", (boolean)false);
-        this.isVisualDrawPlayerNickname = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawPlayerNickname", (boolean)false);
-        this.isVisualDrawPlayerInfo = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawPlayerInfo", (boolean)false);
-        this.isVisualDrawLineToVehicle = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawLineToVehicle", (boolean)false);
-        this.isVisualDrawLineToPlayers = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawLineToPlayers", (boolean)false);
-        this.isVisualEnable360Vision = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualEnable360Vision", (boolean)false);
-        this.isMapDrawLocalPlayer = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawLocalPlayer", (boolean)true);
-        this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawAllPlayers", (boolean)false);
-        this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawVehicles", (boolean)false);
-        this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawZombies", (boolean)false);
-        this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawSurvivors", (boolean)false);
-        this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRemoteSurvivors", (boolean)false);
-        this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRooms", (boolean)false);
-        this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawBuildings", (boolean)false);
-        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawPushables", (boolean)false);
+        this.mainUIAccentColor = ConfigUtils.getColorFromConfig(config, "mainUIAccentColor", new Color(56, 239, 125));
+        this.vehiclesUIColor = ConfigUtils.getColorFromConfig(config, "vehiclesUIColor", new Color(150, 150, 200));
+        this.zombiesUIColor = ConfigUtils.getColorFromConfig(config, "zombiesUIColor", new Color(255, 150, 100));
+        this.playersUIColor = ConfigUtils.getColorFromConfig(config, "playersUIColor", new Color(255, 50, 100));
+        this.survivorsUIColor = ConfigUtils.getColorFromConfig(config, "survivorsUIColor", new Color(0, 0, 0));
+        this.remoteSurvivorsUIColor = ConfigUtils.getColorFromConfig(config, "remoteSurvivorsUIColor", new Color(0, 0, 0));
+        this.roomsUIColor = ConfigUtils.getColorFromConfig(config, "roomsUIColor", new Color(0, 0, 0));
+        this.buildingsUIColor = ConfigUtils.getColorFromConfig(config, "buildingsUIColor", new Color(0, 0, 0));
+        this.pushablesUIColor = ConfigUtils.getColorFromConfig(config, "pushablesUIColor", new Color(0, 0, 0));
+        this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRack", false);
+        this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRoundChamber", false);
+        this.isAlwaysRepaired = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRepaired", false);
+        this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig(config, "isAlwaysKnockdown", false);
+        this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig(config, "isAlwaysAiming", false);
+        this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig(config, "isAlwaysCritical", false);
+        this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(config, "isPlayerInSafeTeleported", false);
+        this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(config, "isMultiHitZombies", false);
+        this.isExtraDamage = ConfigUtils.getBooleanFromConfig(config, "isExtraDamage", false);
+        this.isTimedActionCheat = ConfigUtils.getBooleanFromConfig(config, "isTimedActionCheat", false);
+        this.isEnableGodMode = ConfigUtils.getBooleanFromConfig(config, "isEnableGodMode", false);
+        this.isEnableNoclip = ConfigUtils.getBooleanFromConfig(config, "isEnableNoclip", false);
+        this.isEnableInvisible = ConfigUtils.getBooleanFromConfig(config, "isEnableInvisible", false);
+        this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(config, "isEnableNightVision", false);
+        this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(config, "isZombieDontAttack", false);
+        this.isNoRecoil = ConfigUtils.getBooleanFromConfig(config, "isNoRecoil", false);
+        this.isNoReload = ConfigUtils.getBooleanFromConfig(config, "isNoReload", false);
+        this.isNoJam = ConfigUtils.getBooleanFromConfig(config, "isNoJam", false);
+        this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(config, "isNoSpentRoundChamber", false);
+        this.isNoBroken = ConfigUtils.getBooleanFromConfig(config, "isNoBroken", false);
+        this.isNoInfected = ConfigUtils.getBooleanFromConfig(config, "isNoInfected", false);
+        this.isNoWet = ConfigUtils.getBooleanFromConfig(config, "isNoWet", false);
+        this.isNoHoled = ConfigUtils.getBooleanFromConfig(config, "isNoHoled", false);
+        this.isNoDirted = ConfigUtils.getBooleanFromConfig(config, "isNoDirted", false);
+        this.isNoBlooded = ConfigUtils.getBooleanFromConfig(config, "isNoBlooded", false);
+        this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(config, "isBypassDebugMode", false);
+        this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedCarry", false);
+        this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedCondition", false);
+        this.isUnlimitedEndurance = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedEndurance", false);
+        this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedAmmo", false);
+        this.isDisableFatigue = ConfigUtils.getBooleanFromConfig(config, "isDisableFatigue", false);
+        this.isDisableHunger = ConfigUtils.getBooleanFromConfig(config, "isDisableHunger", false);
+        this.isDisableThirst = ConfigUtils.getBooleanFromConfig(config, "isDisableThirst", false);
+        this.isDisableDrunkenness = ConfigUtils.getBooleanFromConfig(config, "isDisableDrunkenness", false);
+        this.isDisableAnger = ConfigUtils.getBooleanFromConfig(config, "isDisableAnger", false);
+        this.isDisableFear = ConfigUtils.getBooleanFromConfig(config, "isDisableFear", false);
+        this.isDisablePain = ConfigUtils.getBooleanFromConfig(config, "isDisablePain", false);
+        this.isDisablePanic = ConfigUtils.getBooleanFromConfig(config, "isDisablePanic", false);
+        this.isDisableMorale = ConfigUtils.getBooleanFromConfig(config, "isDisableMorale", false);
+        this.isDisableStress = ConfigUtils.getBooleanFromConfig(config, "isDisableStress", false);
+        this.isDisableSickness = ConfigUtils.getBooleanFromConfig(config, "isDisableSickness", false);
+        this.isDisableStressFromCigarettes = ConfigUtils.getBooleanFromConfig(config, "isDisableStressFromCigarettes", false);
+        this.isDisableSanity = ConfigUtils.getBooleanFromConfig(config, "isDisableSanity", false);
+        this.isDisableBoredomLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableBoredomLevel", false);
+        this.isDisableUnhappynessLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableUnhappynessLevel", false);
+        this.isDisableWetness = ConfigUtils.getBooleanFromConfig(config, "isDisableWetness", false);
+        this.isDisableInfectionLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableInfectionLevel", false);
+        this.isDisableFakeInfectionLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableFakeInfectionLevel", false);
+        this.isDisableFire = ConfigUtils.getBooleanFromConfig(config, "isDisableFire", false);
+        this.isOptimalCalories = ConfigUtils.getBooleanFromConfig(config, "isOptimalCalories", false);
+        this.isOptimalWeight = ConfigUtils.getBooleanFromConfig(config, "isOptimalWeight", false);
+        this.isVisualsEnable = ConfigUtils.getBooleanFromConfig(config, "isVisualsEnable", false);
+        this.isVisualsPlayersEnable = ConfigUtils.getBooleanFromConfig(config, "isVisualsPlayersEnable", false);
+        this.isVisualsVehiclesEnable = ConfigUtils.getBooleanFromConfig(config, "isVisualsVehiclesEnable", false);
+        this.isVisualsZombiesEnable = ConfigUtils.getBooleanFromConfig(config, "isVisualsZombiesEnable", false);
+        this.isVisualDrawToLocalPlayer = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawToLocalPlayer", false);
+        this.isVisualDrawPlayerNickname = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawPlayerNickname", false);
+        this.isVisualDrawPlayerInfo = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawPlayerInfo", false);
+        this.isVisualDrawLineToVehicle = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawLineToVehicle", false);
+        this.isVisualDrawLineToPlayers = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawLineToPlayers", false);
+        this.isVisualEnable360Vision = ConfigUtils.getBooleanFromConfig(config, "isVisualEnable360Vision", false);
+        this.isMapDrawLocalPlayer = ConfigUtils.getBooleanFromConfig(config, "isMapDrawLocalPlayer", true);
+        this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(config, "isMapDrawAllPlayers", false);
+        this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(config, "isMapDrawVehicles", false);
+        this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(config, "isMapDrawZombies", false);
+        this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig(config, "isMapDrawSurvivors", false);
+        this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig(config, "isMapDrawRemoteSurvivors", false);
+        this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig(config, "isMapDrawRooms", false);
+        this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig(config, "isMapDrawBuildings", false);
+        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig(config, "isMapDrawPushables", false);
     }
 
     private void initStartupConfig() {
@@ -305,79 +324,85 @@ public class EtherAPI
             Logger.printLog((String)"Startup file not found. Loading default settings.");
         }
         //this. = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"", (boolean)false);
-        this.mainUIAccentColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"mainUIAccentColor", (Color)new Color(56, 239, 125));
-        this.vehiclesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"vehiclesUIColor", (Color)new Color(150, 150, 200));
-        this.zombiesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"zombiesUIColor", (Color)new Color(255, 150, 100));
-        this.playersUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"playersUIColor", (Color)new Color(255, 50, 100));
-        this.survivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"survivorsUIColor", (Color)new Color(0, 0, 0));
-        this.remoteSurvivorsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"remoteSurvivorsUIColor", (Color)new Color(0, 0, 0));
-        this.roomsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"roomsUIColor", (Color)new Color(0, 0, 0));
-        this.buildingsUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"buildingsUIColor", (Color)new Color(0, 0, 0));
-        this.pushablesUIColor = ConfigUtils.getColorFromConfig((Properties)config, (String)"pushablesUIColor", (Color)new Color(0, 0, 0));
-        this.isAlwaysRack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRack", (boolean)false);
-        this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysRoundChamber", (boolean)false);
-        this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysKnockdown", (boolean)false);
-        this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysAiming", (boolean)false);
-        this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAlwaysCritical", (boolean)false);
-        this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isPlayerInSafeTeleported", (boolean)false);
-        this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMultiHitZombies", (boolean)false);
-        this.isExtraDamage = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isExtraDamage", (boolean)false);
-        this.isTimedActionCheat = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isTimedActionCheat", (boolean)false);
-        this.isEnableGodMode = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableGodMode", (boolean)false);
-        this.isEnableNoclip = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableNoclip", (boolean)false);
-        this.isEnableInvisible = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableInvisible", (boolean)false);
-        this.isEnableNightVision = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isEnableNightVision", (boolean)false);
-        this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isZombieDontAttack", (boolean)false);
-        this.isNoRecoil = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoRecoil", (boolean)false);
-        this.isNoReload = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoReload", (boolean)false);
-        this.isNoJam = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoJam", (boolean)false);
-        this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isNoSpentRoundChamber", (boolean)false);
-        this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isBypassDebugMode", (boolean)false);
-        this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCarry", (boolean)false);
-        this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedCondition", (boolean)false);
-        this.isUnlimitedEndurance = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedEndurance", (boolean)false);
-        this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isUnlimitedAmmo", (boolean)false);
-        this.isAutoRepairItems = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isAutoRepairItems", (boolean)false);
-        this.isDisableFatigue = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFatigue", (boolean)false);
-        this.isDisableHunger = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableHunger", (boolean)false);
-        this.isDisableThirst = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableThirst", (boolean)false);
-        this.isDisableDrunkenness = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableDrunkenness", (boolean)false);
-        this.isDisableAnger = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableAnger", (boolean)false);
-        this.isDisableFear = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFear", (boolean)false);
-        this.isDisablePain = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisablePain", (boolean)false);
-        this.isDisablePanic = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisablePanic", (boolean)false);
-        this.isDisableMorale = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableMorale", (boolean)false);
-        this.isDisableStress = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableStress", (boolean)false);
-        this.isDisableSickness = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableSickness", (boolean)false);
-        this.isDisableStressFromCigarettes = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableStressFromCigarettes", (boolean)false);
-        this.isDisableSanity = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableSanity", (boolean)false);
-        this.isDisableBoredomLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableBoredomLevel", (boolean)false);
-        this.isDisableUnhappynessLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableUnhappynessLevel", (boolean)false);
-        this.isDisableWetness = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableWetness", (boolean)false);
-        this.isDisableInfectionLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableInfectionLevel", (boolean)false);
-        this.isDisableFakeInfectionLevel = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFakeInfectionLevel", (boolean)false);
-        this.isDisableFire = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isDisableFire", (boolean)false);
-        this.isOptimalCalories = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isOptimalCalories", (boolean)false);
-        this.isOptimalWeight = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isOptimalWeight", (boolean)false);
-        this.isVisualsEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsEnable", (boolean)false);
-        this.isVisualsPlayersEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsPlayersEnable", (boolean)false);
-        this.isVisualsVehiclesEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsVehiclesEnable", (boolean)false);
-        this.isVisualsZombiesEnable = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualsZombiesEnable", (boolean)false);
-        this.isVisualDrawToLocalPlayer = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawToLocalPlayer", (boolean)false);
-        this.isVisualDrawPlayerNickname = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawPlayerNickname", (boolean)false);
-        this.isVisualDrawPlayerInfo = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawPlayerInfo", (boolean)false);
-        this.isVisualDrawLineToVehicle = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawLineToVehicle", (boolean)false);
-        this.isVisualDrawLineToPlayers = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualDrawLineToPlayers", (boolean)false);
-        this.isVisualEnable360Vision = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isVisualEnable360Vision", (boolean)false);
-        this.isMapDrawLocalPlayer = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawLocalPlayer", (boolean)true);
-        this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawAllPlayers", (boolean)false);
-        this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawVehicles", (boolean)false);
-        this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawZombies", (boolean)false);
-        this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawSurvivors", (boolean)false);
-        this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRemoteSurvivors", (boolean)false);
-        this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawRooms", (boolean)false);
-        this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawBuildings", (boolean)false);
-        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"isMapDrawPushables", (boolean)false);
+        this.mainUIAccentColor = ConfigUtils.getColorFromConfig(config, "mainUIAccentColor", new Color(56, 239, 125));
+        this.vehiclesUIColor = ConfigUtils.getColorFromConfig(config, "vehiclesUIColor", new Color(150, 150, 200));
+        this.zombiesUIColor = ConfigUtils.getColorFromConfig(config, "zombiesUIColor", new Color(255, 150, 100));
+        this.playersUIColor = ConfigUtils.getColorFromConfig(config, "playersUIColor", new Color(255, 50, 100));
+        this.survivorsUIColor = ConfigUtils.getColorFromConfig(config, "survivorsUIColor", new Color(0, 0, 0));
+        this.remoteSurvivorsUIColor = ConfigUtils.getColorFromConfig(config, "remoteSurvivorsUIColor", new Color(0, 0, 0));
+        this.roomsUIColor = ConfigUtils.getColorFromConfig(config, "roomsUIColor", new Color(0, 0, 0));
+        this.buildingsUIColor = ConfigUtils.getColorFromConfig(config, "buildingsUIColor", new Color(0, 0, 0));
+        this.pushablesUIColor = ConfigUtils.getColorFromConfig(config, "pushablesUIColor", new Color(0, 0, 0));
+        this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRack", false);
+        this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRoundChamber", false);
+        this.isAlwaysRepaired = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRepaired", false);
+        this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig(config, "isAlwaysKnockdown", false);
+        this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig(config, "isAlwaysAiming", false);
+        this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig(config, "isAlwaysCritical", false);
+        this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(config, "isPlayerInSafeTeleported", false);
+        this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(config, "isMultiHitZombies", false);
+        this.isExtraDamage = ConfigUtils.getBooleanFromConfig(config, "isExtraDamage", false);
+        this.isTimedActionCheat = ConfigUtils.getBooleanFromConfig(config, "isTimedActionCheat", false);
+        this.isEnableGodMode = ConfigUtils.getBooleanFromConfig(config, "isEnableGodMode", false);
+        this.isEnableNoclip = ConfigUtils.getBooleanFromConfig(config, "isEnableNoclip", false);
+        this.isEnableInvisible = ConfigUtils.getBooleanFromConfig(config, "isEnableInvisible", false);
+        this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(config, "isEnableNightVision", false);
+        this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(config, "isZombieDontAttack", false);
+        this.isNoRecoil = ConfigUtils.getBooleanFromConfig(config, "isNoRecoil", false);
+        this.isNoReload = ConfigUtils.getBooleanFromConfig(config, "isNoReload", false);
+        this.isNoJam = ConfigUtils.getBooleanFromConfig(config, "isNoJam", false);
+        this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(config, "isNoSpentRoundChamber", false);
+        this.isNoBroken = ConfigUtils.getBooleanFromConfig(config, "isNoBroken", false);
+        this.isNoInfected = ConfigUtils.getBooleanFromConfig(config, "isNoInfected", false);
+        this.isNoWet = ConfigUtils.getBooleanFromConfig(config, "isNoWet", false);
+        this.isNoHoled = ConfigUtils.getBooleanFromConfig(config, "isNoHoled", false);
+        this.isNoDirted = ConfigUtils.getBooleanFromConfig(config, "isNoDirted", false);
+        this.isNoBlooded = ConfigUtils.getBooleanFromConfig(config, "isNoBlooded", false);
+        this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(config, "isBypassDebugMode", false);
+        this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedCarry", false);
+        this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedCondition", false);
+        this.isUnlimitedEndurance = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedEndurance", false);
+        this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedAmmo", false);
+        this.isDisableFatigue = ConfigUtils.getBooleanFromConfig(config, "isDisableFatigue", false);
+        this.isDisableHunger = ConfigUtils.getBooleanFromConfig(config, "isDisableHunger", false);
+        this.isDisableThirst = ConfigUtils.getBooleanFromConfig(config, "isDisableThirst", false);
+        this.isDisableDrunkenness = ConfigUtils.getBooleanFromConfig(config, "isDisableDrunkenness", false);
+        this.isDisableAnger = ConfigUtils.getBooleanFromConfig(config, "isDisableAnger", false);
+        this.isDisableFear = ConfigUtils.getBooleanFromConfig(config, "isDisableFear", false);
+        this.isDisablePain = ConfigUtils.getBooleanFromConfig(config, "isDisablePain", false);
+        this.isDisablePanic = ConfigUtils.getBooleanFromConfig(config, "isDisablePanic", false);
+        this.isDisableMorale = ConfigUtils.getBooleanFromConfig(config, "isDisableMorale", false);
+        this.isDisableStress = ConfigUtils.getBooleanFromConfig(config, "isDisableStress", false);
+        this.isDisableSickness = ConfigUtils.getBooleanFromConfig(config, "isDisableSickness", false);
+        this.isDisableStressFromCigarettes = ConfigUtils.getBooleanFromConfig(config, "isDisableStressFromCigarettes", false);
+        this.isDisableSanity = ConfigUtils.getBooleanFromConfig(config, "isDisableSanity", false);
+        this.isDisableBoredomLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableBoredomLevel", false);
+        this.isDisableUnhappynessLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableUnhappynessLevel", false);
+        this.isDisableWetness = ConfigUtils.getBooleanFromConfig(config, "isDisableWetness", false);
+        this.isDisableInfectionLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableInfectionLevel", false);
+        this.isDisableFakeInfectionLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableFakeInfectionLevel", false);
+        this.isDisableFire = ConfigUtils.getBooleanFromConfig(config, "isDisableFire", false);
+        this.isOptimalCalories = ConfigUtils.getBooleanFromConfig(config, "isOptimalCalories", false);
+        this.isOptimalWeight = ConfigUtils.getBooleanFromConfig(config, "isOptimalWeight", false);
+        this.isVisualsEnable = ConfigUtils.getBooleanFromConfig(config, "isVisualsEnable", false);
+        this.isVisualsPlayersEnable = ConfigUtils.getBooleanFromConfig(config, "isVisualsPlayersEnable", false);
+        this.isVisualsVehiclesEnable = ConfigUtils.getBooleanFromConfig(config, "isVisualsVehiclesEnable", false);
+        this.isVisualsZombiesEnable = ConfigUtils.getBooleanFromConfig(config, "isVisualsZombiesEnable", false);
+        this.isVisualDrawToLocalPlayer = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawToLocalPlayer", false);
+        this.isVisualDrawPlayerNickname = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawPlayerNickname", false);
+        this.isVisualDrawPlayerInfo = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawPlayerInfo", false);
+        this.isVisualDrawLineToVehicle = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawLineToVehicle", false);
+        this.isVisualDrawLineToPlayers = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawLineToPlayers", false);
+        this.isVisualEnable360Vision = ConfigUtils.getBooleanFromConfig(config, "isVisualEnable360Vision", false);
+        this.isMapDrawLocalPlayer = ConfigUtils.getBooleanFromConfig(config, "isMapDrawLocalPlayer", true);
+        this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(config, "isMapDrawAllPlayers", false);
+        this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(config, "isMapDrawVehicles", false);
+        this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(config, "isMapDrawZombies", false);
+        this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig(config, "isMapDrawSurvivors", false);
+        this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig(config, "isMapDrawRemoteSurvivors", false);
+        this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig(config, "isMapDrawRooms", false);
+        this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig(config, "isMapDrawBuildings", false);
+        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig(config, "isMapDrawPushables", false);
     }
 
     public EtherAPI() {
@@ -429,163 +454,88 @@ public class EtherAPI
 
         if (localPlayer == null)
             return;
+
+        if (playerItem != null)
+        {
+            if (this.isExtraDamage && (playerItem.getStringItemType().equals("RangedWeapon") || playerItem.getStringItemType().equals("MeleeWeapon")) && playerItem instanceof HandWeapon)
+            {
+                if (!this.originalWeaponStats.containsKey(weaponType))
+                    this.originalWeaponStats.put(weaponType, new float[]{weapon.getExtraDamage(), weapon.getMaxDamage(), weapon.getMinDamage(), weapon.getMaxRange(), weapon.getMinRange(), weapon.getHitChance(), weapon.getCritDmgMultiplier()});
+            }
         
-        if (this.isExtraDamage && playerItem != null && (playerItem.getStringItemType().equals("RangedWeapon") || playerItem.getStringItemType().equals("MeleeWeapon")) && playerItem instanceof HandWeapon)
-        {
-            if (!this.originalWeaponStats.containsKey(weaponType))
-                this.originalWeaponStats.put(weaponType, new float[]{weapon.getExtraDamage(), weapon.getMaxDamage(), weapon.getMinDamage(), weapon.getMaxRange(), weapon.getMinRange(), weapon.getHitChance(), weapon.getCritDmgMultiplier()});
+            if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies)
+                SandboxOptions.instance.set("MultiHitZombies", (Object)this.isMultiHitZombies);
+
+            if (playerItem != null && playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
+            {
+                if(this.isAlwaysKnockdown) weapon.setAlwaysKnockdown(true);
+                if(this.isAlwaysCritical)weapon.setCriticalChance(100.0f);
+                if(this.isAlwaysRack)weapon.setRackAfterShoot(true);
+                if(this.isNoJam) weapon.setJammed(false);
+                if(this.isAlwaysRoundChamber)weapon.setRoundChambered(true);
+                if(this.isNoSpentRoundChamber) weapon.setSpentRoundChambered(false);
+                if(this.isAlwaysAiming) weapon.setAimingTime(0);
+                if(this.isNoRecoil) weapon.setRecoilDelay(0);
+                if(this.isNoReload) weapon.setReloadTime(0);
+                if (this.isUnlimitedAmmo) playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
+            }
+                
+            if(this.isAlwaysRepaired) playerItem.setHaveBeenRepaired(1);
+            if(this.isUnlimitedCondition) playerItem.setCondition(playerItem.getConditionMax());
         }
-        
-        if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies)
-            SandboxOptions.instance.set("MultiHitZombies", (Object)this.isMultiHitZombies);
-
-        if (localPlayer.isTimedActionInstantCheat() != this.isTimedActionCheat)
-            localPlayer.setTimedActionInstantCheat(this.isTimedActionCheat);
-
-        if (localPlayer.isWearingNightVisionGoggles() != this.isEnableNightVision)
-            localPlayer.setWearingNightVisionGoggles(this.isEnableNightVision);
-
-        if (localPlayer.isGodMod() != this.isEnableGodMode)
-            localPlayer.setGodMod(this.isEnableGodMode);
-
-        if (localPlayer.isNoClip() != this.isEnableNoclip)
-            localPlayer.setNoClip(this.isEnableNoclip);
-
-        if (localPlayer.isInvisible() != this.isEnableInvisible)
-            localPlayer.setInvisible(this.isEnableInvisible);
-
-        if (localPlayer.isZombiesDontAttack() != this.isZombieDontAttack)
-            localPlayer.setZombiesDontAttack(this.isZombieDontAttack);
-
-        if (playerItem != null && playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
-        {
-            if(this.isAlwaysKnockdown)
-                weapon.setAlwaysKnockdown(true);
-            
-            if(this.isAlwaysCritical)
-                weapon.setCriticalChance(100.0f);
-            
-            if(this.isAlwaysRack)
-                weapon.setRackAfterShoot(true);
-            
-            if(this.isNoJam)
-                weapon.setJammed(false);
-            
-            if(this.isAlwaysRoundChamber)
-                weapon.setRoundChambered(true);
-            
-            if(this.isNoSpentRoundChamber)
-                weapon.setSpentRoundChambered(false);
-            
-            if(this.isAlwaysAiming)
-                weapon.setAimingTime(0);
-            
-            if(this.isNoRecoil)
-                weapon.setRecoilDelay(0);
-            
-            if(this.isNoReload)
-                weapon.setReloadTime(0);
-
-            if (this.isUnlimitedAmmo)
-                playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
-        }
-
-        if (this.isUnlimitedCondition && playerItem != null)
-        {
-            if (playerItem.getHaveBeenRepaired() > 1)
-                playerItem.setHaveBeenRepaired(1);
-
-            playerItem.setCondition(playerItem.getConditionMax());
-        }
-        if (this.isAutoRepairItems && (inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty())
+        if ((inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty())
         {
             for (InventoryItem item : inventoryItems)
             {
                 if (item == null)
                     continue;
-                
-                if (item.isBroken())
-                    item.setBroken(false);
-                
-                item.setHaveBeenRepaired(1);
+
                 if (item.getVisual() != null)
-                    for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i)
-                    {
-                        item.getVisual().removeHole(i);
-                        item.getVisual().removeDirt();
-                        item.getVisual().removeBlood();
-                    }
-                item.setWet(false);
-                item.setInfected(false);
-                item.setCondition(item.getConditionMax());
+                {
+                    if(this.isNoHoled) for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i) item.getVisual().removeHole(i);
+                    if(this.isNoDirted) item.getVisual().removeDirt();
+                    if(this.isNoBlooded) item.getVisual().removeBlood();
+                }
+
+                if(this.isNoBroken) item.setBroken(false);
+                if(this.isAlwaysRepaired) item.setHaveBeenRepaired(1);
+                if(this.isNoWet) item.setWet(false);
+                if(this.isNoInfected)item.setInfected(false);
+                if(this.isUnlimitedCondition) item.setCondition(item.getConditionMax());
             }
         }
-        if (this.isUnlimitedEndurance)
-            localPlayer.getStats().setEndurance(1.0f);
 
-        if (this.isDisableFatigue) 
-            localPlayer.getStats().setFatigue(0.0f);
-
-        if (this.isDisableHunger) 
-            localPlayer.getStats().setHunger(0.0f);
-
-        if (this.isDisableThirst) 
-            localPlayer.getStats().setThirst(0.0f);
-
-        if (this.isDisableDrunkenness)
-            localPlayer.getStats().setDrunkenness(0.0f);
-
-        if (this.isDisableAnger)
-            localPlayer.getStats().setAnger(0.0f);
-
-        if (this.isDisableFear)
-            localPlayer.getStats().setFear(0.0f);
-
-        if (this.isDisablePain)
-            localPlayer.getStats().setPain(0.0f);
-    
-        if (this.isDisablePanic)
-            localPlayer.getStats().setPanic(0.0f);
-    
-        if (this.isDisableMorale)
-            localPlayer.getStats().setMorale(1.0f);
-    
-        if (this.isDisableStress)
-            localPlayer.getStats().setStress(0.0f);
-    
-        if (this.isDisableSickness)
-            localPlayer.getStats().setSickness(0.0f);
-    
-        if (this.isDisableStressFromCigarettes)
-            localPlayer.getStats().setStressFromCigarettes(0.0f);
-    
-        if (this.isDisableSanity)
-            localPlayer.getStats().setSanity(1.0f);
-    
-        if (this.isDisableBoredomLevel)
-            localPlayer.getBodyDamage().setBoredomLevel(0.0f);
-    
-        if (this.isDisableUnhappynessLevel)
-            localPlayer.getBodyDamage().setUnhappynessLevel(0.0f);
-    
-        if (this.isDisableWetness)
-            localPlayer.getBodyDamage().setWetness(0.0f);
-
-        if (this.isDisableInfectionLevel)
-            localPlayer.getBodyDamage().setInfectionLevel(0.0f);
-
-        if (this.isDisableFakeInfectionLevel)
-            localPlayer.getBodyDamage().setFakeInfectionLevel(0.0f);
-
-        if (this.isDisableFire)
-            localPlayer.setOnFire(false);
-
-        if (this.isOptimalCalories)
-            localPlayer.getNutrition().setCalories(1200.0f);
-
-        if (this.isOptimalWeight)
-            localPlayer.getNutrition().setWeight(80.0);
-
+        if (localPlayer != null)
+        {
+            if(this.isUnlimitedEndurance) localPlayer.getStats().setEndurance(1.0f);
+            if(this.isDisableFatigue) localPlayer.getStats().setFatigue(0.0f);
+            if(this.isDisableHunger) localPlayer.getStats().setHunger(0.0f);
+            if(this.isDisableThirst) localPlayer.getStats().setThirst(0.0f);
+            if(this.isDisableDrunkenness) localPlayer.getStats().setDrunkenness(0.0f);
+            if(this.isDisableAnger) localPlayer.getStats().setAnger(0.0f);
+            if(this.isDisableFear) localPlayer.getStats().setFear(0.0f);
+            if(this.isDisablePain) localPlayer.getStats().setPain(0.0f);
+            if(this.isDisablePanic) localPlayer.getStats().setPanic(0.0f);
+            if(this.isDisableMorale) localPlayer.getStats().setMorale(1.0f);
+            if(this.isDisableStress) localPlayer.getStats().setStress(0.0f);
+            if(this.isDisableSickness) localPlayer.getStats().setSickness(0.0f);
+            if(this.isDisableStressFromCigarettes) localPlayer.getStats().setStressFromCigarettes(0.0f);
+            if(this.isDisableSanity) localPlayer.getStats().setSanity(1.0f);
+            if(this.isDisableBoredomLevel) localPlayer.getBodyDamage().setBoredomLevel(0.0f);
+            if(this.isDisableUnhappynessLevel) localPlayer.getBodyDamage().setUnhappynessLevel(0.0f);
+            if(this.isDisableWetness) localPlayer.getBodyDamage().setWetness(0.0f);
+            if(this.isDisableInfectionLevel) localPlayer.getBodyDamage().setInfectionLevel(0.0f);
+            if(this.isDisableFakeInfectionLevel) localPlayer.getBodyDamage().setFakeInfectionLevel(0.0f);
+            if(this.isDisableFire) localPlayer.setOnFire(false);
+            if(this.isOptimalCalories) localPlayer.getNutrition().setCalories(1200.0f);
+            if(this.isOptimalWeight) localPlayer.getNutrition().setWeight(80.0);
+            if(localPlayer.isGodMod() != this.isEnableGodMode) localPlayer.setGodMod(this.isEnableGodMode);
+            if(localPlayer.isNoClip() != this.isEnableNoclip) localPlayer.setNoClip(this.isEnableNoclip);
+            if(localPlayer.isInvisible() != this.isEnableInvisible) localPlayer.setInvisible(this.isEnableInvisible);
+            if(localPlayer.isTimedActionInstantCheat() != this.isTimedActionCheat) localPlayer.setTimedActionInstantCheat(this.isTimedActionCheat);
+            if(localPlayer.isZombiesDontAttack() != this.isZombieDontAttack) localPlayer.setZombiesDontAttack(this.isZombieDontAttack);
+            if(localPlayer.isWearingNightVisionGoggles() != this.isEnableNightVision) localPlayer.setWearingNightVisionGoggles(this.isEnableNightVision);
+        }
     }
 
     private void bypassDebugMode() {
