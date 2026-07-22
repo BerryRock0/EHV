@@ -194,6 +194,38 @@ function UIMap:render()
 		end
 	end
 
+	--Buildings rendering
+	if isMapDrawBuildings() then
+		local buildings = getCell():getBuildingList()
+		for i=1, buildings:size() do
+			local building = buildings.get(i-1)
+			local x = self.mapAPI:worldToUIX(building:getX(), building:getY());
+			local y = self.mapAPI:worldToUIY(building:getX(), building:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.Color.a, self.Color.r, self.Color.g, self.Color.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+
+	--Rooms rendering
+	if isMapDrawRooms() then
+		local rooms = getCell():get()
+		for i=1, rooms:size() do
+			local room = rooms.get(i-1)
+			local x = self.mapAPI:worldToUIX(room:getX(), room:getY());
+			local y = self.mapAPI:worldToUIY(room:getX(), room:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.roomColor.a, self.roomColor.r, self.roomColor.g, self.roomColor.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+
 	self:clearStencilRect()
     self:resumeStencil()
 end
