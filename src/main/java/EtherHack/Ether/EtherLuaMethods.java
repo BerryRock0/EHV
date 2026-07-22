@@ -200,7 +200,7 @@ public final class EtherLuaMethods {
     @LuaMethod(name="isBlockCompileDefaultLua",global=true)public static boolean isBlockCompileDefaultLua(){return EtherLuaCompiler.getInstance().isBlockCompileDefaultLua;}
     @LuaMethod(name="toggleBlockCompileDefaultLua",global=true)public static void toggleBlockCompileDefaultLua(boolean isToggled){EtherLuaCompiler.getInstance().isBlockCompileDefaultLua = isToggled;}
 
-    @LuaMethod(name="isAlwaysRack",global=true)public static boolean isAlwaysRack(){return EtherMain.getInstance().etherAPI.isAlwaysRack}
+    @LuaMethod(name="isAlwaysRack",global=true)public static boolean isAlwaysRack(){return EtherMain.getInstance().etherAPI.isAlwaysRack;}
     @LuaMethod(name="toggleAlwaysRack",global=true)public static void toggleAlwaysRack(boolean isToggled){EtherMain.getInstance().etherAPI.isAlwaysRack = isToggled;}
 
     @LuaMethod(name="isAlwaysRoundChamber",global=true)public static boolean isAlwaysRoundChamber(){return EtherMain.getInstance().etherAPI.isAlwaysRoundChamber;}
