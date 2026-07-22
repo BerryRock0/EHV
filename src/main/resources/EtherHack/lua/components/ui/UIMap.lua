@@ -198,7 +198,7 @@ function UIMap:render()
 	if isMapDrawBuildings then
 		local buildings = getCell():getBuildingList()
 		for i=1, buildings:size() do
-			local building = .get(i-1)
+			local building = buildings.get(i-1)
 			local x = self.mapAPI:worldToUIX(building:getX(), building:getY());
 			local y = self.mapAPI:worldToUIY(building:getX(), building:getY());
 
