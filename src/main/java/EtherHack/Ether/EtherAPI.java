@@ -317,7 +317,7 @@ public class EtherAPI
         Properties config = new Properties();
         try (FileInputStream fis = new FileInputStream("EtherHack/config/startup.properties");)
         {
-            if (Files.noExist(Paths.get("EtherHack","config")))
+            if (Files.noExists(Paths.get("EtherHack","config")))
             {
                 Files.createDirectories(Paths.get("EtherHack","config"));
                 Files.createFile(Paths.get("EtherHack","config").resolve("startup.properties"));
