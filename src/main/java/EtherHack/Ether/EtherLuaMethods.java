@@ -184,12 +184,9 @@ public final class EtherLuaMethods {
     
     @LuaMethod(name="getTranslate",global=true)public static String getTranslate(String key, KahluaTable args){return EtherMain.getInstance().etherTranslator.getTranslate(key, args);}
     @LuaMethod(name="getTranslate",global=true)public static String getTranslate(String key){return EtherMain.getInstance().etherTranslator.getTranslate(key);}
-    
     @LuaMethod(name="getAntiCheat12Status",global=true)public static boolean getAntiCheat12Status() {return ServerOptions.instance.getBoolean("AntiCheatProtectionType12");}
     @LuaMethod(name="getAntiCheat8Status",global=true)public static boolean getAntiCheat8Status() {return ServerOptions.instance.getBoolean("AntiCheatProtectionType8");}
-    
     @LuaMethod(name="getDistanceBetweenPlayers",global=true)public static float getDistanceBetweenPlayers(IsoPlayer player1, IsoPlayer player2) {return PlayerUtils.getDistanceBetweenPlayers((IsoPlayer)player1, (IsoPlayer)player2);}
-    @LuaMethod(name="resetWeaponsStats",global=true)public static void resetWeaponsStats() {EtherMain.getInstance().etherAPI.resetWeaponsStats();}
     
     @LuaMethod(name="isBlockCompileLuaWithBadWords",global=true)public static boolean isBlockCompileLuaWithBadWords(){return EtherLuaCompiler.getInstance().isBlockCompileLuaWithBadWords;}
     @LuaMethod(name="toggleBlockCompileLuaWithBadWords",global=true)public static void toggleBlockCompileLuaWithBadWords(boolean isToggled){EtherLuaCompiler.getInstance().isBlockCompileLuaWithBadWords = isToggled;}
