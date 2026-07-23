@@ -216,6 +216,7 @@ public class EtherAPI
         }
         catch (IOException e) {
             Logger.printLog((String)("Error while saving config: " + e));
+            return;
         }
     }
 
