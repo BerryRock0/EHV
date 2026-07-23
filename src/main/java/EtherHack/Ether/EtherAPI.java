@@ -128,7 +128,6 @@ public class EtherAPI
     public boolean isMapDrawRooms;
 
     public void saveConfig(String configFileName) {
-        String fixedFileName = "EtherHack/config/" + configFileName + ".properties";
         Properties config = new Properties();
         //config.setProperty("", Boolean.toString(this.));
         config.setProperty("mainUIAccentColor", ColorUtils.colorToString((Color)this.mainUIAccentColor));
@@ -212,7 +211,7 @@ public class EtherAPI
         config.setProperty("isMapDrawRooms", Boolean.toString(this.isMapDrawRooms));
         config.setProperty("isMapDrawSurvivors", Boolean.toString(this.isMapDrawSurvivors));
         config.setProperty("isMapDrawRemoteSurvivors", Boolean.toString(this.isMapDrawRemoteSurvivors));
-        try (FileOutputStream out = new FileOutputStream(fixedFileName);){
+        try (FileOutputStream out = new FileOutputStream("EtherHack/config/" + configFileName + ".properties");){
             config.store(out, null);
         }
         catch (IOException e) {
@@ -221,9 +220,8 @@ public class EtherAPI
     }
 
     public void loadConfig(String configFileName) {
-        String fixedFileName = "EtherHack/config/" + configFileName + ".properties";
         Properties config = new Properties();
-        try (FileInputStream fis = new FileInputStream(fixedFileName);){
+        try (FileInputStream fis = new FileInputStream("EtherHack/config/" + configFileName + ".properties");){
             config.load(fis);
         }
         catch (IOException e) {
@@ -313,11 +311,13 @@ public class EtherAPI
 
     private void initStartupConfig() {
         Properties config = new Properties();
-        try (FileInputStream fis = new FileInputStream("EtherHack/config/startup.properties");){
-            config.load(fis);
+        try (FileInputStream fis = new FileInputStream("EtherHack/config/startup.properties");)
+        {
+            config.load(fis);    
         }
-        catch (IOException e) {
-            Logger.printLog((String)"Startup file not found. Loading default settings.");
+        catch (IOException e) 
+        {
+            Files.createDirectories(Paths.get("EtherHack","config"));
         }
         //this. = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"", (boolean)false);
         this.mainUIAccentColor = ConfigUtils.getColorFromConfig(config, "mainUIAccentColor", new Color(56, 239, 125));
