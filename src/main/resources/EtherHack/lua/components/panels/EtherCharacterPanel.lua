@@ -97,17 +97,6 @@ function EtherCharacterPanel:createChildren()
     self:addCheckBox(getTranslate("UI_CharacterPanel_MultiHitZombies"), function(isChecked)
         toggleMultiHitZombies(isChecked);
     end, isMultiHitZombies(), false);
-	
-    self:addCheckBox(getTranslate("UI_CharacterPanel_InstantKill"), function(isChecked)
-        toggleExtraDamage(isChecked);
-        if(not isChecked) then
-            resetWeaponsStats()
-        end
-    end, isExtraDamage(), false);
-
-	self:addCheckBox(getTranslate("UI_CharacterPanel_NightVision"), function(isChecked)
-        toggleNightVision(isChecked);
-    end, isEnableNightVision(), false);
 
     self:addCheckBox(getTranslate("UI_CharacterPanel_BuildCheat"), function(isChecked)
         ISBuildMenu.cheat = isChecked;
