@@ -108,6 +108,11 @@ function EtherVisualsPanel:createChildren()
     self:setScrollHeight(0);
     self:addScrollBars();
 
+
+	self:addCheckBox(getTranslate("UI_VisualsPanel_NightVision"), function(isChecked)
+        toggleNightVision(isChecked);
+    end, isEnableNightVision(), false);
+
     self:addCheckBox(getTranslate("UI_VisualsPanel_IsVisualsEnable"), function(isChecked)
         toggleVisualsEnable(isChecked);
     end, isVisualsEnable());
@@ -115,8 +120,6 @@ function EtherVisualsPanel:createChildren()
     self:addCheckBox(getTranslate("UI_VisualsPanel_360Vision"), function(isChecked)
         toggleVisualEnable360Vision(isChecked);
     end, isVisualEnable360Vision());
-
-
 
     self:addCheckBox(getTranslate("UI_VisualsPanel_IsVisualsVehiclesEnable"), function(isChecked)
         toggleVisualsVehiclesEnable(isChecked);
@@ -126,13 +129,9 @@ function EtherVisualsPanel:createChildren()
         toggleVisualDrawLineToVehicle(isChecked);
     end, isVisualDrawLineToVehicle());
 
-
-
     self:addCheckBox(getTranslate("UI_VisualsPanel_IsVisualsZombiesEnable"), function(isChecked)
         toggleVisualsZombiesEnable(isChecked);
     end, isVisualsZombiesEnable());
-
-
 
     self:addCheckBox(getTranslate("UI_VisualsPanel_IsVisualsPlayersEnable"), function(isChecked)
         toggleVisualsPlayersEnable(isChecked);
