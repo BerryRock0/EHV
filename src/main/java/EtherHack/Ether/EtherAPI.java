@@ -317,12 +317,17 @@ public class EtherAPI
         Properties config = new Properties();
         try (FileInputStream fis = new FileInputStream("EtherHack/config/startup.properties");)
         {
+            if (Files.noExist(Paths.get("EtherHack","config")))
+            {
+                Files.createDirectories(Paths.get("EtherHack","config"));
+                Files.createFile(Paths.get("EtherHack","config").resolve("startup.properties"));
+            }
+
             config.load(fis);    
         }
         catch (IOException e) 
-        {
-            Files.createDirectories(Paths.get("EtherHack","config"));
-        }
+        {}
+
         //this. = ConfigUtils.getBooleanFromConfig((Properties)config, (String)"", (boolean)false);
         this.mainUIAccentColor = ConfigUtils.getColorFromConfig(config, "mainUIAccentColor", new Color(56, 239, 125));
         this.vehiclesUIColor = ConfigUtils.getColorFromConfig(config, "vehiclesUIColor", new Color(150, 150, 200));
