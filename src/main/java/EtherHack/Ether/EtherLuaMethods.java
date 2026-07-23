@@ -260,9 +260,6 @@ public final class EtherLuaMethods {
     @LuaMethod(name="isNoBlooded",global=true)public static boolean isNoBlooded(){return EtherMain.getInstance().etherAPI.isNoBlooded;}
     @LuaMethod(name="toggleNo",global=true)public static void toggleNoBlooded(boolean isToggled){EtherMain.getInstance().etherAPI.isNoBlooded = isToggled;}
 
-    @LuaMethod(name="isExtraDamage",global=true)public static boolean isExtraDamage(){return EtherMain.getInstance().etherAPI.isExtraDamage;}
-    @LuaMethod(name="toggleExtraDamage",global=true)public static void toggleExtraDamage(boolean isToggled){EtherMain.getInstance().etherAPI.isExtraDamage = isToggled;}
-
     @LuaMethod(name="isTimedActionCheat",global=true)public static boolean isTimedActionCheat(){return EtherMain.getInstance().etherAPI.isTimedActionCheat;}
     @LuaMethod(name="toggleTimedActionCheat",global=true)public static void toggleTimedActionCheat(boolean isToggled){EtherMain.getInstance().etherAPI.isTimedActionCheat = isToggled;}
 
