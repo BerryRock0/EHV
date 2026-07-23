@@ -415,30 +415,6 @@ public class EtherAPI
         this.exposer.exposeAPI(this.etherLuaMethods);
     }
 
-    public void resetWeaponsStats() {
-        IsoPlayer localPlayer = IsoPlayer.getInstance();
-        if (localPlayer == null) {
-            return;
-        }
-        ArrayList<InventoryItem> inventoryItems = localPlayer.getInventory().getItems();
-        if (inventoryItems != null && !inventoryItems.isEmpty()) {
-            for (InventoryItem item : inventoryItems) {
-                String type;
-                if (!(item instanceof HandWeapon)) continue;
-                HandWeapon weapon = (HandWeapon)item;
-                if (!item.getStringItemType().equals("RangedWeapon") && !item.getStringItemType().equals("MeleeWeapon") || !this.originalWeaponStats.containsKey(type = weapon.getFullType())) continue;
-                float[] values = this.originalWeaponStats.get(type);
-                weapon.setExtraDamage(values[0]);
-                weapon.setMaxDamage(values[1]);
-                weapon.setMinDamage(values[2]);
-                weapon.setMaxRange(values[3]);
-                weapon.setMinRange(values[4]);
-                weapon.setHitChance((int)values[5]);
-                weapon.setCritDmgMultiplier(values[6]);
-            }
-        }
-    }
-
     private void updateLocalPlayerFeatures()
     {
         ArrayList<InventoryItem> inventoryItems;
