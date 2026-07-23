@@ -38,7 +38,6 @@
 	UI_CharacterPanel_Invisible = "Invisibility mode (Type 12) (Logged BikiniTools)",
 	UI_CharacterPanel_GodMode = "God mode (Logged BikiniTools)",
 	UI_CharacterPanel_NoClip = "No clip mode (Type 12) (Logged BikiniTools)",
-	UI_CharacterPanel_NightVision = "Night vision mode",
 	UI_CharacterPanel_AntiWet = "No wet items",
 	UI_CharacterPanel_AntiHoled = "No holed items",
 	UI_CharacterPanel_AntiDirted = "No dirted items",
@@ -189,6 +188,7 @@
 	UI_PlayerEditor_PlayerInfo_Calories = "Calories",
 	UI_PlayerEditor_PanelWorkOnlyInGame = "Character editing is only available in-game!",
 
+	UI_VisualsPanel_NightVision = "Night vision mode",
 	UI_VisualsPanel_DrawCheatCredits = "Enable the rendering of cheat information",
 	UI_VisualsPanel_IsVisualsEnable = "Enable visual effects rendering",
 	UI_VisualsPanel_IsVisualsPlayersEnable = "Enable the rendering of player information",
