@@ -189,7 +189,6 @@
 	UI_PlayerEditor_PanelWorkOnlyInGame = "Character editing is only available in-game!",
 
 	UI_VisualsPanel_NightVision = "Night vision mode",
-	UI_VisualsPanel_DrawCheatCredits = "Enable the rendering of cheat information",
 	UI_VisualsPanel_IsVisualsEnable = "Enable visual effects rendering",
 	UI_VisualsPanel_IsVisualsPlayersEnable = "Enable the rendering of player information",
 	UI_VisualsPanel_IsVisualsVehiclesEnable = "Enable the rendering of transport information",
@@ -226,6 +225,13 @@
     UI_Settings_ConfigDelete = "Delete",
     UI_Settings_AccentColor = "Accent color",
     UI_Settings_VehicleColor = "Color for rendering vehicle UI elements",
-    UI_Settings_PlayersColor = "Color for rendering players UI elements",
-    UI_Settings_ZombiesColor = "Color for rendering zombies UI elements",
+    UI_Settings_PlayerColor = "Color for rendering players UI elements",
+    UI_Settings_ZombieColor = "Color for rendering zombies UI elements",
+	UI_Settings_SurvivorColor = "Color for rendering survivor UI elements",
+	UI_Settings_RemoteSurvivorColor = "Color for rendering remote survivor UI elements",
+	UI_Settings_ItemColor = "Color for rendering item UI elements",
+	UI_Settings_WorldItemColor = "Color for rendering world item UI elements",
+	UI_Settings_PushableColor = "Color for rendering pushable UI elements",
+	UI_Settings_BuildingColor = "Color for rendering building UI elements",
+
 }
