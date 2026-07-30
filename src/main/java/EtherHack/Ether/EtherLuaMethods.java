@@ -50,13 +50,13 @@ public final class EtherLuaMethods {
     @LuaMethod(name="getWorldItemUIColor",global=true)public static Color getWorldItemUIColor(){return EtherMain.getInstance().etherAPI.worldItemUIColor;}
     @LuaMethod(name="setWorldItemUIColor",global=true)public static void setWorldItemUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.worldItemUIColor = new Color(r, g, b);}
 
-    @LuaMethod(name="getRoomUIColor",global=true)public static Color getRoomUIColor(){return EtherMain.getInstance().etherAPI.roomsUIColor;}
+    @LuaMethod(name="getRoomUIColor",global=true)public static Color getRoomUIColor(){return EtherMain.getInstance().etherAPI.roomUIColor;}
     @LuaMethod(name="setRoomUIColor",global=true)public static void setRoomUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.roomUIColor = new Color(r, g, b);}
     
-    @LuaMethod(name="getBuildingUIColor",global=true)public static Color getBuildingUIColor(){return EtherMain.getInstance().etherAPI.buildingsUIColor;}
+    @LuaMethod(name="getBuildingUIColor",global=true)public static Color getBuildingUIColor(){return EtherMain.getInstance().etherAPI.buildingUIColor;}
     @LuaMethod(name="setBuildingUIColor",global=true)public static void setBuildingUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.buildingUIColor = new Color(r, g, b);}
     
-    @LuaMethod(name="getPushableUIColor",global=true)public static Color getPushableUIColor(){return EtherMain.getInstance().etherAPI.pushablesUIColor;}
+    @LuaMethod(name="getPushableUIColor",global=true)public static Color getPushableUIColor(){return EtherMain.getInstance().etherAPI.pushableUIColor;}
     @LuaMethod(name="setPushableUIColor",global=true)public static void setPushableUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.pushableUIColor = new Color(r, g, b);}
     
     @LuaMethod(name="getAccentUIColor",global=true)public static Color getAccentUIColor(){return EtherMain.getInstance().etherAPI.mainUIAccentColor;}
