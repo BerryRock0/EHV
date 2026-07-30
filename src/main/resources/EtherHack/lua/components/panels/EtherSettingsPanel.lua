@@ -259,7 +259,7 @@ function EtherSettingsPanel:createChildren()
         picker:initialise()
         picker.pickedTarget = self
         picker.resetFocusTo = self
-        picker:setInitialColor(getPlayersUIColor());
+        picker:setInitialColor(getPlayerUIColor());
         picker.pickedFunc = function (target, color, mouseUp)
             self.playerColors.backgroundColor = {r = getPlayerUIColor():getR(), g = getPlayerUIColor():getG(), b = getPlayerUIColor():getB(), a = 1.0};
             setPlayersUIColor(color.r, color.g, color.b);
