@@ -35,8 +35,8 @@ public final class EtherLuaMethods {
     @LuaMethod(name="getVehicleUIColor",global=true)public static Color getVehicleUIColor(){return EtherMain.getInstance().etherAPI.vehicleUIColor;}
     @LuaMethod(name="setVehicleUIColor",global=true)public static void setVehicleUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.vehicleUIColor = new Color(r, g, b);}
     
-    @LuaMethod(name="getPlayersUIColor",global=true)public static Color getPlayerUIColor(){return EtherMain.getInstance().etherAPI.playerUIColor;}
-    @LuaMethod(name="setPlayersUIColor",global=true)public static void setPlayerUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.playerUIColor = new Color(r, g, b);}
+    @LuaMethod(name="getPlayerUIColor",global=true)public static Color getPlayerUIColor(){return EtherMain.getInstance().etherAPI.playerUIColor;}
+    @LuaMethod(name="setPlayerUIColor",global=true)public static void setPlayerUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.playerUIColor = new Color(r, g, b);}
     
     @LuaMethod(name="getSurvivorUIColor",global=true)public static Color getSurvivorUIColor(){return EtherMain.getInstance().etherAPI.survivorUIColor;}
     @LuaMethod(name="setSurvivorUIColor",global=true)public static void setSurvivorUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.survivorUIColor = new Color(r, g, b);}
