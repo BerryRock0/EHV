@@ -1,7 +1,6 @@
 package EtherHack;
 
 import EtherHack.Main;
-import EtherHack.utils.Info;
 import EtherHack.utils.Logger;
 import EtherHack.utils.Patch;
 import java.io.File;
