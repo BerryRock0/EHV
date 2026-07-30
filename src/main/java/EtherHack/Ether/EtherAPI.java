@@ -135,17 +135,17 @@ public class EtherAPI
     public void saveConfig(String configFileName) {
         Properties config = new Properties();
         //config.setProperty("", Boolean.toString(this.));
-        config.setProperty("mainUIAccentColor", ColorUtils.colorToString((Color)this.mainUIAccentColor));
-        config.setProperty("vehicleUIColor", ColorUtils.colorToString((Color)this.vehicleUIColor));
-        config.setProperty("zombieUIColor", ColorUtils.colorToString((Color)this.zombieUIColor));
-        config.setProperty("playerUIColor", ColorUtils.colorToString((Color)this.playerUIColor));
-        config.setProperty("survivorUIColor", ColorUtils.colorToString((Color)this.survivorUIColor));
-        config.setProperty("remoteSurvivorUIColor", ColorUtils.colorToString((Color)this.remoteSurvivorUIColor));
-        config.setProperty("itemUIColor", Boolean.toString(this.itemUIColor));
-        config.setProperty("worldItemUIColor", Boolean.toString(this.worldItemUIColor));
-        config.setProperty("pushableUIColor", ColorUtils.colorToString((Color)this.pushableUIColor));
-        config.setProperty("roomUIColor", ColorUtils.colorToString((Color)this.roomUIColor));
-        config.setProperty("buildingsUIColor", ColorUtils.colorToString((Color)this.buildingUIColor));
+        config.setProperty("mainUIAccentColor", ColorUtils.colorToString(this.mainUIAccentColor));
+        config.setProperty("vehicleUIColor", ColorUtils.colorToString(this.vehicleUIColor));
+        config.setProperty("zombieUIColor", ColorUtils.colorToString(this.zombieUIColor));
+        config.setProperty("playerUIColor", ColorUtils.colorToString(this.playerUIColor));
+        config.setProperty("survivorUIColor", ColorUtils.colorToString(this.survivorUIColor));
+        config.setProperty("remoteSurvivorUIColor", ColorUtils.colorToString(this.remoteSurvivorUIColor));
+        config.setProperty("itemUIColor", ColorUtils.colorToString(this.itemUIColor));
+        config.setProperty("worldItemUIColor", ColorUtils.colorToString(this.worldItemUIColor));
+        config.setProperty("pushableUIColor", ColorUtils.colorToString(this.pushableUIColor));
+        config.setProperty("roomUIColor", ColorUtils.colorToString(this.roomUIColor));
+        config.setProperty("buildingsUIColor", ColorUtils.colorToString(this.buildingUIColor));
         config.setProperty("isAlwaysRack", Boolean.toString(this.isAlwaysRack));
         config.setProperty("isAlwaysRoundChamber", Boolean.toString(this.isAlwaysRoundChamber));
         config.setProperty("isAlwaysRepaired", Boolean.toString(this.isAlwaysRepaired));
