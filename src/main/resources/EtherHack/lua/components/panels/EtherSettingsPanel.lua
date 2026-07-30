@@ -254,18 +254,18 @@ function EtherSettingsPanel:createChildren()
         picker:addToUIManager();
     end, getAccentUIColor())
 
-    self.playerColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_PlayersColor"), function ()
+    self.playerColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_PlayerColor"), function ()
         local picker = ISColorPicker:new(getMouseX(), getMouseY())
         picker:initialise()
         picker.pickedTarget = self
         picker.resetFocusTo = self
         picker:setInitialColor(getPlayersUIColor());
         picker.pickedFunc = function (target, color, mouseUp)
-            self.playerColors.backgroundColor = {r = getPlayersUIColor():getR(), g = getPlayersUIColor():getG(), b = getPlayersUIColor():getB(), a = 1.0};
+            self.playerColors.backgroundColor = {r = getPlayerUIColor():getR(), g = getPlayerUIColor():getG(), b = getPlayerUIColor():getB(), a = 1.0};
             setPlayersUIColor(color.r, color.g, color.b);
         end;
         picker:addToUIManager();
-    end, getPlayersUIColor())
+    end, getPlayerUIColor())
 
     self.vehicleColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_VehicleColor"), function ()
         local picker = ISColorPicker:new(getMouseX(), getMouseY())
@@ -280,7 +280,7 @@ function EtherSettingsPanel:createChildren()
         picker:addToUIManager();
     end, getVehicleUIColor())
 
-    self.zombieColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_ZombiesColor"), function ()
+    self.zombieColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_ZombieColor"), function ()
         local picker = ISColorPicker:new(getMouseX(), getMouseY())
         picker:initialise()
         picker.pickedTarget = self
@@ -293,7 +293,7 @@ function EtherSettingsPanel:createChildren()
         picker:addToUIManager();
     end, getZombieUIColor())
 
-    self.survivorColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_SurvivorsColor"), function ()
+    self.survivorColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_SurvivorColor"), function ()
         local picker = ISColorPicker:new(getMouseX(), getMouseY())
         picker:initialise()
         picker.pickedTarget = self
@@ -306,7 +306,7 @@ function EtherSettingsPanel:createChildren()
         picker:addToUIManager();
     end, getSurvivorUIColor())
 
-    self.remoteSurvivorColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_RemoteSurvivorsColor"), function ()
+    self.remoteSurvivorColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_RemoteSurvivorColor"), function ()
         local picker = ISColorPicker:new(getMouseX(), getMouseY())
         picker:initialise()
         picker.pickedTarget = self
@@ -319,7 +319,7 @@ function EtherSettingsPanel:createChildren()
         picker:addToUIManager();
     end, getRemoteSurvivorUIColor())
 
-    self.itemColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_ItemsColor"), function ()
+    self.itemColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_ItemColor"), function ()
         local picker = ISColorPicker:new(getMouseX(), getMouseY())
         picker:initialise()
         picker.pickedTarget = self
@@ -332,7 +332,7 @@ function EtherSettingsPanel:createChildren()
         picker:addToUIManager();
     end, getItemUIColor())
 
-    self.worldItemColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_WorldItemsColor"), function ()
+    self.worldItemColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_WorldItemColor"), function ()
         local picker = ISColorPicker:new(getMouseX(), getMouseY())
         picker:initialise()
         picker.pickedTarget = self
@@ -345,7 +345,7 @@ function EtherSettingsPanel:createChildren()
         picker:addToUIManager();
     end, getWorldItemUIColor())
 
-    self.pushableColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_PushablesColor"), function ()
+    self.pushableColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_PushableColor"), function ()
         local picker = ISColorPicker:new(getMouseX(), getMouseY())
         picker:initialise()
         picker.pickedTarget = self
@@ -358,7 +358,7 @@ function EtherSettingsPanel:createChildren()
         picker:addToUIManager();
     end, getPushableUIColor())
 
-    self.buildingColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_BuildingsColor"), function ()
+    self.buildingColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_BuildingColor"), function ()
         local picker = ISColorPicker:new(getMouseX(), getMouseY())
         picker:initialise()
         picker.pickedTarget = self
