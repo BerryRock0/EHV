@@ -309,7 +309,7 @@ public final class EtherLuaMethods {
     @LuaMethod(name="toggleMapDrawBuildings",global=true)public static void toggleMapDraw(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawBuildings = isToggled;}
     
     @LuaMethod(name="isMapDrawItems",global=true)public static boolean isMapDrawItems(){return EtherMain.getInstance().etherAPI.isMapDrawItems;}
-    @LuaMethod(name="toggleMapDraw",global=true)public static void toggleMapDrawItems(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawItems = isToggled;}
+    @LuaMethod(name="toggleMapDrawItems",global=true)public static void toggleMapDrawItems(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawItems = isToggled;}
     
     @LuaMethod(name="isMapDrawWorldItems",global=true)public static boolean isMapDrawWorldItems(){return EtherMain.getInstance().etherAPI.isMapDrawWorldItems;}
     @LuaMethod(name="toggleMapDrawWorldItems",global=true)public static void toggleMapDrawWorldItems(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawWorldItems = isToggled;}
