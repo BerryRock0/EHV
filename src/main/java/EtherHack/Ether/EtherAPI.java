@@ -579,10 +579,10 @@ public class EtherAPI
         ArrayList<BaseVehicle> vehicles = IsoWorld.instance.getCell().getVehicles();
         float posLocalPlayerX = PlayerUtils.getScreenPositionX((IsoPlayer)localPlayer);
         float posLocalPlayerY = PlayerUtils.getScreenPositionY((IsoPlayer)localPlayer);
-        float colorA = this.vehiclesUIColor.a;
-        float colorR = this.vehiclesUIColor.r;
-        float colorG = this.vehiclesUIColor.g;
-        float colorB = this.vehiclesUIColor.b;
+        float colorA = this.vehicleUIColor.a;
+        float colorR = this.vehicleUIColor.r;
+        float colorG = this.vehicleUIColor.g;
+        float colorB = this.vehicleUIColor.b;
         if (vehicles == null && vehicles.isEmpty()) {
             return;
         }
@@ -612,10 +612,10 @@ public class EtherAPI
             return;
         }
         ArrayList<IsoZombie> zombies = IsoWorld.instance.getCell().getZombieList();
-        float colorA = this.zombiesUIColor.a;
-        float colorR = this.zombiesUIColor.r;
-        float colorG = this.zombiesUIColor.g;
-        float colorB = this.zombiesUIColor.b;
+        float colorA = this.zombieUIColor.a;
+        float colorR = this.zombieUIColor.r;
+        float colorG = this.zombieUIColor.g;
+        float colorB = this.zombieUIColor.b;
         if (zombies == null && zombies.isEmpty()) {
             return;
         }
@@ -639,10 +639,10 @@ public class EtherAPI
         ArrayList<IsoPlayer> players = GameClient.instance.getPlayers();
         float posLocalPlayerX = PlayerUtils.getScreenPositionX((IsoPlayer)localPlayer);
         float posLocalPlayerY = PlayerUtils.getScreenPositionY((IsoPlayer)localPlayer);
-        float colorA = this.playersUIColor.a;
-        float colorR = this.playersUIColor.r;
-        float colorG = this.playersUIColor.g;
-        float colorB = this.playersUIColor.b;
+        float colorA = this.playerUIColor.a;
+        float colorR = this.playerUIColor.r;
+        float colorG = this.playerUIColor.g;
+        float colorB = this.playerUIColor.b;
         if (players == null && players.isEmpty()) {
             return;
         }
