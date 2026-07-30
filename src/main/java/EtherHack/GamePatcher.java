@@ -30,12 +30,14 @@ import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
-public class GamePatcher {
+public class GamePatcher
+{
     private final String[] patchFiles = new String[]{"GameWindow.class", "inventory/ItemContainer.class", "Lua/LuaEventManager.class", "Lua/LuaManager.class"};
     private final String gameClassFolder = "zombie";
     private final String whiteListPathEtherFiles = "EtherHack";
 
-    public void extractEtherHack() {
+    public void extractEtherHack()
+    {
         try {
             String jarFilePath = Main.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
             Path currentDirectory = Paths.get(System.getProperty("user.dir"), new String[0]);
@@ -66,7 +68,8 @@ public class GamePatcher {
         }
     }
 
-    public void uninstallEtherHackFiles() {
+    public void uninstallEtherHackFiles()
+    {
         Logger.print("Deleting all EtherHack files...");
         try {
             Path currentDirectory = Paths.get(System.getProperty("user.dir"), new String[0]);
@@ -81,7 +84,8 @@ public class GamePatcher {
         }
     }
 
-    public void backupGameFiles() {
+    public void backupGameFiles()
+    {
         Path currentPath = Paths.get("", new String[0]).toAbsolutePath();
         for (int i = 0; i < this.patchFiles.length; ++i) {
             String iteration = "[" + (i + 1) + "/" + this.patchFiles.length + "]";
@@ -106,18 +110,8 @@ public class GamePatcher {
         Logger.print("Backups of game files have been completed!");
     }
 
-    public void patchGameWindow() {
-        Patch.injectIntoClass("zombie/GameWindow", "InitDisplay", true, method -> {
-            AbstractInsnNode[] nodes;
-            String oldTitle = "Project Zomboid";
-            String newTitle = "Project Zomboid" + Info.CHEAT_WINDOW_TITLE_SUFFIX;
-            for (AbstractInsnNode insn : nodes = method.instructions.toArray()) {
-                if (!(insn instanceof LdcInsnNode)) continue;
-                LdcInsnNode ldcInsnNode = (LdcInsnNode)insn;
-                if (!ldcInsnNode.cst.equals(oldTitle)) continue;
-                ldcInsnNode.cst = newTitle;
-            }
-        });
+    public void patchGameWindow()
+    {
         Patch.injectIntoClass("zombie/GameWindow", "init", true, method -> {
             AbstractInsnNode insertionPoint = null;
             for (AbstractInsnNode insn : method.instructions.toArray()) {
@@ -144,7 +138,8 @@ public class GamePatcher {
         });
     }
 
-    public void patchItemContainer() {
+    public void patchItemContainer()
+    {
         Patch.injectIntoClass("zombie/inventory/ItemContainer", "getWeight", false, method -> {
             InsnList newInstructions = new InsnList();
             LabelNode carryOnLabel = new LabelNode();
@@ -198,7 +193,8 @@ public class GamePatcher {
         });
     }
 
-    public void patchLuaEventManager() {
+    public void patchLuaEventManager()
+    {
         Patch.injectIntoClass("zombie/Lua/LuaEventManager", "triggerEvent", true, method -> {
             InsnList toInject = new InsnList();
             toInject.add(new VarInsnNode(25, 0));
@@ -207,7 +203,8 @@ public class GamePatcher {
         });
     }
 
-    public void patchLuaManager() {
+    public void patchLuaManager()
+    {
         Patch.injectIntoClass("zombie/Lua/LuaManager", "RunLua", true, method -> {
             if (!method.desc.equals("(Ljava/lang/String;Z)Ljava/lang/Object;")) {
                 return;
@@ -225,11 +222,13 @@ public class GamePatcher {
         });
     }
 
-    public boolean checkInjectedAnnotations() {
+    public boolean checkInjectedAnnotations()
+    {
         return Arrays.stream(this.patchFiles).anyMatch(filePath -> Patch.isInjectedAnnotationPresent(filePath, "zombie"));
     }
 
-    public boolean isGameFolder() {
+    public boolean isGameFolder()
+    {
         Path gameFolderPath = Paths.get("zombie", new String[0]);
         if (Files.exists(gameFolderPath, new LinkOption[0]) && Files.isDirectory(gameFolderPath, new LinkOption[0])) {
             return Arrays.stream(this.patchFiles).allMatch(fileName -> Files.exists(gameFolderPath.resolve((String)fileName), new LinkOption[0]));
@@ -263,7 +262,8 @@ public class GamePatcher {
         Logger.print("The cheat installation is complete, you can enter the game!");
     }
 
-    public void restoreFiles() {
+    public void restoreFiles()
+    {
         Logger.printCredits();
         Logger.print("Restoring files...");
         Path currentPath = Paths.get("", new String[0]).toAbsolutePath();
