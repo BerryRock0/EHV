@@ -435,11 +435,11 @@ public class EtherAPI
 
     private void updateLocalPlayerFeatures()
     {
-        ArrayList<InventoryItem> inventoryItems;
         IsoPlayer localPlayer = IsoPlayer.getInstance();
         InventoryItem playerItem = localPlayer.getPrimaryHandItem();
         HandWeapon weapon = (HandWeapon)playerItem;
         String weaponType = weapon.getFullType();
+        ArrayList<InventoryItem> inventoryItems = localPlayer.getInventory().getItems();
 
         if (localPlayer == null)
             return;
@@ -449,7 +449,7 @@ public class EtherAPI
             if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies)
                 SandboxOptions.instance.set("MultiHitZombies", (Object)this.isMultiHitZombies);
 
-            if (playerItem != null && playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
+            if (playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
             {
                 if(this.isAlwaysKnockdown) weapon.setAlwaysKnockdown(true);
                 if(this.isAlwaysCritical)weapon.setCriticalChance(100.0f);
@@ -466,7 +466,7 @@ public class EtherAPI
             if(this.isAlwaysRepaired) playerItem.setHaveBeenRepaired(1);
             if(this.isUnlimitedCondition) playerItem.setCondition(playerItem.getConditionMax());
         }
-        if ((inventoryItems = localPlayer.getInventory().getItems()) != null && !inventoryItems.isEmpty())
+        if (inventoryItems != null && !inventoryItems.isEmpty())
         {
             for (InventoryItem item : inventoryItems)
             {
@@ -483,7 +483,7 @@ public class EtherAPI
                 if(this.isNoBroken) item.setBroken(false);
                 if(this.isAlwaysRepaired) item.setHaveBeenRepaired(1);
                 if(this.isNoWet) item.setWet(false);
-                if(this.isNoInfected)item.setInfected(false);
+                if(this.isNoInfected) item.setInfected(false);
                 if(this.isUnlimitedCondition) item.setCondition(item.getConditionMax());
             }
         }
@@ -521,7 +521,8 @@ public class EtherAPI
         }
     }
 
-    private void bypassDebugMode() {
+    private void bypassDebugMode()
+    {
         boolean isGameActive = GameClient.bIngame;
         boolean isAntiCheatProtectionEnabled = ServerOptions.instance.getBoolean("AntiCheatProtectionType12");
         boolean isServerMode = GameServer.bServer;
@@ -531,51 +532,48 @@ public class EtherAPI
 
     @SubscribeLuaEvent(eventName="OnPostUIDraw")
     public void updateVisuals() {
-        try {
+        try
+        {
             this.updatePlayersVisuals();
             this.updateVehiclesVisuals();
             this.updateZombiesVisuals();
             this.updateUltraPlayerVision();
         }
-        catch (Exception exception) {
-            // empty catch block
-        }
+        catch (Exception exception)
+        {}
     }
 
-    public void updateUltraPlayerVision() {
-        ArrayList<IsoPlayer> players;
-        ArrayList<IsoZombie> zombies;
-        
-        if (!this.isVisualEnable360Vision) {
-            return;
-        }
+    public void updateUltraPlayerVision()
+    {
+        ArrayList<IsoPlayer> players = GameClient.instance.getPlayers();
+        ArrayList<IsoZombie> zombies = IsoWorld.instance.getCell().getZombieList();
         ArrayList<BaseVehicle> vehicles = IsoWorld.instance.getCell().getVehicles();
-        if (vehicles != null && !vehicles.isEmpty()) {
-            for (BaseVehicle vehicle : vehicles) {
+        
+        if (!this.isVisualEnable360Vision)
+            return;
+        
+        if (vehicles != null && !vehicles.isEmpty())
+            for (BaseVehicle vehicle : vehicles)
                 vehicle.setAlpha(100.0f);
-            }
-        }
-        if ((zombies = IsoWorld.instance.getCell().getZombieList()) != null && !zombies.isEmpty()) {
-            for (IsoZombie zombie : zombies) {
+        
+        if (zombies != null && !zombies.isEmpty())
+            for (IsoZombie zombie : zombies)
                 zombie.setAlpha(100.0f);
-            }
-        }
-        if ((players = GameClient.instance.getPlayers()) != null && !players.isEmpty()) {
-            for (IsoPlayer player : players) {
-                if (player.isLocalPlayer()) continue;
+        
+        if (players != null && !players.isEmpty())
+            for (IsoPlayer player : players)
                 player.setAlpha(100.0f);
-            }
-        }
     }
 
-    private void updateVehiclesVisuals() {
-        if (!this.isVisualsEnable || !this.isVisualsVehiclesEnable) {
+    private void updateVehiclesVisuals()
+    {
+        if (!this.isVisualsEnable || !this.isVisualsVehiclesEnable)
             return;
-        }
+
         IsoPlayer localPlayer = IsoPlayer.getInstance();
-        if (localPlayer == null) {
+        if (localPlayer == null)
             return;
-        }
+
         ArrayList<BaseVehicle> vehicles = IsoWorld.instance.getCell().getVehicles();
         float posLocalPlayerX = PlayerUtils.getScreenPositionX((IsoPlayer)localPlayer);
         float posLocalPlayerY = PlayerUtils.getScreenPositionY((IsoPlayer)localPlayer);
@@ -583,10 +581,12 @@ public class EtherAPI
         float colorR = this.vehicleUIColor.r;
         float colorG = this.vehicleUIColor.g;
         float colorB = this.vehicleUIColor.b;
-        if (vehicles == null && vehicles.isEmpty()) {
+
+        if (vehicles == null && vehicles.isEmpty())
             return;
-        }
-        for (BaseVehicle vehicle : vehicles) {
+
+        for (BaseVehicle vehicle : vehicles)
+        {
             float vehiclePosX = VehicleUtils.getScreenPositionX((BaseVehicle)vehicle);
             float vehiclePosY = VehicleUtils.getScreenPositionY((BaseVehicle)vehicle);
             Rendering.drawTextCenterWithShadow((String)("ID:" + vehicle.getScriptName()), (UIFont)UIFont.Small, (float)vehiclePosX, (float)vehiclePosY, (float)colorR, (float)colorG, (float)colorB, (float)colorA);
@@ -604,22 +604,24 @@ public class EtherAPI
     }
 
     private void updateZombiesVisuals() {
-        if (!this.isVisualsEnable || !this.isVisualsZombiesEnable) {
+        if (!this.isVisualsEnable || !this.isVisualsZombiesEnable)
             return;
-        }
+    
         IsoPlayer localPlayer = IsoPlayer.getInstance();
-        if (localPlayer == null) {
+        if (localPlayer == null)
             return;
-        }
+
         ArrayList<IsoZombie> zombies = IsoWorld.instance.getCell().getZombieList();
         float colorA = this.zombieUIColor.a;
         float colorR = this.zombieUIColor.r;
         float colorG = this.zombieUIColor.g;
         float colorB = this.zombieUIColor.b;
-        if (zombies == null && zombies.isEmpty()) {
+
+        if (zombies == null && zombies.isEmpty())
             return;
-        }
-        for (IsoZombie zombie : zombies) {
+
+        for (IsoZombie zombie : zombies)
+        {
             float posX = ZombieUtils.getScreenPositionX((IsoZombie)zombie);
             float posY = ZombieUtils.getScreenPositionY((IsoZombie)zombie);
             int health = (int)(zombie.getHealth() * 100.0f);
@@ -628,14 +630,15 @@ public class EtherAPI
         }
     }
 
-    private void updatePlayersVisuals() {
-        if (!this.isVisualsEnable || !this.isVisualsPlayersEnable) {
+    private void updatePlayersVisuals()
+    {
+        if (!this.isVisualsEnable || !this.isVisualsPlayersEnable)
             return;
-        }
+            
         IsoPlayer localPlayer = IsoPlayer.getInstance();
-        if (localPlayer == null) {
+        if (localPlayer == null)
             return;
-        }
+
         ArrayList<IsoPlayer> players = GameClient.instance.getPlayers();
         float posLocalPlayerX = PlayerUtils.getScreenPositionX((IsoPlayer)localPlayer);
         float posLocalPlayerY = PlayerUtils.getScreenPositionY((IsoPlayer)localPlayer);
@@ -643,23 +646,30 @@ public class EtherAPI
         float colorR = this.playerUIColor.r;
         float colorG = this.playerUIColor.g;
         float colorB = this.playerUIColor.b;
-        if (players == null && players.isEmpty()) {
+        if (players == null && players.isEmpty())
             return;
-        }
-        for (IsoPlayer player : players) {
+
+        for (IsoPlayer player : players)
+        {
             float playerPosX = PlayerUtils.getScreenPositionX((IsoPlayer)player);
             float playerPosY = PlayerUtils.getScreenPositionY((IsoPlayer)player);
-            if (player.isLocalPlayer() && !this.isVisualDrawToLocalPlayer) continue;
-            if (this.isVisualDrawPlayerNickname) {
+            if (player.isLocalPlayer() && !this.isVisualDrawToLocalPlayer)
+                continue;
+            
+            if (this.isVisualDrawPlayerNickname)
                 Rendering.drawTextCenterWithShadow((String)player.getUsername(), (UIFont)UIFont.Small, (float)playerPosX, (float)(playerPosY - 30.0f), (float)colorR, (float)colorG, (float)colorB, (float)colorA);
-            }
-            if (this.isVisualDrawPlayerInfo) {
+
+            if (this.isVisualDrawPlayerInfo)
+            {
                 String firstHandItem = player.getPrimaryHandItem() != null ? player.getPrimaryHandItem().getDisplayName() : "None";
                 String secondHandItem = player.getSecondaryHandItem() != null ? player.getSecondaryHandItem().getDisplayName() : "None";
                 Rendering.drawTextCenterWithShadow((String)(EtherMain.getInstance().etherTranslator.getTranslate("UI_VisualsDraws_PrimaryHand") + firstHandItem), (UIFont)UIFont.Small, (float)playerPosX, (float)(playerPosY + 70.0f), (float)colorR, (float)colorG, (float)colorB, (float)colorA);
                 Rendering.drawTextCenterWithShadow((String)(EtherMain.getInstance().etherTranslator.getTranslate("UI_VisualsDraws_SecondaryHand") + secondHandItem), (UIFont)UIFont.Small, (float)playerPosX, (float)(playerPosY + 80.0f), (float)colorR, (float)colorG, (float)colorB, (float)colorA);
             }
-            if (player.isLocalPlayer() || !this.isVisualDrawLineToPlayers) continue;
+            
+            if (player.isLocalPlayer() || !this.isVisualDrawLineToPlayers)
+                continue;
+
             int distance = (int)PlayerUtils.getDistanceBetweenPlayers((IsoPlayer)player, (IsoPlayer)localPlayer);
             int textDistance = distance;
             float totalLength = (float)Math.sqrt(Math.pow(playerPosX - posLocalPlayerX, 2.0) + Math.pow(playerPosY - posLocalPlayerY, 2.0));
@@ -672,7 +682,8 @@ public class EtherAPI
     }
 
     @SubscribeLuaEvent(eventName="OnRenderTick")
-    public void updateAPI() {
+    public void updateAPI()
+    {
         try
         {
             this.bypassDebugMode();
