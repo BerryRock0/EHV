@@ -214,6 +214,10 @@
 	UI_Map_DrawSurvivors = "Show survivors",
 	UI_Map_DrawRemoteSurvivors = "Show remote survivors",
 	UI_Map_DrawPushables = "Show pushables",
+	UI_Map_DrawBuildings = "Show buildings";
+	UI_Map_DrawItems = "Show items";
+	UI_Map_DrawWorldItems = "Show world items";
+	UI_Map_DrawRooms = "Show rooms";
 
 	UI_Map_MiniMapTitle = "Minimap",
 	UI_Map_MiniMapOpenLabel = "Open a movable minimap",
