@@ -286,24 +286,7 @@ function EtherSettingsPanel:createChildren()
         getCore():ResetLua("default", "Force")
     end, true);
 
-    self:updateConfigsList();
     self:updatePanel();
-end
-
-
---*********************************************************
---* Инициализация списка конфигов
---*********************************************************
-function EtherSettingsPanel:updateConfigsList()
-    self.lastSelectedIndex = self.configs.selected or 0;
-    self.configs:clear();
-
-    local configList = getConfigList();
-    for i=0, configList:size() - 1 do
-        local config = configList:get(i)
-        self.configs:addItem("Config", config);
-    end
-    self.configs.selected = self.lastSelectedIndex;
 end
 
 --*********************************************************
