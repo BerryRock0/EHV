@@ -150,9 +150,9 @@ public class GamePatcher
             newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
             newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
             //newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "boolean value", "Z"));
-            newInstructions.add(new FieldInsnNode(GETFIELD, "EtherHack/Ether/EtherAPI", "toggles", [Z"));
-            newInstructions.add(new IntInsnNode(BIPUSH, 63)); // or SIPUSH for larger
-            newInstructions.add(new InsnNode(BALOAD));       // loads boolean -> int on stack
+            newInstructions.add(new FieldInsnNode(GETFIELD, "EtherHack/Ether/EtherAPI", "toggles", "[Z"));
+            newInstructions.add(new IntInsnNode(BIPUSH, 63));
+            newInstructions.add(new InsnNode(BALOAD));      
             newInstructions.add(new JumpInsnNode(153, carryOnLabel));
             newInstructions.add(new InsnNode(3));
             newInstructions.add(new InsnNode(172));
@@ -170,9 +170,9 @@ public class GamePatcher
             newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
             newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
             //newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "toggles[63]", "Z"));
-            newInstructions.add(new FieldInsnNode(GETFIELD, "EtherHack/Ether/EtherAPI", "toggles", [Z"));
-            newInstructions.add(new IntInsnNode(BIPUSH, 63)); // or SIPUSH for larger
-            newInstructions.add(new InsnNode(BALOAD));       // loads boolean -> int on stack
+            newInstructions.add(new FieldInsnNode(GETFIELD, "EtherHack/Ether/EtherAPI", "toggles", "[Z"));
+            newInstructions.add(new IntInsnNode(BIPUSH, 63)); 
+            newInstructions.add(new InsnNode(BALOAD));       
             newInstructions.add(new JumpInsnNode(153, carryOnLabel));
             newInstructions.add(new InsnNode(11));
             newInstructions.add(new InsnNode(174));
@@ -190,9 +190,9 @@ public class GamePatcher
             newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
             newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
             //newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "toggles[63]", "Z"));
-            newInstructions.add(new FieldInsnNode(GETFIELD, "EtherHack/Ether/EtherAPI", "toggles", [Z"));
-            newInstructions.add(new IntInsnNode(BIPUSH, 63)); // or SIPUSH for larger
-            newInstructions.add(new InsnNode(BALOAD));       // loads boolean -> int on stack
+            newInstructions.add(new FieldInsnNode(GETFIELD, "EtherHack/Ether/EtherAPI", "toggles", "[Z"));
+            newInstructions.add(new IntInsnNode(BIPUSH, 63));
+            newInstructions.add(new InsnNode(BALOAD));
             newInstructions.add(new JumpInsnNode(153, carryOnLabel));
             newInstructions.add(new InsnNode(11));
             newInstructions.add(new InsnNode(174));
