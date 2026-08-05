@@ -143,12 +143,6 @@ public final class EtherLuaMethods {
             PlayerPacket.l_send.playerPacket.write(writer);
             PacketTypes.PacketType.PlayerUpdateReliable.send(GameClient.connection);
         }
-        EtherMain.getInstance().etherAPI.isPlayerInSafeTeleported = false;
-    }
-
-    @LuaMethod(name="isPlayerInSafeTeleported", global=true)
-    public static boolean isPlayerInSafeTeleported() {
-        return EtherMain.getInstance().etherAPI.isPlayerInSafeTeleported;
     }
 
     @LuaMethod(name="learnAllRecipes", global=true)
