@@ -50,7 +50,7 @@ public class EtherAPI
     public HashMap<String, Texture> textureCache = new HashMap();
     public HashMap<String, float[]> originalWeaponStats = new HashMap();
     public boolean[] toggles = new boolean[64];
-    public Color[] colors = new Color[11];
+    public Color mainUIAccentColor,vehicleUIColor,zombieUIColor,playerUIColor,survivorUIColor,remoteSurvivorUIColor,itemUIColor,worldItemUIColor,pushableUIColor,buildingUIColor,roomUIColor;
 
     public EtherAPI() {
         this.initStartupConfig();
@@ -61,8 +61,18 @@ public class EtherAPI
     {   
         for (boolean b: toggles)
             b = false;
-        for (Color c: colors)
-            c = new Color(0, 0, 0);
+
+        this.mainUIAccentColor = ConfigUtils.getColorFromConfig(config, "mainUIAccentColor", new Color(56, 239, 125));
+        this.vehicleUIColor = ConfigUtils.getColorFromConfig(config, "vehicleUIColor", new Color(150, 150, 200));
+        this.zombieUIColor = ConfigUtils.getColorFromConfig(config, "zombieUIColor", new Color(255, 150, 100));
+        this.playerUIColor = ConfigUtils.getColorFromConfig(config, "playerUIColor", new Color(255, 50, 100));
+        this.survivorUIColor = ConfigUtils.getColorFromConfig(config, "survivorUIColor", new Color(0, 0, 0));
+        this.remoteSurvivorUIColor = ConfigUtils.getColorFromConfig(config, "remoteSurvivorUIColor", new Color(0, 0, 0));
+        this.itemUIColor = ConfigUtils.getColorFromConfig(config, "itemUIColor", new Color(0, 0, 0));
+        this.worldItemUIColor = ConfigUtils.getColorFromConfig(config, "worldItemUIColor", new Color(0, 0, 0));
+        this.roomUIColor = ConfigUtils.getColorFromConfig(config, "roomUIColor", new Color(0, 0, 0));
+        this.buildingUIColor = ConfigUtils.getColorFromConfig(config, "buildingUIColor", new Color(0, 0, 0));
+        this.pushableUIColor = ConfigUtils.getColorFromConfig(config, "pushableUIColor", new Color(0, 0, 0));
     }
 
     @LuaEvents(value={@SubscribeLuaEvent(eventName="OnResetLua"), @SubscribeLuaEvent(eventName="OnMainMenuEnter")})
