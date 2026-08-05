@@ -2,19 +2,31 @@ package EtherHack.Ether;
 
 public class EtherSettings
 {
-    private final boolean[] flags = new boolean[Flag.values().length];
+    private final boolean[] value = new boolean[EtherValue.values().length];
 
-    public void load(Properties config)
+    public boolean is(EtherValue ev) {
+        return value[ev.ordinal()];
+    }
+
+    public void set(EtherValue ev, boolean value) {
+        value[ev.ordinal()] = value;
+    }
+
+    public void saveConfig(String configFileName)
     {
-        for (Flag f : Flag.values())
-          flags[f.ordinal()] = Boolean.parseBoolean(config.getProperty(f.name(), "false"));
-    }
+        Properties config = new Properties();
+        FileOutputStream out = new FileOutputStream("EtherHack/config/" + configFileName + ".properties");
+        
+        for (EtherValue ev : EtherValue.values())
+            config.setProperty(ev.name(), ev.is(ev));
 
-    public boolean is(Flag f) {
-        return flags[f.ordinal()];
+        try {config.store(out, null);}
+        catch (Exception e) {return;}
     }
+    public void loadConfig()
+    {
 
-    public void set(Flag f, boolean value) {
-        flags[f.ordinal()] = value;
+
+        
     }
 }
