@@ -90,16 +90,6 @@ public final class EtherLuaMethods {
         return configFiles;
     }
 
-    @LuaMethod(name="loadConfig", global=true)
-    public static void loadConfig(String configName) {
-        EtherMain.getInstance().etherAPI.loadConfig(configName);
-    }
-
-    @LuaMethod(name="saveConfig", global=true)
-    public static void saveConfig(String configName) {
-        EtherMain.getInstance().etherAPI.saveConfig(configName);
-    }
-
     @LuaMethod(name="safePlayerTeleport", global=true)
     public static void safePlayerTeleport(int x, int y) {
         EtherMain.getInstance().etherAPI.isPlayerInSafeTeleported = true;
