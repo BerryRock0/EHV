@@ -332,11 +332,7 @@ end
 --*********************************************************
 --* Safe teleportation
 --*********************************************************
-function UIMap:onTeleport(x, y) 
-	if isPlayerInSafeTeleported() then
-		return
-	end
-
+function UIMap:onTeleport(x, y)
 	safePlayerTeleport(x, y);
 end
 --*********************************************************
