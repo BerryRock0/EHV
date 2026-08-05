@@ -50,7 +50,7 @@ public class EtherAPI
     public HashMap<String, Texture> textureCache = new HashMap();
     public HashMap<String, float[]> originalWeaponStats = new HashMap();
     public boolean[] toggles = new boolean[64];
-    public Color[] colors = new Color[12];
+    public Color[] colors = new Color[11];
 
     public EtherAPI() {
         this.initStartupConfig();
