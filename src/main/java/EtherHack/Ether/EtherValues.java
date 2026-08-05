@@ -1,6 +1,6 @@
 package EtherHack.Ether;
 
-public enum EtherBooleans
+public enum Booleans
 {
   isAlwaysRack,
   isAlwaysRoundChamber,
@@ -75,5 +75,5 @@ public enum EtherBooleans
   isMapDrawRooms
 }
 
-public enum EtherColors
+public enum Colors
 {}
