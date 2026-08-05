@@ -49,10 +49,20 @@ public class EtherAPI
     private final EtherLuaMethods etherLuaMethods = new EtherLuaMethods();
     public HashMap<String, Texture> textureCache = new HashMap();
     public HashMap<String, float[]> originalWeaponStats = new HashMap();
+    public boolean[] toggles = new boolean[70];
+    public Color[] colors = new Color[12];
 
     public EtherAPI() {
         this.initStartupConfig();
         EventSubscriber.register((Object)this);
+    }
+
+    private void initStartupConfig()
+    {   
+        for (boolean b: toggles)
+            b = false;
+        for (Color c: colors)
+            c = new Color(0, 0, 0);
     }
 
     @LuaEvents(value={@SubscribeLuaEvent(eventName="OnResetLua"), @SubscribeLuaEvent(eventName="OnMainMenuEnter")})
