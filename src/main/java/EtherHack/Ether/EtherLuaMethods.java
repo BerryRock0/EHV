@@ -232,12 +232,6 @@ public final class EtherLuaMethods {
 
     @LuaMethod(name="isVisualEnable360Vision", global=true)public static boolean isVisualEnable360Vision(){return EtherMain.getInstance().etherAPI.isVisualEnable360Vision;}
     @LuaMethod(name="toggleVisualEnable360Vision", global=true)public static void toggleVisualEnable360Vision(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualEnable360Vision = isToggled;}
-
-    @LuaMethod(name="isVisualDrawLineToPlayers",global=true)public static boolean isVisualDrawLineToPlayers(){return EtherMain.getInstance().etherAPI.isVisualDrawLineToPlayers;}
-    @LuaMethod(name="toggleVisualDrawLineToPlayers",global=true)public static void toggleVisualDrawLineToPlayers(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualDrawLineToPlayers = isToggled;}
-
-    @LuaMethod(name="isVisualDrawLineToVehicle",global=true)public static boolean isVisualDrawLineToVehicle(){return EtherMain.getInstance().etherAPI.isVisualDrawLineToVehicle;}
-    @LuaMethod(name="toggleVisualDrawLineToVehicle",global=true)public static void toggleVisualDrawLineToVehicle(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualDrawLineToVehicle = isToggled;}
     
     @LuaMethod(name="isMapDrawZombies",global=true)public static boolean isMapDrawZombies(){return EtherMain.getInstance().etherAPI.isMapDrawZombies;}
     @LuaMethod(name="toggleMapDrawZombies",global=true)public static void toggleMapDrawZombies(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawZombies = isToggled;}
@@ -271,25 +265,6 @@ public final class EtherLuaMethods {
 
     @LuaMethod(name="isMapDrawRooms",global=true)public static boolean isMapDrawRooms(){return EtherMain.getInstance().etherAPI.isMapDrawRooms;}
     @LuaMethod(name="toggleMapDrawRooms",global=true)public static void toggleMapDrawRooms(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawRooms = isToggled;}
-    
-    @LuaMethod(name="isVisualDrawPlayerInfo",global=true)public static boolean isVisualDrawPlayerInfo(){return EtherMain.getInstance().etherAPI.isVisualDrawPlayerInfo;}
-    @LuaMethod(name="toggleVisualDrawPlayerInfo",global=true) public static void toggleVisualDrawPlayerInfo(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualDrawPlayerInfo = isToggled;}
-
-    @LuaMethod(name="isVisualsZombiesEnable",global=true)public static boolean isVisualsZombiesEnable(){return EtherMain.getInstance().etherAPI.isVisualsZombiesEnable;}
-    @LuaMethod(name="toggleVisualsZombiesEnable",global=true)public static void toggleVisualsZombiesEnable(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualsZombiesEnable = isToggled;}
-
-    @LuaMethod(name="isVisualsVehiclesEnable",global=true)public static boolean isVisualsVehiclesEnable(){return EtherMain.getInstance().etherAPI.isVisualsVehiclesEnable;}
-    @LuaMethod(name="toggleVisualsVehiclesEnable",global=true)public static void toggleVisualsVehiclesEnable(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualsVehiclesEnable = isToggled;}
-    
-    @LuaMethod(name="isVisualsPlayersEnable",global=true)public static boolean isVisualsPlayersEnable(){return EtherMain.getInstance().etherAPI.isVisualsPlayersEnable;}
-    @LuaMethod(name="isVisualDrawPlayerNickname",global=true)public static boolean isVisualDrawPlayerNickname(){return EtherMain.getInstance().etherAPI.isVisualDrawPlayerNickname;}
-    @LuaMethod(name="toggleVisualDrawPlayerNickname",global=true)public static void toggleVisualDrawPlayerNickname(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualDrawPlayerNickname = isToggled;}
-    
-    @LuaMethod(name="isVisualDrawToLocalPlayer",global=true)public static boolean isVisualDrawToLocalPlayer(){return EtherMain.getInstance().etherAPI.isVisualDrawToLocalPlayer;}
-    @LuaMethod(name="toggleVisualDrawToLocalPlayer",global=true)public static void toggleVisualDrawToLocalPlayer(boolean isToggled) {EtherMain.getInstance().etherAPI.isVisualDrawToLocalPlayer = isToggled;}
-    
-    @LuaMethod(name="isVisualsEnable",global=true)public static boolean isVisualsEnable(){return EtherMain.getInstance().etherAPI.isVisualsEnable;}
-    @LuaMethod(name="toggleVisualsEnable",global=true)public static void toggleVisualsEnable(boolean isToggled) {EtherMain.getInstance().etherAPI.isVisualsEnable = isToggled;}
     
     @LuaMethod(name="isBypassDebugMode",global=true)public static boolean isBypassDebugMode(){return EtherMain.getInstance().etherAPI.isBypassDebugMode;}
     @LuaMethod(name="toggleBypassDebugMode",global=true)public static void toggleBypassDebugMode(boolean isToggled){EtherMain.getInstance().etherAPI.isBypassDebugMode = isToggled;}
