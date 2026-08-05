@@ -109,19 +109,7 @@ function EtherVisualsPanel:createChildren()
     self:addScrollBars();
 
     self:addCheckBox(getTranslate("UI_VisualsPanel_360Vision"), function(isChecked) toggleVisualEnable360Vision(isChecked); end, isVisualEnable360Vision());
-	self:addCheckBox(getTranslate("UI_VisualsPanel_NightVision"), function(isChecked) toggleNightVision(isChecked); end, isEnableNightVision(), false);
-
-    self:addCheckBox(getTranslate("UI_VisualsPanel_IsVisualsEnable"), function(isChecked) toggleVisualsEnable(isChecked); end, isVisualsEnable());
-    self:addCheckBox(getTranslate("UI_VisualsPanel_IsVisualsPlayersEnable"), function(isChecked) toggleVisualsPlayersEnable(isChecked); end, isVisualsPlayersEnable());
-    self:addCheckBox(getTranslate("UI_VisualsPanel_IsVisualsZombiesEnable"), function(isChecked) toggleVisualsZombiesEnable(isChecked); end, isVisualsZombiesEnable());
-    self:addCheckBox(getTranslate("UI_VisualsPanel_IsVisualsVehiclesEnable"), function(isChecked) toggleVisualsVehiclesEnable(isChecked); end, isVisualsVehiclesEnable());
-
-    self:addCheckBox(getTranslate("UI_VisualsPanel_DrawToLocalPlayer"), function(isChecked) toggleVisualDrawToLocalPlayer(isChecked); end, isVisualDrawToLocalPlayer());
-    self:addCheckBox(getTranslate("UI_VisualsPanel_DrawLineToPlayers"), function(isChecked) toggleVisualDrawLineToPlayers(isChecked); end, isVisualDrawLineToPlayers());
-    self:addCheckBox(getTranslate("UI_VisualsPanel_DrawLineToVehicles"), function(isChecked) toggleVisualDrawLineToVehicle(isChecked); end, isVisualDrawLineToVehicle());
-	
-    self:addCheckBox(getTranslate("UI_VisualsPanel_DrawPlayerName"), function(isChecked) toggleVisualDrawPlayerNickname(isChecked); end, isVisualDrawPlayerNickname());
-    self:addCheckBox(getTranslate("UI_VisualsPanel_DrawPlayerInfo"), function(isChecked) toggleVisualDrawPlayerInfo(isChecked); end, isVisualDrawPlayerInfo());
+	self:addCheckBox(getTranslate("UI_VisualsPanel_NightVision"), function(isChecked) toggleNightVision(isChecked); end, isEnableNightVision());
 	
 	self:addCheckBox(getTranslate("UI_Map_DrawZombies"), function (isChecked) toggleMapDrawZombies(isChecked); end, isMapDrawZombies())
     self:addCheckBox(getTranslate("UI_Map_DrawOtherPlayers"), function (isChecked) toggleMapDrawAllPlayers(isChecked); end, isMapDrawAllPlayers())
