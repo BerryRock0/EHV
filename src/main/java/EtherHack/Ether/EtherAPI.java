@@ -102,11 +102,11 @@ public class EtherAPI
                 if(toggles[4])weapon.setAimingTime(0);
                 if(toggles[11])weapon.setRecoilDelay(0);
                 if(toggles[12])weapon.setReloadTime(0);
-                if(toggles[47])playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
+                if(toggles[41])playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
             }
                 
             if(toggles[2]) playerItem.setHaveBeenRepaired(1);
-            if(toggles[2]) playerItem.setCondition(playerItem.getConditionMax());
+            if(toggles[23]) playerItem.setCondition(playerItem.getConditionMax());
         }
         if (inventoryItems != null && !inventoryItems.isEmpty())
         {
@@ -126,34 +126,34 @@ public class EtherAPI
                 if(toggles[2]) item.setHaveBeenRepaired(1);
                 if(toggles[17]) item.setWet(false);
                 if(toggles[16]) item.setInfected(false);
-                if(toggles[20]) item.setCondition(item.getConditionMax());
+                if(toggles[23]) item.setCondition(item.getConditionMax());
             }
         }
 
         if (localPlayer != null)
         {
-            if(toggles[46]) localPlayer.getStats().setEndurance(1.0f);
-            if(toggles[48]) localPlayer.getStats().setFatigue(0.0f);
-            if(toggles[49]) localPlayer.getStats().setHunger(0.0f);
-            if(toggles[50]) localPlayer.getStats().setThirst(0.0f);
-            if(toggles[51]) localPlayer.getStats().setDrunkenness(0.0f);
-            if(toggles[52]) localPlayer.getStats().setAnger(0.0f);
-            if(toggles[53]) localPlayer.getStats().setFear(0.0f);
-            if(toggles[54]) localPlayer.getStats().setPain(0.0f);
-            if(toggles[55]) localPlayer.getStats().setPanic(0.0f);
-            if(toggles[56]) localPlayer.getStats().setMorale(1.0f);
-            if(toggles[57]) localPlayer.getStats().setStress(0.0f);
-            if(toggles[58]) localPlayer.getStats().setSickness(0.0f);
-            if(toggles[59]) localPlayer.getStats().setStressFromCigarettes(0.0f);
-            if(toggles[60]) localPlayer.getStats().setSanity(1.0f);
-            if(toggles[61]) localPlayer.getBodyDamage().setBoredomLevel(0.0f);
-            if(toggles[62]) localPlayer.getBodyDamage().setUnhappynessLevel(0.0f);
-            if(toggles[63]) localPlayer.getBodyDamage().setWetness(0.0f);
-            if(toggles[64]) localPlayer.getBodyDamage().setInfectionLevel(0.0f);
-            if(toggles[65]) localPlayer.getBodyDamage().setFakeInfectionLevel(0.0f);
-            if(toggles[66]) localPlayer.setOnFire(false);
-            if(toggles[67]) localPlayer.getNutrition().setCalories(1200.0f);
-            if(toggles[68]) localPlayer.getNutrition().setWeight(80.0);
+            if(toggles[40]) localPlayer.getStats().setEndurance(1.0f);
+            if(toggles[42]) localPlayer.getStats().setFatigue(0.0f);
+            if(toggles[43]) localPlayer.getStats().setHunger(0.0f);
+            if(toggles[44]) localPlayer.getStats().setThirst(0.0f);
+            if(toggles[45]) localPlayer.getStats().setDrunkenness(0.0f);
+            if(toggles[46]) localPlayer.getStats().setAnger(0.0f);
+            if(toggles[47]) localPlayer.getStats().setFear(0.0f);
+            if(toggles[48]) localPlayer.getStats().setPain(0.0f);
+            if(toggles[49]) localPlayer.getStats().setPanic(0.0f);
+            if(toggles[50]) localPlayer.getStats().setMorale(1.0f);
+            if(toggles[51]) localPlayer.getStats().setStress(0.0f);
+            if(toggles[52]) localPlayer.getStats().setSickness(0.0f);
+            if(toggles[53]) localPlayer.getStats().setStressFromCigarettes(0.0f);
+            if(toggles[54]) localPlayer.getStats().setSanity(1.0f);
+            if(toggles[55]) localPlayer.getBodyDamage().setBoredomLevel(0.0f);
+            if(toggles[56]) localPlayer.getBodyDamage().setUnhappynessLevel(0.0f);
+            if(toggles[57]) localPlayer.getBodyDamage().setWetness(0.0f);
+            if(toggles[58]) localPlayer.getBodyDamage().setInfectionLevel(0.0f);
+            if(toggles[59]) localPlayer.getBodyDamage().setFakeInfectionLevel(0.0f);
+            if(toggles[60]) localPlayer.setOnFire(false);
+            if(toggles[61]) localPlayer.getNutrition().setCalories(1200.0f);
+            if(toggles[62]) localPlayer.getNutrition().setWeight(80.0);
             if(localPlayer.isGodMod() != toggles[9]) localPlayer.setGodMod(toggles[9]);
             if(localPlayer.isNoClip() != toggles[8]) localPlayer.setNoClip(toggles[8]);
             if(localPlayer.isInvisible() != toggles[6]) localPlayer.setInvisible(toggles[6]);
@@ -169,7 +169,7 @@ public class EtherAPI
         boolean isAntiCheatProtectionEnabled = ServerOptions.instance.getBoolean("AntiCheatProtectionType12");
         boolean isServerMode = GameServer.bServer;
         boolean isCooperativeMode = GameServer.bCoop;
-        Core.bDebug = isGameActive && toggles[45] && (!isAntiCheatProtectionEnabled && isServerMode || isCooperativeMode || !isServerMode);
+        Core.bDebug = isGameActive && toggles[39] && (!isAntiCheatProtectionEnabled && isServerMode || isCooperativeMode || !isServerMode);
     }
 
     @SubscribeLuaEvent(eventName="OnPostUIDraw")
@@ -188,7 +188,7 @@ public class EtherAPI
         ArrayList<IsoZombie> zombies = IsoWorld.instance.getCell().getZombieList();
         ArrayList<BaseVehicle> vehicles = IsoWorld.instance.getCell().getVehicles();
         
-        if (!toggles[24] || !toggles[51])
+        if (!toggles[24])
             return;
         
         if (vehicles != null && !vehicles.isEmpty())
