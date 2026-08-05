@@ -49,7 +49,7 @@ public class EtherAPI
     private final EtherLuaMethods etherLuaMethods = new EtherLuaMethods();
     public HashMap<String, Texture> textureCache = new HashMap();
     public HashMap<String, float[]> originalWeaponStats = new HashMap();
-    public boolean[] toggles = new boolean[70];
+    public boolean[] toggles = new boolean[64];
     public Color[] colors = new Color[12];
 
     public EtherAPI() {
