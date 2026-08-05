@@ -44,7 +44,7 @@ EtherMain.menuKeyID         = 210; -- Клавиша открытия окна -
 EtherMain.defaultWidth      = 510; -- Стандартная ширина окна
 EtherMain.defaultHeight     = 500; -- Стандартная высота окна
 EtherMain.currentTabID      = 1; -- Последняя открытая вкладка
-EtherMain.accentColor       = {r = 0.0), g = 0.0, b = 0.0, a = 1.0}; -- Акцентный цвет
+EtherMain.accentColor       = {r = getAccentUIColor():getR(), g = getAccentUIColor():getG(), b = getAccentUIColor():getB(), a = 1.0}; -- Акцентный цвет
 
 --*********************************************************
 --* Закрытие окна по нажатию кнопки UI
