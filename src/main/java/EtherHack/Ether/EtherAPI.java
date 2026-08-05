@@ -58,7 +58,9 @@ public class EtherAPI
     }
 
     private void initStartupConfig()
-    {   
+    {
+        Properties config = new Properties();
+
         for (boolean b: toggles)
             b = false;
 
