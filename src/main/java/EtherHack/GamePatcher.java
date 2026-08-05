@@ -141,7 +141,7 @@ public class GamePatcher
             newInstructions.add(new JumpInsnNode(198, carryOnLabel));
             newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
             newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
-            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "unlimitedCarry", "Z"));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "isUnlimitedCarry", "Z"));
             newInstructions.add(new JumpInsnNode(153, carryOnLabel));
             newInstructions.add(new InsnNode(3));
             newInstructions.add(new InsnNode(172));
@@ -158,7 +158,7 @@ public class GamePatcher
             newInstructions.add(new JumpInsnNode(198, carryOnLabel));
             newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
             newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
-            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "unlimitedCarry", "Z"));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "isUnlimitedCarry", "Z"));
             newInstructions.add(new JumpInsnNode(153, carryOnLabel));
             newInstructions.add(new InsnNode(11));
             newInstructions.add(new InsnNode(174));
@@ -175,7 +175,7 @@ public class GamePatcher
             newInstructions.add(new JumpInsnNode(198, carryOnLabel));
             newInstructions.add(new MethodInsnNode(184, "EtherHack/Ether/EtherMain", "getInstance", "()LEtherHack/Ether/EtherMain;", false));
             newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherMain", "etherAPI", "LEtherHack/Ether/EtherAPI;"));
-            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "unlimitedCarry", "Z"));
+            newInstructions.add(new FieldInsnNode(180, "EtherHack/Ether/EtherAPI", "isUnlimitedCarry", "Z"));
             newInstructions.add(new JumpInsnNode(153, carryOnLabel));
             newInstructions.add(new InsnNode(11));
             newInstructions.add(new InsnNode(174));
