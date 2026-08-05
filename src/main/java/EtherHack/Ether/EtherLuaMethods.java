@@ -91,8 +91,8 @@ public final class EtherLuaMethods {
     }
 
     @LuaMethod(name="safePlayerTeleport", global=true)
-    public static void safePlayerTeleport(int x, int y) {
-        EtherMain.getInstance().etherAPI.isPlayerInSafeTeleported = true;
+    public static void safePlayerTeleport(int x, int y)
+    {
         IsoPlayer player = IsoPlayer.getInstance();
         float z = player.z;
         float deltaX = (float)x - player.x;
