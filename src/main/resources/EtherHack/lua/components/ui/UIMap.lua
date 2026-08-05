@@ -346,17 +346,17 @@ function UIMap:new(x, y, width, height)
 	self.__index = self
 
 	uiTableData.localPlayer = getPlayer();
-	uiTableData.localPlayerColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
-	uiTableData.playerColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
-	uiTableData.vehicleColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
-	uiTableData.zombieColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
-	uiTableData.roomColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
-	uiTableData.buildingColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
-	uiTableData.pushableColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
-	uiTableData.worldItemColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
-	uiTableData.itemColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
-	uiTableData.survivorColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
-	uiTableData.remoteSurvivorColor = {r = 0.0, g = 0.0, b = 0.0, a = 1.0}
+	uiTableData.localPlayerColor = {r = getPlayerUIColor():getR(), g = getPlayerUIColor():getG(), b = getPlayerUIColor():getB(), a = 1.0}
+	uiTableData.playerColor = {r = getPlayerUIColor():getR(), g = getPlayerUIColor():getG(), b = getPlayerUIColor():getB(), a = 1.0}
+	uiTableData.vehicleColor = {r = getVehicleUIColor():getR(), g = getVehicleUIColor():getG(), b = getVehicleUIColor():getB(), a = 1.0}
+	uiTableData.zombieColor = {r = getZombieUIColor():getR(), g = getZombieUIColor():getG(), b = getZombieUIColor():getB(), a = 1.0}
+	uiTableData.roomColor = {r = getRoomUIColor():getR(), g = getRoomUIColor():getG(), b = getRoomUIColor():getB(), a = 1.0}
+	uiTableData.buildingColor = {r = getBuildingUIColor():getR(), g = getBuildingUIColor():getG(), b = getBuildingUIColor():getB(), a = 1.0}
+	uiTableData.pushableColor = {r = getPushableUIColor():getR(), g = getPushableUIColor():getG(), b = getPushableUIColor():getB(), a = 1.0}
+	uiTableData.worldItemColor = {r = getWorldItemUIColor():getR(), g = getWorldItemUIColor():getG(), b = getWorldItemUIColor():getB(), a = 1.0}
+	uiTableData.itemColor = {r = getItemUIColor():getR(), g = getItemUIColor():getG(), b = getItemUIColor():getB(), a = 1.0}
+	uiTableData.survivorColor = {r = getSurvivorUIColor():getR(), g = getSurvivorUIColor():getG(), b = getSurvivorUIColor():getB(), a = 1.0}
+	uiTableData.remoteSurvivorColor = {r = getRemoteSurvivorUIColor():getR(), g = getRemoteSurvivorUIColor():getG(), b = getRemoteSurvivorUIColor():getB(), a = 1.0}
 	uiTableData.centerByPlayer = false;
 
 	return uiTableData
