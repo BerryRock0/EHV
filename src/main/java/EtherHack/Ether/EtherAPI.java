@@ -49,21 +49,84 @@ public class EtherAPI
     private final EtherLuaMethods etherLuaMethods = new EtherLuaMethods();
     public HashMap<String, Texture> textureCache = new HashMap();
     public HashMap<String, float[]> originalWeaponStats = new HashMap();
-    public boolean[] toggles = new boolean[64];
-    public Color mainUIAccentColor,vehicleUIColor,zombieUIColor,playerUIColor,survivorUIColor,remoteSurvivorUIColor,itemUIColor,worldItemUIColor,pushableUIColor,buildingUIColor,roomUIColor;
-
-    public EtherAPI() {
-        this.initStartupConfig();
-        EventSubscriber.register((Object)this);
-    }
+    public Color mainUIAccentColor;
+    public Color vehicleUIColor;
+    public Color zombieUIColor;
+    public Color playerUIColor;
+    public Color survivorUIColor;
+    public Color remoteSurvivorUIColor;
+    public Color itemUIColor;
+    public Color worldItemUIColor;
+    public Color pushableUIColor;
+    public Color buildingUIColor;
+    public Color roomUIColor;
+    public boolean isAlwaysRack;
+    public boolean isAlwaysRoundChamber;
+    public boolean isAlwaysRepaired;
+    public boolean isAlwaysKnockdown;
+    public boolean isAlwaysCritical;
+    public boolean isAlwaysAiming;
+    public boolean isPlayerInSafeTeleported;
+    public boolean isMultiHitZombies;
+    public boolean isTimedActionCheat;
+    public boolean isEnableGodMode;
+    public boolean isEnableNoclip;
+    public boolean isEnableInvisible;
+    public boolean isEnableNightVision;
+    public boolean isZombieDontAttack;
+    public boolean isNoRecoil;
+    public boolean isNoReload;
+    public boolean isNoJam;
+    public boolean isNoSpentRoundChamber;
+    public boolean isNoBroken;
+    public boolean isNoInfected;
+    public boolean isNoWet;
+    public boolean isNoHoled;
+    public boolean isNoDirted;
+    public boolean isNoBlooded;
+    public boolean isBypassDebugMode;
+    public boolean isUnlimitedCarry;
+    public boolean isUnlimitedCondition;
+    public boolean isUnlimitedEndurance;
+    public boolean isUnlimitedAmmo;
+    public boolean isDisableFatigue;
+    public boolean isDisableHunger;
+    public boolean isDisableThirst;
+    public boolean isDisableDrunkenness;
+    public boolean isDisableAnger;
+    public boolean isDisableFear;
+    public boolean isDisablePain;
+    public boolean isDisablePanic;
+    public boolean isDisableMorale;
+    public boolean isDisableStress;
+    public boolean isDisableSickness;
+    public boolean isDisableStressFromCigarettes;
+    public boolean isDisableSanity;
+    public boolean isDisableBoredomLevel;
+    public boolean isDisableUnhappynessLevel;
+    public boolean isDisableWetness;
+    public boolean isDisableInfectionLevel;
+    public boolean isDisableFakeInfectionLevel;
+    public boolean isDisableFire;
+    public boolean isOptimalCalories;
+    public boolean isOptimalWeight;
+    public boolean isVisualEnable360Vision;
+    public boolean isMapDrawLocalPlayer;
+    public boolean isMapDrawAllPlayers;
+    public boolean isMapDrawVehicles;
+    public boolean isMapDrawZombies;
+    public boolean isMapDrawBuildings;
+    public boolean isMapDrawSurvivors;
+    public boolean isMapDrawRemoteSurvivors;
+    public boolean isMapDrawPushables;
+    public boolean isMapDrawItems;
+    public boolean isMapDrawWorldItems;
+    public boolean isMapDrawRooms;
 
     private void initStartupConfig()
     {
         Properties config = new Properties();
-
-        for (boolean b: toggles)
-            b = false;
-
+        //this. = ConfigUtils.getBooleanFromConfig(config, "", false);
         this.mainUIAccentColor = ConfigUtils.getColorFromConfig(config, "mainUIAccentColor", new Color(56, 239, 125));
         this.vehicleUIColor = ConfigUtils.getColorFromConfig(config, "vehicleUIColor", new Color(150, 150, 200));
         this.zombieUIColor = ConfigUtils.getColorFromConfig(config, "zombieUIColor", new Color(255, 150, 100));
@@ -75,6 +138,71 @@ public class EtherAPI
         this.roomUIColor = ConfigUtils.getColorFromConfig(config, "roomUIColor", new Color(0, 0, 0));
         this.buildingUIColor = ConfigUtils.getColorFromConfig(config, "buildingUIColor", new Color(0, 0, 0));
         this.pushableUIColor = ConfigUtils.getColorFromConfig(config, "pushableUIColor", new Color(0, 0, 0));
+        this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRack", false);
+        this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRoundChamber", false);
+        this.isAlwaysRepaired = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRepaired", false);
+        this.isAlwaysKnockdown = ConfigUtils.getBooleanFromConfig(config, "isAlwaysKnockdown", false);
+        this.isAlwaysAiming = ConfigUtils.getBooleanFromConfig(config, "isAlwaysAiming", false);
+        this.isAlwaysCritical = ConfigUtils.getBooleanFromConfig(config, "isAlwaysCritical", false);
+        this.isPlayerInSafeTeleported = ConfigUtils.getBooleanFromConfig(config, "isPlayerInSafeTeleported", false);
+        this.isMultiHitZombies = ConfigUtils.getBooleanFromConfig(config, "isMultiHitZombies", false);
+        this.isTimedActionCheat = ConfigUtils.getBooleanFromConfig(config, "isTimedActionCheat", false);
+        this.isEnableGodMode = ConfigUtils.getBooleanFromConfig(config, "isEnableGodMode", false);
+        this.isEnableNoclip = ConfigUtils.getBooleanFromConfig(config, "isEnableNoclip", false);
+        this.isEnableInvisible = ConfigUtils.getBooleanFromConfig(config, "isEnableInvisible", false);
+        this.isEnableNightVision = ConfigUtils.getBooleanFromConfig(config, "isEnableNightVision", false);
+        this.isZombieDontAttack = ConfigUtils.getBooleanFromConfig(config, "isZombieDontAttack", false);
+        this.isNoRecoil = ConfigUtils.getBooleanFromConfig(config, "isNoRecoil", false);
+        this.isNoReload = ConfigUtils.getBooleanFromConfig(config, "isNoReload", false);
+        this.isNoJam = ConfigUtils.getBooleanFromConfig(config, "isNoJam", false);
+        this.isNoSpentRoundChamber = ConfigUtils.getBooleanFromConfig(config, "isNoSpentRoundChamber", false);
+        this.isNoBroken = ConfigUtils.getBooleanFromConfig(config, "isNoBroken", false);
+        this.isNoInfected = ConfigUtils.getBooleanFromConfig(config, "isNoInfected", false);
+        this.isNoWet = ConfigUtils.getBooleanFromConfig(config, "isNoWet", false);
+        this.isNoHoled = ConfigUtils.getBooleanFromConfig(config, "isNoHoled", false);
+        this.isNoDirted = ConfigUtils.getBooleanFromConfig(config, "isNoDirted", false);
+        this.isNoBlooded = ConfigUtils.getBooleanFromConfig(config, "isNoBlooded", false);
+        this.isBypassDebugMode = ConfigUtils.getBooleanFromConfig(config, "isBypassDebugMode", false);
+        this.isUnlimitedCarry = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedCarry", false);
+        this.isUnlimitedCondition = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedCondition", false);
+        this.isUnlimitedEndurance = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedEndurance", false);
+        this.isUnlimitedAmmo = ConfigUtils.getBooleanFromConfig(config, "isUnlimitedAmmo", false);
+        this.isDisableFatigue = ConfigUtils.getBooleanFromConfig(config, "isDisableFatigue", false);
+        this.isDisableHunger = ConfigUtils.getBooleanFromConfig(config, "isDisableHunger", false);
+        this.isDisableThirst = ConfigUtils.getBooleanFromConfig(config, "isDisableThirst", false);
+        this.isDisableDrunkenness = ConfigUtils.getBooleanFromConfig(config, "isDisableDrunkenness", false);
+        this.isDisableAnger = ConfigUtils.getBooleanFromConfig(config, "isDisableAnger", false);
+        this.isDisableFear = ConfigUtils.getBooleanFromConfig(config, "isDisableFear", false);
+        this.isDisablePain = ConfigUtils.getBooleanFromConfig(config, "isDisablePain", false);
+        this.isDisablePanic = ConfigUtils.getBooleanFromConfig(config, "isDisablePanic", false);
+        this.isDisableMorale = ConfigUtils.getBooleanFromConfig(config, "isDisableMorale", false);
+        this.isDisableStress = ConfigUtils.getBooleanFromConfig(config, "isDisableStress", false);
+        this.isDisableSickness = ConfigUtils.getBooleanFromConfig(config, "isDisableSickness", false);
+        this.isDisableStressFromCigarettes = ConfigUtils.getBooleanFromConfig(config, "isDisableStressFromCigarettes", false);
+        this.isDisableSanity = ConfigUtils.getBooleanFromConfig(config, "isDisableSanity", false);
+        this.isDisableBoredomLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableBoredomLevel", false);
+        this.isDisableUnhappynessLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableUnhappynessLevel", false);
+        this.isDisableWetness = ConfigUtils.getBooleanFromConfig(config, "isDisableWetness", false);
+        this.isDisableInfectionLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableInfectionLevel", false);
+        this.isDisableFakeInfectionLevel = ConfigUtils.getBooleanFromConfig(config, "isDisableFakeInfectionLevel", false);
+        this.isDisableFire = ConfigUtils.getBooleanFromConfig(config, "isDisableFire", false);
+        this.isOptimalCalories = ConfigUtils.getBooleanFromConfig(config, "isOptimalCalories", false);
+        this.isOptimalWeight = ConfigUtils.getBooleanFromConfig(config, "isOptimalWeight", false);
+        this.isVisualEnable360Vision = ConfigUtils.getBooleanFromConfig(config, "isVisualEnable360Vision", false);
+        this.isMapDrawLocalPlayer = ConfigUtils.getBooleanFromConfig(config, "isMapDrawLocalPlayer", true);
+        this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(config, "isMapDrawAllPlayers", false);
+        this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(config, "isMapDrawVehicles", false);
+        this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(config, "isMapDrawZombies", false);
+        this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig(config, "isMapDrawSurvivors", false);
+        this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig(config, "isMapDrawRemoteSurvivors", false);
+        this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig(config, "isMapDrawRooms", false);
+        this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig(config, "isMapDrawBuildings", false);
+        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig(config, "isMapDrawPushables", false);
+    }
+
+    public EtherAPI() {
+        this.initStartupConfig();
+        EventSubscriber.register((Object)this);
     }
 
     @LuaEvents(value={@SubscribeLuaEvent(eventName="OnResetLua"), @SubscribeLuaEvent(eventName="OnMainMenuEnter")})
@@ -100,25 +228,25 @@ public class EtherAPI
 
         if (playerItem != null)
         {        
-            if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != toggles[0] )
-                SandboxOptions.instance.set("MultiHitZombies", (Object)toggles[0]);
+            if ((Boolean)SandboxOptions.instance.getOptionByName("MultiHitZombies").asConfigOption().getValueAsObject() != this.isMultiHitZombies)
+                SandboxOptions.instance.set("MultiHitZombies", (Object)this.isMultiHitZombies);
 
             if (playerItem.getStringItemType().equals("RangedWeapon") && playerItem instanceof HandWeapon)
             {
-                if(toggles[3])weapon.setAlwaysKnockdown(true);
-                if(toggles[5])weapon.setCriticalChance(100.0f);
-                if(toggles[0])weapon.setRackAfterShoot(true);
-                if(toggles[13])weapon.setJammed(false);
-                if(toggles[1])weapon.setRoundChambered(true);
-                if(toggles[14])weapon.setSpentRoundChambered(false);
-                if(toggles[4])weapon.setAimingTime(0);
-                if(toggles[11])weapon.setRecoilDelay(0);
-                if(toggles[12])weapon.setReloadTime(0);
-                if(toggles[41])playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
+                if(this.isAlwaysKnockdown) weapon.setAlwaysKnockdown(true);
+                if(this.isAlwaysCritical)weapon.setCriticalChance(100.0f);
+                if(this.isAlwaysRack)weapon.setRackAfterShoot(true);
+                if(this.isNoJam) weapon.setJammed(false);
+                if(this.isAlwaysRoundChamber)weapon.setRoundChambered(true);
+                if(this.isNoSpentRoundChamber) weapon.setSpentRoundChambered(false);
+                if(this.isAlwaysAiming) weapon.setAimingTime(0);
+                if(this.isNoRecoil) weapon.setRecoilDelay(0);
+                if(this.isNoReload) weapon.setReloadTime(0);
+                if (this.isUnlimitedAmmo) playerItem.setCurrentAmmoCount(playerItem.getMaxAmmo());
             }
                 
-            if(toggles[2]) playerItem.setHaveBeenRepaired(1);
-            if(toggles[23]) playerItem.setCondition(playerItem.getConditionMax());
+            if(this.isAlwaysRepaired) playerItem.setHaveBeenRepaired(1);
+            if(this.isUnlimitedCondition) playerItem.setCondition(playerItem.getConditionMax());
         }
         if (inventoryItems != null && !inventoryItems.isEmpty())
         {
@@ -129,49 +257,49 @@ public class EtherAPI
 
                 if (item.getVisual() != null)
                 {
-                    if(toggles[18]) for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i) item.getVisual().removeHole(i);
-                    if(toggles[19]) item.getVisual().removeDirt();
-                    if(toggles[20]) item.getVisual().removeBlood();
+                    if(this.isNoHoled) for (int i = 0; i < BloodBodyPartType.MAX.index(); ++i) item.getVisual().removeHole(i);
+                    if(this.isNoDirted) item.getVisual().removeDirt();
+                    if(this.isNoBlooded) item.getVisual().removeBlood();
                 }
 
-                if(toggles[15]) item.setBroken(false);
-                if(toggles[2]) item.setHaveBeenRepaired(1);
-                if(toggles[17]) item.setWet(false);
-                if(toggles[16]) item.setInfected(false);
-                if(toggles[23]) item.setCondition(item.getConditionMax());
+                if(this.isNoBroken) item.setBroken(false);
+                if(this.isAlwaysRepaired) item.setHaveBeenRepaired(1);
+                if(this.isNoWet) item.setWet(false);
+                if(this.isNoInfected) item.setInfected(false);
+                if(this.isUnlimitedCondition) item.setCondition(item.getConditionMax());
             }
         }
 
         if (localPlayer != null)
         {
-            if(toggles[40]) localPlayer.getStats().setEndurance(1.0f);
-            if(toggles[42]) localPlayer.getStats().setFatigue(0.0f);
-            if(toggles[43]) localPlayer.getStats().setHunger(0.0f);
-            if(toggles[44]) localPlayer.getStats().setThirst(0.0f);
-            if(toggles[45]) localPlayer.getStats().setDrunkenness(0.0f);
-            if(toggles[46]) localPlayer.getStats().setAnger(0.0f);
-            if(toggles[47]) localPlayer.getStats().setFear(0.0f);
-            if(toggles[48]) localPlayer.getStats().setPain(0.0f);
-            if(toggles[49]) localPlayer.getStats().setPanic(0.0f);
-            if(toggles[50]) localPlayer.getStats().setMorale(1.0f);
-            if(toggles[51]) localPlayer.getStats().setStress(0.0f);
-            if(toggles[52]) localPlayer.getStats().setSickness(0.0f);
-            if(toggles[53]) localPlayer.getStats().setStressFromCigarettes(0.0f);
-            if(toggles[54]) localPlayer.getStats().setSanity(1.0f);
-            if(toggles[55]) localPlayer.getBodyDamage().setBoredomLevel(0.0f);
-            if(toggles[56]) localPlayer.getBodyDamage().setUnhappynessLevel(0.0f);
-            if(toggles[57]) localPlayer.getBodyDamage().setWetness(0.0f);
-            if(toggles[58]) localPlayer.getBodyDamage().setInfectionLevel(0.0f);
-            if(toggles[59]) localPlayer.getBodyDamage().setFakeInfectionLevel(0.0f);
-            if(toggles[60]) localPlayer.setOnFire(false);
-            if(toggles[61]) localPlayer.getNutrition().setCalories(1200.0f);
-            if(toggles[62]) localPlayer.getNutrition().setWeight(80.0);
-            if(localPlayer.isGodMod() != toggles[9]) localPlayer.setGodMod(toggles[9]);
-            if(localPlayer.isNoClip() != toggles[8]) localPlayer.setNoClip(toggles[8]);
-            if(localPlayer.isInvisible() != toggles[6]) localPlayer.setInvisible(toggles[6]);
-            if(localPlayer.isTimedActionInstantCheat() != toggles[21]) localPlayer.setTimedActionInstantCheat(toggles[21]);
-            if(localPlayer.isZombiesDontAttack() != toggles[7]) localPlayer.setZombiesDontAttack(toggles[7]);
-            if(localPlayer.isWearingNightVisionGoggles() != toggles[10]) localPlayer.setWearingNightVisionGoggles(toggles[10]);
+            if(this.isUnlimitedEndurance) localPlayer.getStats().setEndurance(1.0f);
+            if(this.isDisableFatigue) localPlayer.getStats().setFatigue(0.0f);
+            if(this.isDisableHunger) localPlayer.getStats().setHunger(0.0f);
+            if(this.isDisableThirst) localPlayer.getStats().setThirst(0.0f);
+            if(this.isDisableDrunkenness) localPlayer.getStats().setDrunkenness(0.0f);
+            if(this.isDisableAnger) localPlayer.getStats().setAnger(0.0f);
+            if(this.isDisableFear) localPlayer.getStats().setFear(0.0f);
+            if(this.isDisablePain) localPlayer.getStats().setPain(0.0f);
+            if(this.isDisablePanic) localPlayer.getStats().setPanic(0.0f);
+            if(this.isDisableMorale) localPlayer.getStats().setMorale(1.0f);
+            if(this.isDisableStress) localPlayer.getStats().setStress(0.0f);
+            if(this.isDisableSickness) localPlayer.getStats().setSickness(0.0f);
+            if(this.isDisableStressFromCigarettes) localPlayer.getStats().setStressFromCigarettes(0.0f);
+            if(this.isDisableSanity) localPlayer.getStats().setSanity(1.0f);
+            if(this.isDisableBoredomLevel) localPlayer.getBodyDamage().setBoredomLevel(0.0f);
+            if(this.isDisableUnhappynessLevel) localPlayer.getBodyDamage().setUnhappynessLevel(0.0f);
+            if(this.isDisableWetness) localPlayer.getBodyDamage().setWetness(0.0f);
+            if(this.isDisableInfectionLevel) localPlayer.getBodyDamage().setInfectionLevel(0.0f);
+            if(this.isDisableFakeInfectionLevel) localPlayer.getBodyDamage().setFakeInfectionLevel(0.0f);
+            if(this.isDisableFire) localPlayer.setOnFire(false);
+            if(this.isOptimalCalories) localPlayer.getNutrition().setCalories(1200.0f);
+            if(this.isOptimalWeight) localPlayer.getNutrition().setWeight(80.0);
+            if(localPlayer.isGodMod() != this.isEnableGodMode) localPlayer.setGodMod(this.isEnableGodMode);
+            if(localPlayer.isNoClip() != this.isEnableNoclip) localPlayer.setNoClip(this.isEnableNoclip);
+            if(localPlayer.isInvisible() != this.isEnableInvisible) localPlayer.setInvisible(this.isEnableInvisible);
+            if(localPlayer.isTimedActionInstantCheat() != this.isTimedActionCheat) localPlayer.setTimedActionInstantCheat(this.isTimedActionCheat);
+            if(localPlayer.isZombiesDontAttack() != this.isZombieDontAttack) localPlayer.setZombiesDontAttack(this.isZombieDontAttack);
+            if(localPlayer.isWearingNightVisionGoggles() != this.isEnableNightVision) localPlayer.setWearingNightVisionGoggles(this.isEnableNightVision);
         }
     }
 
@@ -181,7 +309,7 @@ public class EtherAPI
         boolean isAntiCheatProtectionEnabled = ServerOptions.instance.getBoolean("AntiCheatProtectionType12");
         boolean isServerMode = GameServer.bServer;
         boolean isCooperativeMode = GameServer.bCoop;
-        Core.bDebug = isGameActive && toggles[39] && (!isAntiCheatProtectionEnabled && isServerMode || isCooperativeMode || !isServerMode);
+        Core.bDebug = isGameActive && this.isBypassDebugMode && (!isAntiCheatProtectionEnabled && isServerMode || isCooperativeMode || !isServerMode);
     }
 
     @SubscribeLuaEvent(eventName="OnPostUIDraw")
@@ -200,7 +328,7 @@ public class EtherAPI
         ArrayList<IsoZombie> zombies = IsoWorld.instance.getCell().getZombieList();
         ArrayList<BaseVehicle> vehicles = IsoWorld.instance.getCell().getVehicles();
         
-        if (!toggles[24])
+        if (!this.isVisualEnable360Vision)
             return;
         
         if (vehicles != null && !vehicles.isEmpty())
