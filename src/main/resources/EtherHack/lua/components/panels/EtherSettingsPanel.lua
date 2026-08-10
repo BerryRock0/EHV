@@ -48,7 +48,7 @@ end
 --*********************************************************
 function EtherSettingsPanel:addButtonWithLabel(title, buttonTitle, func, isOnlyNotInGame)
     local rows = self.rows;
-    local buttonY = 200 + rows * 25;
+    local buttonY = rows * 25;
 
     self:addLabel(10, buttonY - 3, title)
     self:addButton(self:getWidth() - 130 - 10, buttonY, buttonTitle, func, isOnlyNotInGame)
