@@ -48,7 +48,7 @@ end
 --*********************************************************
 function EtherSettingsPanel:addButtonWithLabel(title, buttonTitle, func, isOnlyNotInGame)
     local rows = self.rows;
-    local buttonY = rows * 25;
+    local buttonY = 10 + rows * 20;
 
     self:addLabel(10, buttonY - 3, title)
     self:addButton(self:getWidth() - 130 - 10, buttonY, buttonTitle, func, isOnlyNotInGame)
@@ -62,7 +62,7 @@ end
 --*********************************************************
 function EtherSettingsPanel:addColorPickerWithLabel(title, func, startColor)
     local rows = self.rows;
-    local buttonY = 200 + rows * 25;
+    local buttonY = 10 + rows * 20;
 
     self:addLabel(10, buttonY - 3, title)
 
@@ -85,7 +85,7 @@ end
 --*********************************************************
 function EtherSettingsPanel:addSliderWithLabel(title, sliderMethod, value, minValue, maxValue)
     local rows = self.rows;
-    local buttonY = 10 + rows * 25;
+    local buttonY = 10 + rows * 20;
 
     self:addLabel(15, buttonY - 3, title)
     self:addSlider(self:getWidth() - 200 - 50, buttonY + 3, 200, 10, value, minValue, maxValue, sliderMethod)
