@@ -115,13 +115,6 @@ public class EtherAPI
     public boolean isMapDrawAllPlayers;
     public boolean isMapDrawVehicles;
     public boolean isMapDrawZombies;
-    public boolean isMapDrawBuildings;
-    public boolean isMapDrawSurvivors;
-    public boolean isMapDrawRemoteSurvivors;
-    public boolean isMapDrawPushables;
-    public boolean isMapDrawItems;
-    public boolean isMapDrawWorldItems;
-    public boolean isMapDrawRooms;
 
     private void initStartupConfig()
     {
@@ -193,11 +186,6 @@ public class EtherAPI
         this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(config, "isMapDrawAllPlayers", false);
         this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(config, "isMapDrawVehicles", false);
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(config, "isMapDrawZombies", false);
-        this.isMapDrawSurvivors = ConfigUtils.getBooleanFromConfig(config, "isMapDrawSurvivors", false);
-        this.isMapDrawRemoteSurvivors = ConfigUtils.getBooleanFromConfig(config, "isMapDrawRemoteSurvivors", false);
-        this.isMapDrawRooms = ConfigUtils.getBooleanFromConfig(config, "isMapDrawRooms", false);
-        this.isMapDrawBuildings = ConfigUtils.getBooleanFromConfig(config, "isMapDrawBuildings", false);
-        this.isMapDrawPushables = ConfigUtils.getBooleanFromConfig(config, "isMapDrawPushables", false);
     }
 
     public EtherAPI() {
