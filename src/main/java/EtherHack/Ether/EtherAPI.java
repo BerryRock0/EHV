@@ -258,37 +258,34 @@ public class EtherAPI
             }
         }
 
-        if (localPlayer != null)
-        {
-            if(this.isUnlimitedEndurance) localPlayer.getStats().setEndurance(1.0f);
-            if(this.isDisableFatigue) localPlayer.getStats().setFatigue(0.0f);
-            if(this.isDisableHunger) localPlayer.getStats().setHunger(0.0f);
-            if(this.isDisableThirst) localPlayer.getStats().setThirst(0.0f);
-            if(this.isDisableDrunkenness) localPlayer.getStats().setDrunkenness(0.0f);
-            if(this.isDisableAnger) localPlayer.getStats().setAnger(0.0f);
-            if(this.isDisableFear) localPlayer.getStats().setFear(0.0f);
-            if(this.isDisablePain) localPlayer.getStats().setPain(0.0f);
-            if(this.isDisablePanic) localPlayer.getStats().setPanic(0.0f);
-            if(this.isDisableMorale) localPlayer.getStats().setMorale(1.0f);
-            if(this.isDisableStress) localPlayer.getStats().setStress(0.0f);
-            if(this.isDisableSickness) localPlayer.getStats().setSickness(0.0f);
-            if(this.isDisableStressFromCigarettes) localPlayer.getStats().setStressFromCigarettes(0.0f);
-            if(this.isDisableSanity) localPlayer.getStats().setSanity(1.0f);
-            if(this.isDisableBoredomLevel) localPlayer.getBodyDamage().setBoredomLevel(0.0f);
-            if(this.isDisableUnhappynessLevel) localPlayer.getBodyDamage().setUnhappynessLevel(0.0f);
-            if(this.isDisableWetness) localPlayer.getBodyDamage().setWetness(0.0f);
-            if(this.isDisableInfectionLevel) localPlayer.getBodyDamage().setInfectionLevel(0.0f);
-            if(this.isDisableFakeInfectionLevel) localPlayer.getBodyDamage().setFakeInfectionLevel(0.0f);
-            if(this.isDisableFire) localPlayer.setOnFire(false);
-            if(this.isOptimalCalories) localPlayer.getNutrition().setCalories(1200.0f);
-            if(this.isOptimalWeight) localPlayer.getNutrition().setWeight(80.0);
-            if(localPlayer.isGodMod() != this.isEnableGodMode) localPlayer.setGodMod(this.isEnableGodMode);
-            if(localPlayer.isNoClip() != this.isEnableNoclip) localPlayer.setNoClip(this.isEnableNoclip);
-            if(localPlayer.isInvisible() != this.isEnableInvisible) localPlayer.setInvisible(this.isEnableInvisible);
-            if(localPlayer.isTimedActionInstantCheat() != this.isTimedActionCheat) localPlayer.setTimedActionInstantCheat(this.isTimedActionCheat);
-            if(localPlayer.isZombiesDontAttack() != this.isZombieDontAttack) localPlayer.setZombiesDontAttack(this.isZombieDontAttack);
-            if(localPlayer.isWearingNightVisionGoggles() != this.isEnableNightVision) localPlayer.setWearingNightVisionGoggles(this.isEnableNightVision);
-        }
+        if(this.isUnlimitedEndurance) localPlayer.getStats().setEndurance(1.0f);
+        if(this.isDisableFatigue) localPlayer.getStats().setFatigue(0.0f);
+        if(this.isDisableHunger) localPlayer.getStats().setHunger(0.0f);
+        if(this.isDisableThirst) localPlayer.getStats().setThirst(0.0f);
+        if(this.isDisableDrunkenness) localPlayer.getStats().setDrunkenness(0.0f);
+        if(this.isDisableAnger) localPlayer.getStats().setAnger(0.0f);
+        if(this.isDisableFear) localPlayer.getStats().setFear(0.0f);
+        if(this.isDisablePain) localPlayer.getStats().setPain(0.0f);
+        if(this.isDisablePanic) localPlayer.getStats().setPanic(0.0f);
+        if(this.isDisableMorale) localPlayer.getStats().setMorale(1.0f);
+        if(this.isDisableStress) localPlayer.getStats().setStress(0.0f);
+        if(this.isDisableSickness) localPlayer.getStats().setSickness(0.0f);
+        if(this.isDisableStressFromCigarettes) localPlayer.getStats().setStressFromCigarettes(0.0f);
+        if(this.isDisableSanity) localPlayer.getStats().setSanity(1.0f);
+        if(this.isDisableBoredomLevel) localPlayer.getBodyDamage().setBoredomLevel(0.0f);
+        if(this.isDisableUnhappynessLevel) localPlayer.getBodyDamage().setUnhappynessLevel(0.0f);
+        if(this.isDisableWetness) localPlayer.getBodyDamage().setWetness(0.0f);
+        if(this.isDisableInfectionLevel) localPlayer.getBodyDamage().setInfectionLevel(0.0f);
+        if(this.isDisableFakeInfectionLevel) localPlayer.getBodyDamage().setFakeInfectionLevel(0.0f);
+        if(this.isDisableFire) localPlayer.setOnFire(false);
+        if(this.isOptimalCalories) localPlayer.getNutrition().setCalories(1200.0f);
+        if(this.isOptimalWeight) localPlayer.getNutrition().setWeight(80.0);
+        if(localPlayer.isGodMod() != this.isEnableGodMode) localPlayer.setGodMod(this.isEnableGodMode);
+        if(localPlayer.isNoClip() != this.isEnableNoclip) localPlayer.setNoClip(this.isEnableNoclip);
+        if(localPlayer.isInvisible() != this.isEnableInvisible) localPlayer.setInvisible(this.isEnableInvisible);
+        if(localPlayer.isTimedActionInstantCheat() != this.isTimedActionCheat) localPlayer.setTimedActionInstantCheat(this.isTimedActionCheat);
+        if(localPlayer.isZombiesDontAttack() != this.isZombieDontAttack) localPlayer.setZombiesDontAttack(this.isZombieDontAttack);
+        if(localPlayer.isWearingNightVisionGoggles() != this.isEnableNightVision) localPlayer.setWearingNightVisionGoggles(this.isEnableNightVision);
     }
 
     private void bypassDebugMode()
