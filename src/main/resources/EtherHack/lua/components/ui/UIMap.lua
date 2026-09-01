@@ -226,6 +226,23 @@ function UIMap:render()
 		end
 	end
 
+	--Items rendering
+	if isMapDrawItems() then
+		local items = getInventoryItem():getWorldItem()
+		for i=1, items:size() do
+			local item = items.get(i-1)
+			local x = self.mapAPI:worldToUIX(item:getX(), item:getY());
+			local y = self.mapAPI:worldToUIY(item:getX(), item:getY());
+
+			local size = 125 / self.mapAPI:getWorldScale()
+			size = clamp(size, 2, 5)
+
+			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.itemColor.a, self.itemColor.r, self.itemColor.g, self.itemColor.b);
+			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+		end
+	end
+	
+
 	self:clearStencilRect()
     self:resumeStencil()
 end
