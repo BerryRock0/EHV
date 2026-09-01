@@ -146,103 +146,6 @@ function UIMap:render()
 		end
 	end
 
-	--Survivors rendering
-	if isMapDrawSurvivors() then
-		local survivors = getCell():getSurvivorList()
-		for i=1, survivors:size() do
-			local survivor = survivors.get(i-1)
-			local x = self.mapAPI:worldToUIX(survivor:getX(), survivor:getY());
-			local y = self.mapAPI:worldToUIY(survivor:getX(), survivor:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.survivorColor.a, self.survivorColor.r, self.survivorColor.g, self.survivorColor.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		end
-	end
-
-	--Remote survivors rendering
-	if isMapDrawRemoteSurvivors() then
-		local remoteSurvivors = getCell():getRemoteSurvivorList()
-		for i=1, remoteSurvivors:size() do
-			local remoteSurvivor = remoteSurvivors.get(i-1)
-			local x = self.mapAPI:worldToUIX(remoteSurvivor:getX(), remoteSurvivor:getY());
-			local y = self.mapAPI:worldToUIY(remoteSurvivor:getX(), remoteSurvivor:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.remoteSurvivorColor.a, self.remoteSurvivorColor.r, self.remoteSurvivorColor.g, self.remoteSurvivorColor.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		end
-	end	
-
-	--Pushables rendering
-	if isMapDrawPushables() then
-		local pushables = getCell():getPushableObjectList()
-		for i=1, pushables:size() do
-			local pushable = pushables.get(i-1)
-			local x = self.mapAPI:worldToUIX(pushable:getX(), pushable:getY());
-			local y = self.mapAPI:worldToUIY(pushable:getX(), pushable:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.pushableColor.a, self.pushableColor.r, self.pushableColor.g, self.pushableColor.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		end
-	end
-
-	--Buildings rendering
-	if isMapDrawBuildings() then
-		local buildings = getCell():getBuildingList()
-		for i=1, buildings:size() do
-			local building = buildings.get(i-1)
-			local x = self.mapAPI:worldToUIX(building:getX(), building:getY());
-			local y = self.mapAPI:worldToUIY(building:getX(), building:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.Color.a, self.Color.r, self.Color.g, self.Color.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		end
-	end
-
-	--Rooms rendering
-	if isMapDrawRooms() then
-		local rooms = getCell():getRoomList()
-		for i=1, rooms:size() do
-			local room = rooms.get(i-1)
-			local x = self.mapAPI:worldToUIX(room:getX(), room:getY());
-			local y = self.mapAPI:worldToUIY(room:getX(), room:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.roomColor.a, self.roomColor.r, self.roomColor.g, self.roomColor.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		end
-	end
-
-	--Items rendering
-	if isMapDrawItems() then
-		local items = getInventoryItem():getWorldItem()
-		for i=1, items:size() do
-			local item = items.get(i-1)
-			local x = self.mapAPI:worldToUIX(item:getX(), item:getY());
-			local y = self.mapAPI:worldToUIY(item:getX(), item:getY());
-
-			local size = 125 / self.mapAPI:getWorldScale()
-			size = clamp(size, 2, 5)
-
-			self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.itemColor.a, self.itemColor.r, self.itemColor.g, self.itemColor.b);
-			self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
-		end
-	end
-	
-
 	self:clearStencilRect()
     self:resumeStencil()
 end
@@ -367,13 +270,6 @@ function UIMap:new(x, y, width, height)
 	uiTableData.playerColor = {r = getPlayerUIColor():getR(), g = getPlayerUIColor():getG(), b = getPlayerUIColor():getB(), a = 1.0}
 	uiTableData.vehicleColor = {r = getVehicleUIColor():getR(), g = getVehicleUIColor():getG(), b = getVehicleUIColor():getB(), a = 1.0}
 	uiTableData.zombieColor = {r = getZombieUIColor():getR(), g = getZombieUIColor():getG(), b = getZombieUIColor():getB(), a = 1.0}
-	uiTableData.roomColor = {r = getRoomUIColor():getR(), g = getRoomUIColor():getG(), b = getRoomUIColor():getB(), a = 1.0}
-	uiTableData.buildingColor = {r = getBuildingUIColor():getR(), g = getBuildingUIColor():getG(), b = getBuildingUIColor():getB(), a = 1.0}
-	uiTableData.pushableColor = {r = getPushableUIColor():getR(), g = getPushableUIColor():getG(), b = getPushableUIColor():getB(), a = 1.0}
-	uiTableData.worldItemColor = {r = getWorldItemUIColor():getR(), g = getWorldItemUIColor():getG(), b = getWorldItemUIColor():getB(), a = 1.0}
-	uiTableData.itemColor = {r = getItemUIColor():getR(), g = getItemUIColor():getG(), b = getItemUIColor():getB(), a = 1.0}
-	uiTableData.survivorColor = {r = getSurvivorUIColor():getR(), g = getSurvivorUIColor():getG(), b = getSurvivorUIColor():getB(), a = 1.0}
-	uiTableData.remoteSurvivorColor = {r = getRemoteSurvivorUIColor():getR(), g = getRemoteSurvivorUIColor():getG(), b = getRemoteSurvivorUIColor():getB(), a = 1.0}
 	uiTableData.centerByPlayer = false;
 
 	return uiTableData
