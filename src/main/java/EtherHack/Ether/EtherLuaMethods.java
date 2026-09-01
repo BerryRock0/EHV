@@ -245,27 +245,6 @@ public final class EtherLuaMethods {
     @LuaMethod(name="isMapDrawLocalPlayer",global=true)public static boolean isMapDrawLocalPlayer(){return EtherMain.getInstance().etherAPI.isMapDrawLocalPlayer;}
     @LuaMethod(name="toggleMapDrawLocalPlayer",global=true)public static void toggleMapDrawLocalPlayer(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawLocalPlayer = isToggled;}
     
-    @LuaMethod(name="isMapDrawSurvivors",global=true)public static boolean isMapDrawSurvivors(){return EtherMain.getInstance().etherAPI.isMapDrawSurvivors;}
-    @LuaMethod(name="toggleMapDrawSurvivors",global=true)public static void toggleMapDrawSurvivors(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawSurvivors = isToggled;}
-    
-    @LuaMethod(name="isMapDrawRemoteSurvivors",global=true)public static boolean isMapDrawRemoteSurvivors(){return EtherMain.getInstance().etherAPI.isMapDrawRemoteSurvivors;}
-    @LuaMethod(name="toggleMapDrawRemoteSurvivors",global=true)public static void toggleMapDrawRemoteSurvivors(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawRemoteSurvivors = isToggled;}
-    
-    @LuaMethod(name="isMapDrawPushables",global=true)public static boolean isMapDrawPushables(){return EtherMain.getInstance().etherAPI.isMapDrawPushables;}
-    @LuaMethod(name="toggleMapDrawPushables",global=true)public static void toggleMapDrawPushables(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawPushables = isToggled;}
-    
-    @LuaMethod(name="isMapDrawBuildings",global=true)public static boolean isMapDrawBuildings(){return EtherMain.getInstance().etherAPI.isMapDrawBuildings;}
-    @LuaMethod(name="toggleMapDrawBuildings",global=true)public static void toggleMapDraw(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawBuildings = isToggled;}
-    
-    @LuaMethod(name="isMapDrawItems",global=true)public static boolean isMapDrawItems(){return EtherMain.getInstance().etherAPI.isMapDrawItems;}
-    @LuaMethod(name="toggleMapDrawItems",global=true)public static void toggleMapDrawItems(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawItems = isToggled;}
-    
-    @LuaMethod(name="isMapDrawWorldItems",global=true)public static boolean isMapDrawWorldItems(){return EtherMain.getInstance().etherAPI.isMapDrawWorldItems;}
-    @LuaMethod(name="toggleMapDrawWorldItems",global=true)public static void toggleMapDrawWorldItems(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawWorldItems = isToggled;}
-
-    @LuaMethod(name="isMapDrawRooms",global=true)public static boolean isMapDrawRooms(){return EtherMain.getInstance().etherAPI.isMapDrawRooms;}
-    @LuaMethod(name="toggleMapDrawRooms",global=true)public static void toggleMapDrawRooms(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawRooms = isToggled;}
-    
     @LuaMethod(name="isBypassDebugMode",global=true)public static boolean isBypassDebugMode(){return EtherMain.getInstance().etherAPI.isBypassDebugMode;}
     @LuaMethod(name="toggleBypassDebugMode",global=true)public static void toggleBypassDebugMode(boolean isToggled){EtherMain.getInstance().etherAPI.isBypassDebugMode = isToggled;}
     
