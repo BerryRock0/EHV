@@ -111,10 +111,10 @@ function EtherVisualsPanel:createChildren()
     self:addCheckBox(getTranslate("UI_VisualsPanel_360Vision"), function(isChecked) toggleVisualEnable360Vision(isChecked); end, isVisualEnable360Vision());
 	self:addCheckBox(getTranslate("UI_VisualsPanel_NightVision"), function(isChecked) toggleNightVision(isChecked); end, isEnableNightVision());
 	
-	self:addCheckBox(getTranslate("UI_Map_DrawZombies"), function (isChecked) toggleMapDrawZombies(isChecked); end, isMapDrawZombies())
-    self:addCheckBox(getTranslate("UI_Map_DrawOtherPlayers"), function (isChecked) toggleMapDrawAllPlayers(isChecked); end, isMapDrawAllPlayers())
-    self:addCheckBox(getTranslate("UI_Map_DrawLocalPlayer"), function (isChecked) toggleMapDrawLocalPlayer(isChecked); end, isMapDrawLocalPlayer())
-    self:addCheckBox(getTranslate("UI_Map_DrawVehicles"), function (isChecked) toggleMapDrawVehicles(isChecked); end, isMapDrawVehicles())
+	self:addCheckBox(getTranslate("UI_Map_DrawZombies"), function (isChecked) toggleMapDrawZombies(isChecked); end, isMapDrawZombies());
+    self:addCheckBox(getTranslate("UI_Map_DrawOtherPlayers"), function (isChecked) toggleMapDrawAllPlayers(isChecked); end, isMapDrawAllPlayers());
+    self:addCheckBox(getTranslate("UI_Map_DrawLocalPlayer"), function (isChecked) toggleMapDrawLocalPlayer(isChecked); end, isMapDrawLocalPlayer());
+    self:addCheckBox(getTranslate("UI_Map_DrawVehicles"), function (isChecked) toggleMapDrawVehicles(isChecked); end, isMapDrawVehicles());
 end
 --*********************************************************
 --* Создание нового экземпляра меню
