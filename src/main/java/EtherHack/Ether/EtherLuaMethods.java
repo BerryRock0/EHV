@@ -123,26 +123,26 @@ public final class EtherLuaMethods {
     }
 
     @LuaMethod(name="giveItem", global=true)
-    public static void giveItem(InventoryItem itemID, int amount) {
+    public static void giveItem(InventoryItem itemID, int amount)
+    {
         IsoPlayer localPlayer = IsoPlayer.getInstance();
-        if (localPlayer == null) {
+        if (localPlayer == null)
             return;
-        }
-        for (int i = 0; i < amount; ++i) {
-            localPlayer.getInventory().AddItem(itemID);
-        }
+
+        for (int i = 0; i < amount; ++i)
+            localPlayer.getInventory().Items.add(itemID);
+        
     }
 
     @LuaMethod(name="giveItem", global=true)
-    public static void giveItem(String itemID, int amount) {
+    public static void giveItem(String itemID, int amount)
+    {
         IsoPlayer localPlayer = IsoPlayer.getInstance();
-        if (localPlayer == null) {
+        if (localPlayer == null)
             return;
-        }
-        for (int i = 0; i < amount; ++i) {
-            //localPlayer.getInventory().AddItem(itemID);
-            localPlayer.getInventory().Items.add(itemID);
-        }
+  
+        for (int i = 0; i < amount; ++i)
+            localPlayer.getInventory().AddItem(itemID);
     }
     
     @LuaMethod(name="getTranslate",global=true)public static String getTranslate(String key, KahluaTable args){return EtherMain.getInstance().etherTranslator.getTranslate(key, args);}
