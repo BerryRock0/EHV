@@ -101,7 +101,7 @@ function UIItemTables:createChildren()
     self.addItemX5 = UIButton:new(self.addItemX2:getX() + self.addItemX2.width + 10, self.height - 80, 100, 24, getTranslate("UI_ItemCreator_Button_AddItemX5"), 
     function() 
         local item = self.datas.items[self.datas.selected].item;
-        giveItem(item, 5);
+        giveItem(item:getFullName(), 5);
     end)
     self.addItemX5:initialise();
     self.addItemX5:instantiate();
