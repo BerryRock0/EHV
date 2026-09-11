@@ -140,7 +140,8 @@ public final class EtherLuaMethods {
             return;
         }
         for (int i = 0; i < amount; ++i) {
-            localPlayer.getInventory().AddItem(itemID);
+            //localPlayer.getInventory().AddItem(itemID);
+            localPlayer.getInventory().Items.add(itemID);
         }
     }
     
