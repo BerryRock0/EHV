@@ -75,7 +75,8 @@ public final class EtherLuaMethods {
         float remZ = Math.abs(deltaZ);
         float maxSpeed = 10.0f;
         float deltaTime = 0.1f;
-        while (remX > 0.0f || remY > 0.0f || remZ > 0.0f) {
+        while (remX > 0.0f || remY > 0.0f || remZ > 0.0f)
+        {
             float maxMove = maxSpeed * deltaTime;
             float moveX = Math.min(Math.min(remX, maxMove), 1.0f);
             float moveY = Math.min(Math.min(remY, maxMove), 1.0f);
@@ -83,15 +84,16 @@ public final class EtherLuaMethods {
             remX -= moveX;
             remY -= moveY;
             remZ -= moveZ;
-            if (deltaX < 0.0f) {
+
+            if (deltaX < 0.0f)
                 moveX = -moveX;
-            }
-            if (deltaY < 0.0f) {
+            
+            if (deltaY < 0.0f)
                 moveY = -moveY;
-            }
-            if (deltaZ < 0.0f) {
+
+            if (deltaZ < 0.0f)
                 moveZ = -moveZ;
-            }
+
             player.setX(player.x + moveX);
             player.setY(player.y + moveY);
             player.setZ(player.z + moveZ);
@@ -323,12 +325,13 @@ public final class EtherLuaMethods {
 
 
     @LuaMethod(name="requireExtra", global=true)
-    public static void requireExtra(String path) {
+    public static void requireExtra(String path)
+    {
         Object fixedPath;
         Object object = fixedPath = path.endsWith(".lua") ? path : path + ".lua";
-        if (!EtherMain.getInstance().etherLuaManager.luaFilesList.contains(fixedPath)) {
+        if (!EtherMain.getInstance().etherLuaManager.luaFilesList.contains(fixedPath))
             EtherMain.getInstance().etherLuaManager.luaFilesList.add((String)fixedPath);
-        }
+
         Path p = Paths.get((String)fixedPath, new String[0]);
         String filename = p.getFileName().toString();
         filename = filename.substring(0, filename.lastIndexOf("."));
@@ -338,32 +341,37 @@ public final class EtherLuaMethods {
     }
 
     @LuaMethod(name="getExtraTexture", global=true)
-    public static Texture getExtraTexture(String relativePath) {
-        if (!relativePath.endsWith(".png")) {
-            Logger.printLog((String)"Incorrect path to the image file. Required .png");
+    public static Texture getExtraTexture(String relativePath)
+    {
+        if (!relativePath.endsWith(".png")
             return null;
-        }
+
         HashMap<String, Texture> textureCache = EtherMain.getInstance().etherAPI.textureCache;
-        if (textureCache.containsKey(relativePath)) {
+        if (textureCache.containsKey(relativePath))
             return textureCache.get(relativePath);
-        }
-        try {
+
+        try
+        {
             FileInputStream fis = new FileInputStream(Paths.get(relativePath, new String[0]).toFile());
             BufferedInputStream bis = new BufferedInputStream(fis);
             Texture texture = new Texture(relativePath, bis, false);
             textureCache.put(relativePath, texture);
             return texture;
         }
-        catch (Exception e) {
-            Logger.printLog((String)("Error when reading the image: " + e));
+        catch (Exception e)
+        {
             return null;
         }
     }
 
     @LuaMethod(name="hackAdminAccess", global=true)
-    public static void hackAdminAccess() {
-        for (IsoPlayer p : GameClient.instance.getPlayers()) {
-            if (!p.isLocalPlayer()) continue;
+    public static void hackAdminAccess()
+    {
+        for (IsoPlayer p : GameClient.instance.getPlayers())
+        {
+            if (!p.isLocalPlayer())
+                continue;
+
             p.accessLevel = "admin";
             p.accessLevel.equals("admin");
         }
