@@ -188,18 +188,19 @@ public class EtherAPI
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(config, "isMapDrawZombies", false);
     }
 
-    public EtherAPI() {
+    public EtherAPI()
+    {
         this.initStartupConfig();
-        EventSubscriber.register((Object)this);
+        EventSubscriber.register(this);
     }
 
     @LuaEvents(value={@SubscribeLuaEvent(eventName="OnResetLua"), @SubscribeLuaEvent(eventName="OnMainMenuEnter")})
-    public void loadAPI() {
-        Logger.printLog((String)"Loading EtherAPI...");
-        if (this.exposer != null) {
+    public void loadAPI()
+    {
+        if (this.exposer != null)
             this.exposer.destroy();
-        }
-        this.exposer = new Exposer(LuaManager.converterManager, (Platform)LuaManager.platform, LuaManager.env);
+
+        this.exposer = new Exposer(LuaManager.converterManager, LuaManager.platform, LuaManager.env);
         this.exposer.exposeAPI(this.etherLuaMethods);
     }
 
