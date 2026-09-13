@@ -343,7 +343,7 @@ public final class EtherLuaMethods {
     @LuaMethod(name="getExtraTexture", global=true)
     public static Texture getExtraTexture(String relativePath)
     {
-        if (!relativePath.endsWith(".png")
+        if (!relativePath.endsWith(".png"))
             return null;
 
         HashMap<String, Texture> textureCache = EtherMain.getInstance().etherAPI.textureCache;
