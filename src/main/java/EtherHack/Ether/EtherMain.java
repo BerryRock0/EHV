@@ -11,24 +11,25 @@ public class EtherMain {
     public EtherLuaManager etherLuaManager;
     public EtherAPI etherAPI;
 
-    private EtherMain() {
-    }
+    private EtherMain()
+    {}
 
     public void init() {
         Logger.printLog((String)"Initializing EtherHack...");
-        this.etherTranslator = new EtherTranslator();
-        this.etherTranslator.loadTranslations();
         this.etherAPI = new EtherAPI();
-        this.etherAPI.loadAPI();
         this.etherLuaManager = new EtherLuaManager();
+        this.etherTranslator = new EtherTranslator();
+        this.etherAPI.loadAPI();
         this.etherLuaManager.loadLua();
+        this.etherTranslator.loadTranslations();
         Logger.printLog((String)"Initialization EtherHack was completed!");
     }
 
-    public static EtherMain getInstance() {
-        if (instance == null) {
+    public static EtherMain getInstance()
+    {
+        if (instance == null)
             instance = new EtherMain();
-        }
+
         return instance;
     }
 }
