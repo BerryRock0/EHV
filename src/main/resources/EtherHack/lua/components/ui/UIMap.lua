@@ -146,6 +146,20 @@ function UIMap:render()
 		end
 	end
 
+	--Local item rendering
+	if isMapDrawItem() then
+		local item = self.localPlayer;
+		
+		local x = self.mapAPI:worldToUIX(item:getX(), item:getY());
+		local y = self.mapAPI:worldToUIY(item:getX(), item:getY());
+	
+		local size = 125 / self.mapAPI:getWorldScale()
+		size = clamp(size, 2, 5)
+	
+		self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.itemColor.a, self.itemColor.r, self.itemColor.g, self.itemColor.b);
+		self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+	end
+
 	self:clearStencilRect()
     self:resumeStencil()
 end
@@ -270,6 +284,7 @@ function UIMap:new(x, y, width, height)
 	uiTableData.playerColor = {r = getPlayerUIColor():getR(), g = getPlayerUIColor():getG(), b = getPlayerUIColor():getB(), a = 1.0}
 	uiTableData.vehicleColor = {r = getVehicleUIColor():getR(), g = getVehicleUIColor():getG(), b = getVehicleUIColor():getB(), a = 1.0}
 	uiTableData.zombieColor = {r = getZombieUIColor():getR(), g = getZombieUIColor():getG(), b = getZombieUIColor():getB(), a = 1.0}
+	uiTableData.itemColor = {r = getItemUIColor():getR(), g = getItemUIColor():getG(), b = getItemUIColor():getB(), a = 1.0}
 	uiTableData.centerByPlayer = false;
 
 	return uiTableData
