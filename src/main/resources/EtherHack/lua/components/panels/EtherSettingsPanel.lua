@@ -203,6 +203,19 @@ function EtherSettingsPanel:createChildren()
         picker:addToUIManager();
     end, getZombieUIColor())
 
+	self.zombieColors = self:addColorPickerWithLabel(getTranslate("UI_Settings_ItemColor"), function ()
+        local picker = ISColorPicker:new(getMouseX(), getMouseY())
+        picker:initialise()
+        picker.pickedTarget = self
+        picker.resetFocusTo = self
+        picker:setInitialColor(getItemUIColor());
+        picker.pickedFunc = function (target, color, mouseUp)
+            self.zombieColors.backgroundColor = {r = getItemUIColor():getR(), g = getItemUIColor():getG(), b = getItemUIColor():getB(), a = 1.0};
+            setItemUIColor(color.r, color.g, color.b);
+        end;
+        picker:addToUIManager();
+    end, getItemUIColor())
+
 
     self:addButtonWithLabel(getTranslate("UI_Settings_ResetLuaLabel"), getTranslate("UI_Settings_ResetLuaButton"), function ()
         getCore():ResetLua("default", "Force")
