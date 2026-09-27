@@ -57,9 +57,6 @@ public class EtherAPI
     public Color remoteSurvivorUIColor;
     public Color itemUIColor;
     public Color worldItemUIColor;
-    public Color pushableUIColor;
-    public Color buildingUIColor;
-    public Color roomUIColor;
     public boolean isAlwaysRack;
     public boolean isAlwaysRoundChamber;
     public boolean isAlwaysRepaired;
@@ -115,6 +112,7 @@ public class EtherAPI
     public boolean isMapDrawAllPlayers;
     public boolean isMapDrawVehicles;
     public boolean isMapDrawZombies;
+    public boolean isMapDrawItems;
 
     private void initStartupConfig()
     {
@@ -128,9 +126,6 @@ public class EtherAPI
         this.remoteSurvivorUIColor = ConfigUtils.getColorFromConfig(config, "remoteSurvivorUIColor", new Color(0, 0, 0));
         this.itemUIColor = ConfigUtils.getColorFromConfig(config, "itemUIColor", new Color(0, 0, 0));
         this.worldItemUIColor = ConfigUtils.getColorFromConfig(config, "worldItemUIColor", new Color(0, 0, 0));
-        this.roomUIColor = ConfigUtils.getColorFromConfig(config, "roomUIColor", new Color(0, 0, 0));
-        this.buildingUIColor = ConfigUtils.getColorFromConfig(config, "buildingUIColor", new Color(0, 0, 0));
-        this.pushableUIColor = ConfigUtils.getColorFromConfig(config, "pushableUIColor", new Color(0, 0, 0));
         this.isAlwaysRack = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRack", false);
         this.isAlwaysRoundChamber = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRoundChamber", false);
         this.isAlwaysRepaired = ConfigUtils.getBooleanFromConfig(config, "isAlwaysRepaired", false);
@@ -186,6 +181,7 @@ public class EtherAPI
         this.isMapDrawAllPlayers = ConfigUtils.getBooleanFromConfig(config, "isMapDrawAllPlayers", false);
         this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(config, "isMapDrawVehicles", false);
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(config, "isMapDrawZombies", false);
+        this.isMapDrawItems = ConfigUtils.getBooleanFromConfig(config, "isMapDrawItems", false);
     }
 
     public EtherAPI()
