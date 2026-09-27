@@ -148,9 +148,10 @@ function UIMap:render()
 
 	--Local item rendering
 	if isMapDrawItems() then
+		local square = getSquare(x,y,z)
 		local objects = square:getObjects()
 		if objects and objects:size() > 0 then
-		for i=0, object:size() -1 do
+		for i=0, object:size() - 1 do
 			local item = objects:get(i):getItem();
 				
 		local x = self.mapAPI:worldToUIX(item:getX(), item:getY());
