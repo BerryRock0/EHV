@@ -147,7 +147,7 @@ function UIMap:render()
 	end
 
 	--Local item rendering
-	if isMapDrawItem() then
+	if isMapDrawItems() then
 		local objects = square:getObjects()
 		if objects and objects:size() > 0 then
 		for i=0, object:size() -1 do
