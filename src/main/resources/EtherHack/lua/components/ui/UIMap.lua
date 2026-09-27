@@ -147,22 +147,43 @@ function UIMap:render()
 	end
 
 	--Local item rendering
-	if isMapDrawItems() then
-		local square = getSquare(x,y,z)
-		local objects = square:getObjects()
-		if objects and objects:size() > 0 then
-		for i=0, object:size() - 1 do
-			local item = objects:get(i):getItem();
-				
-		local x = self.mapAPI:worldToUIX(item:getX(), item:getY());
-		local y = self.mapAPI:worldToUIY(item:getX(), item:getY());
-	
-		local size = 125 / self.mapAPI:getWorldScale()
-		size = clamp(size, 2, 5)
-	
-		self:drawRect(x - size, y - size, size * 2 - 1, size * 2 - 1, self.itemColor.a, self.itemColor.r, self.itemColor.g, self.itemColor.b);
-		self:drawRectBorder(x - size, y - size, size * 2, size * 2, 1, 0, 0, 0);
+if isMapDrawItems() then
+	local player = self.localPlayer;
+	if player then
+		local px = math.floor(player:getX());
+		local py = math.floor(player:getY());
+		local pz = math.floor(player:getZ());
+		local size = clamp(math.floor(125 / self.mapAPI:getWorldScale()), 2, 5);
+		local w, h, d = 61, 61, 5;
+		local SKIP = { Junk = true, Paper = true, Literature = true, Magazine = true, Trash = true, Metal = true };
+
+		for i = 0, w * h * d - 1 do
+			local z = pz - 2 + math.floor(i / (w * h));
+			local r = i % (w * h);
+			local y = py - 30 + math.floor(r / w);
+			local x = px - 30 + r % w;
+
+			local square = getSquare(x, y, z);
+			if square then
+				local objects = square:getWorldObjects();
+				if objects and objects:size() > 0 then
+					for j = 0, objects:size() - 1 do
+						local object = objects:get(j);
+						if instanceof(object, "IsoWorldInventoryObject") then -- только вещи
+							local item = object:getItem();
+							if item and not SKIP[item:getCategory()] then
+								local ux = self.mapAPI:worldToUIX(object:getX(), object:getY());
+								local uy = self.mapAPI:worldToUIY(object:getX(), object:getY());
+								self:drawRect(ux - size, uy - size, size * 2 - 1, size * 2 - 1, self.itemColor.a, self.itemColor.r, self.itemColor.g, self.itemColor.b);
+								self:drawRectBorder(ux - size, uy - size, size * 2, size * 2, 1, 0, 0, 0);
+							end
+						end
+					end
+				end
+			end
+		end
 	end
+end
 
 	self:clearStencilRect()
     self:resumeStencil()
