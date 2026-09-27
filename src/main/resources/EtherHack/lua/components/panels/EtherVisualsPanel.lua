@@ -115,6 +115,7 @@ function EtherVisualsPanel:createChildren()
     self:addCheckBox(getTranslate("UI_Map_DrawOtherPlayers"), function (isChecked) toggleMapDrawAllPlayers(isChecked); end, isMapDrawAllPlayers());
     self:addCheckBox(getTranslate("UI_Map_DrawLocalPlayer"), function (isChecked) toggleMapDrawLocalPlayer(isChecked); end, isMapDrawLocalPlayer());
     self:addCheckBox(getTranslate("UI_Map_DrawVehicles"), function (isChecked) toggleMapDrawVehicles(isChecked); end, isMapDrawVehicles());
+	self:addCheckBox(getTranslate("UI_Map_DrawItems"), function (isChecked) toggleMapDrawItems(isChecked); end, isMapDrawItems());
 end
 --*********************************************************
 --* Создание нового экземпляра меню
