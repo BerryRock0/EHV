@@ -46,18 +46,6 @@ public final class EtherLuaMethods {
 
     @LuaMethod(name="getItemUIColor",global=true)public static Color getItemUIColor(){return EtherMain.getInstance().etherAPI.itemUIColor;}
     @LuaMethod(name="setItemUIColor",global=true)public static void setItemUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.itemUIColor = new Color(r, g, b);}
-
-    @LuaMethod(name="getWorldItemUIColor",global=true)public static Color getWorldItemUIColor(){return EtherMain.getInstance().etherAPI.worldItemUIColor;}
-    @LuaMethod(name="setWorldItemUIColor",global=true)public static void setWorldItemUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.worldItemUIColor = new Color(r, g, b);}
-
-    @LuaMethod(name="getRoomUIColor",global=true)public static Color getRoomUIColor(){return EtherMain.getInstance().etherAPI.roomUIColor;}
-    @LuaMethod(name="setRoomUIColor",global=true)public static void setRoomUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.roomUIColor = new Color(r, g, b);}
-    
-    @LuaMethod(name="getBuildingUIColor",global=true)public static Color getBuildingUIColor(){return EtherMain.getInstance().etherAPI.buildingUIColor;}
-    @LuaMethod(name="setBuildingUIColor",global=true)public static void setBuildingUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.buildingUIColor = new Color(r, g, b);}
-    
-    @LuaMethod(name="getPushableUIColor",global=true)public static Color getPushableUIColor(){return EtherMain.getInstance().etherAPI.pushableUIColor;}
-    @LuaMethod(name="setPushableUIColor",global=true)public static void setPushableUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.pushableUIColor = new Color(r, g, b);}
     
     @LuaMethod(name="getAccentUIColor",global=true)public static Color getAccentUIColor(){return EtherMain.getInstance().etherAPI.mainUIAccentColor;}
     @LuaMethod(name="setAccentUIColor",global=true)public static void setAccentUIColor(float r, float g, float b){EtherMain.getInstance().etherAPI.mainUIAccentColor = new Color(r, g, b);}
@@ -235,7 +223,10 @@ public final class EtherLuaMethods {
 
     @LuaMethod(name="isVisualEnable360Vision", global=true)public static boolean isVisualEnable360Vision(){return EtherMain.getInstance().etherAPI.isVisualEnable360Vision;}
     @LuaMethod(name="toggleVisualEnable360Vision", global=true)public static void toggleVisualEnable360Vision(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualEnable360Vision = isToggled;}
-    
+
+    @LuaMethod(name="isMapDrawItems",global=true)public static boolean isMapDrawItems(){return EtherMain.getInstance().etherAPI.isMapDrawItems;}
+    @LuaMethod(name="toggleMapDrawItems",global=true)public static void toggleMapDrawItems(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawItems = isToggled;}
+
     @LuaMethod(name="isMapDrawZombies",global=true)public static boolean isMapDrawZombies(){return EtherMain.getInstance().etherAPI.isMapDrawZombies;}
     @LuaMethod(name="toggleMapDrawZombies",global=true)public static void toggleMapDrawZombies(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawZombies = isToggled;}
     
