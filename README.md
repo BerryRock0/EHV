@@ -1,14 +1,14 @@
-<h1 align="center">Project-Zomboid-EtherHack</h1>
+<h1 align="center">Project-Zomboid-Ether</h1>
 
-This is a cheat written in Java(API) and LUA(GUI) for Project Zomboid. It is aimed at providing the game with additional functionality that allows users to get some benefits. Please use responsibly and understand the consequences that may arise as a result of improper use.
-The performance of the cheat was tested on the latest version of the game `41.78.16 (Steam)` (July 09, 2023).
+This is a utility client written in Java(API) and LUA(GUI) for Project Zomboid. It is aimed at providing the game with additional functionality that allows users to get some benefits. Please use responsibly and understand the consequences that may arise as a result of improper use.
+The performance of the client was tested on the latest version of the game `41.78.16 (Steam)` (July 09, 2023).
 
-You can watch the cheat [installation video](https://www.youtube.com/watch?v=Olx7O3HyeZc) and see its main functions in action.
+You can watch the client [installation video](https://www.youtube.com/watch?v=Olx7O3HyeZc) and see its main functions in action.
 
 Also, if desired, you can provide [support <3]
 
 ## Table of Contents
-- [Cheat functionality](#cheat-functionality)
+- [Client functionality](#client-functionality)
 - [Demo](#demo)
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
@@ -21,7 +21,7 @@ Also, if desired, you can provide [support <3]
 - [License](#license)
 - [Contact](#contact)
 
-## Cheat functionality
+## Client functionality
 
 | Function                   |  Working in multiplayer  | Working in a co-op  | Description                                                                                                                                                                                                                                                     |
 |----------------------------|:------------------------:|:-------------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -43,7 +43,7 @@ Also, if desired, you can provide [support <3]
 | Get Admin Access           |          -/+(*)          |          +          | Obtaining administrator rights on the server                                                                                                                                                                                                                    |
 | Open Admin Menu            |          -/+(*)          |          +          | Opens the admin window                                                                                                                                                                                                                                          |
 
-(*) - These functions work in multiplayer, provided that some types of anti-cheats are disabled, otherwise it will kick. As a rule, for servers with mods, some types are disabled, for example, [type 12](https://www.unknowncheats.me/forum/other-mmorpg-and-strategy/522818-project-zomboid-anti-cheat-types.html), but for full operation, [type 8](https://www.unknowncheats.me/forum/other-mmorpg-and-strategy/522818-project-zomboid-anti-cheat-types.html) is required to be disabled
+(*) - These functions work in multiplayer, provided that some types of anti-cheats are disabled, otherwise it will kick. As a rule, for servers with mods, some types are disabled, for example, but for full operation, is required to be disabled
 
 (**) - It only works when creating a character from the main menu, that is, points will not be added to the menu after death. Solution: after death, log out of the server and connect again.
 
@@ -74,7 +74,7 @@ This tool requires:
 6. Open the console in the root folder and run the following command: 
 
 ```
-java -jar ./EtherHack-{yourVersion}.jar --install
+java -jar ./Ether-{yourVersion}.jar --install
 ```
 
 `{yourVersion}` - Specify your version of the cheat
@@ -82,25 +82,25 @@ java -jar ./EtherHack-{yourVersion}.jar --install
 ### Uninstallation
 Open the console in the root folder and run the following command:
 ```
-java -jar ./EtherHack-{yourVersion}.jar --uninstall
+java -jar ./Ether-{yourVersion}.jar --uninstall
 ```
 
-`{yourVersion}` - Specify your version of the cheat
+`{yourVersion}` - Specify your version of the client
 
 ## Usage
 
-After successfully installing the cheat, you need to log in to the game. When loading, the cheat logo will appear in front of the main logo, in the game itself (menu and in the game session) in the lower left corner there will be information about the cheat. The name of the game window will also change.
+After successfully installing the client, you need to log in to the game. When loading, the cheat logo will appear in front of the main logo, in the game itself (menu and in the game session) in the lower left corner there will be information about the client. The name of the game window will also change.
 
-To open the cheat menu, press `Insert`
+To open the client menu, press `Insert`
 
-To reload the LuaGUI, press `Home`, but first make sure that all the cheat windows are closed, otherwise an error will appear.
+To reload the LuaGUI, press `Home`, but first make sure that all the client windows are closed, otherwise an error will appear.
 
 ## For developer
 If you are a developer and want to expand the functionality, you can do it as follows:
 
 In the project folder located on the path `src/main/resources/EtherHack/lua` there is a single file responsible for rendering the entire user interface of the cheat. You can edit it using examples from game files.
 
-Also, Eterhack provides the ability to add custom methods from Java to lua, for this in the `src/main/java/EtherHack/Ether/EtherAPI.java` needs to find the `public static class GlobalEtherAPI` and add it according to the available examples:
+Also, Ether provides the ability to add custom methods from Java to lua, for this in the `src/main/java/Ether/Ether/EtherAPI.java` needs to find the `public static class GlobalEtherAPI` and add it according to the available examples:
 
 ```java
 @LuaMethod(
@@ -111,7 +111,7 @@ public static String yourMethodName() {
     return "Test!";
 }
 ```
-After adding and reassembling the cheat, you will be able to call this method in lua:
+After adding and reassembling the client, you will be able to call this method in lua:
 
 ```lua
 print(yourMethodName());
