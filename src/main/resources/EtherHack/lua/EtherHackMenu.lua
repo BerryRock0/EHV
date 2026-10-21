@@ -28,7 +28,8 @@ local etherModules = {
     "EtherHack/lua/components/panels/EtherVisualsPanel.lua",
     "EtherHack/lua/components/panels/EtherMapPanel.lua",
     "EtherHack/lua/components/panels/EtherExploitPanel.lua",
-    "EtherHack/lua/components/panels/EtherSettingsPanel.lua"
+    "EtherHack/lua/components/panels/EtherSettingsPanel.lua",
+    "EtherHack/lua/components/panels/EtherPerformancePanel.lua"
 }
 
 for _, module in ipairs(etherModules) do
@@ -75,6 +76,7 @@ function EtherMain:createChildren()
     self.buttonsPanel:addButton("EtherHack/media/ui/teleport.png", EtherMapPanel);
     self.buttonsPanel:addButton("EtherHack/media/ui/exploit.png", EtherExploitPanel);
     self.buttonsPanel:addButton("EtherHack/media/ui/settings.png", EtherSettingsPanel);
+    self.buttonsPanel:addButton("EtherHack/media/ui/performance.png", EtherPerformancePanel);
 
     self.buttonsPanel:openPanel(EtherMain.currentTabID);
 end

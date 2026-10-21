@@ -10,6 +10,19 @@ public class ConfigUtils {
         return valueStr != null ? Boolean.parseBoolean(valueStr) : defaultValue;
     }
 
+    public static float getFloatFromConfig(Properties config, String key, float defaultValue) {
+        String valueStr = config.getProperty(key);
+        if (valueStr == null) {
+            return defaultValue;
+        }
+        try {
+            return Float.parseFloat(valueStr);
+        }
+        catch (NumberFormatException exception) {
+            return defaultValue;
+        }
+    }
+
     public static Color getColorFromConfig(Properties config, String key, Color defaultColor) {
         String colorStr = config.getProperty(key);
         return colorStr != null ? ColorUtils.stringToColor(colorStr) : defaultColor;

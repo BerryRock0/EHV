@@ -116,6 +116,11 @@ function EtherVisualsPanel:createChildren()
     self:addCheckBox(getTranslate("UI_Map_DrawLocalPlayer"), function (isChecked) toggleMapDrawLocalPlayer(isChecked); end, isMapDrawLocalPlayer());
     self:addCheckBox(getTranslate("UI_Map_DrawVehicles"), function (isChecked) toggleMapDrawVehicles(isChecked); end, isMapDrawVehicles());
 	self:addCheckBox(getTranslate("UI_Map_DrawItems"), function (isChecked) toggleMapDrawItems(isChecked); end, isMapDrawItems());
+
+    self:addCheckBox(getTranslate("UI_VisualsPanel_DrawContainers"), function (isChecked) toggleVisualDrawContainers(isChecked); end, isVisualDrawContainers());
+    self:addSliderWithLabel(getTranslate("UI_VisualsPanel_DrawContainersRadius"), getVisualDrawContainersRadius(), 5, 30, function (value)
+        setVisualDrawContainersRadius(value);
+    end);
 end
 --*********************************************************
 --* Создание нового экземпляра меню

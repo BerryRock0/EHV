@@ -3,6 +3,7 @@ package EtherHack.Ether;
 import EtherHack.Ether.EtherLuaCompiler;
 import EtherHack.Ether.EtherMain;
 import EtherHack.utils.Logger;
+import EtherHack.utils.PerformanceUtils;
 import EtherHack.utils.PlayerUtils;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -224,6 +225,12 @@ public final class EtherLuaMethods {
     @LuaMethod(name="isVisualEnable360Vision", global=true)public static boolean isVisualEnable360Vision(){return EtherMain.getInstance().etherAPI.isVisualEnable360Vision;}
     @LuaMethod(name="toggleVisualEnable360Vision", global=true)public static void toggleVisualEnable360Vision(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualEnable360Vision = isToggled;}
 
+    @LuaMethod(name="isVisualDrawContainers",global=true)public static boolean isVisualDrawContainers(){return EtherMain.getInstance().etherAPI.isVisualDrawContainers;}
+    @LuaMethod(name="toggleVisualDrawContainers",global=true)public static void toggleVisualDrawContainers(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualDrawContainers = isToggled;}
+
+    @LuaMethod(name="getVisualDrawContainersRadius",global=true)public static float getVisualDrawContainersRadius(){return EtherMain.getInstance().etherAPI.visualDrawContainersRadius;}
+    @LuaMethod(name="setVisualDrawContainersRadius",global=true)public static void setVisualDrawContainersRadius(float radius){EtherMain.getInstance().etherAPI.visualDrawContainersRadius = Math.max(1.0f, Math.min(50.0f, radius));}
+
     @LuaMethod(name="isMapDrawItems",global=true)public static boolean isMapDrawItems(){return EtherMain.getInstance().etherAPI.isMapDrawItems;}
     @LuaMethod(name="toggleMapDrawItems",global=true)public static void toggleMapDrawItems(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawItems = isToggled;}
 
@@ -241,6 +248,38 @@ public final class EtherLuaMethods {
     
     @LuaMethod(name="isBypassDebugMode",global=true)public static boolean isBypassDebugMode(){return EtherMain.getInstance().etherAPI.isBypassDebugMode;}
     @LuaMethod(name="toggleBypassDebugMode",global=true)public static void toggleBypassDebugMode(boolean isToggled){EtherMain.getInstance().etherAPI.isBypassDebugMode = isToggled;}
+
+    @LuaMethod(name="isPerfUncappedFPS",global=true)public static boolean isPerfUncappedFPS(){return PerformanceUtils.isUncappedFPS();}
+    @LuaMethod(name="togglePerfUncappedFPS",global=true)public static void togglePerfUncappedFPS(boolean isToggled){PerformanceUtils.setUncappedFPS(isToggled);}
+
+    @LuaMethod(name="getPerfLockFPS",global=true)public static int getPerfLockFPS(){return PerformanceUtils.getLockFPS();}
+    @LuaMethod(name="setPerfLockFPS",global=true)public static void setPerfLockFPS(int fps){PerformanceUtils.setLockFPS(fps);}
+
+    @LuaMethod(name="getPerfLightingQuality",global=true)public static int getPerfLightingQuality(){return PerformanceUtils.getLightingQuality();}
+    @LuaMethod(name="setPerfLightingQuality",global=true)public static void setPerfLightingQuality(int quality){PerformanceUtils.setLightingQuality(quality);}
+
+    @LuaMethod(name="getPerfLightingFPS",global=true)public static int getPerfLightingFPS(){return PerformanceUtils.getLightingFPS();}
+    @LuaMethod(name="setPerfLightingFPS",global=true)public static void setPerfLightingFPS(int fps){PerformanceUtils.setLightingFPS(fps);}
+
+    @LuaMethod(name="getPerfWaterQuality",global=true)public static int getPerfWaterQuality(){return PerformanceUtils.getWaterQuality();}
+    @LuaMethod(name="setPerfWaterQuality",global=true)public static void setPerfWaterQuality(int quality){PerformanceUtils.setWaterQuality(quality);}
+
+    @LuaMethod(name="getPerfPuddlesQuality",global=true)public static int getPerfPuddlesQuality(){return PerformanceUtils.getPuddlesQuality();}
+    @LuaMethod(name="setPerfPuddlesQuality",global=true)public static void setPerfPuddlesQuality(int quality){PerformanceUtils.setPuddlesQuality(quality);}
+
+    @LuaMethod(name="getPerfFogQuality",global=true)public static int getPerfFogQuality(){return PerformanceUtils.getFogQuality();}
+    @LuaMethod(name="setPerfFogQuality",global=true)public static void setPerfFogQuality(int quality){PerformanceUtils.setFogQuality(quality);}
+
+    @LuaMethod(name="isPerfReflectionsEnabled",global=true)public static boolean isPerfReflectionsEnabled(){return PerformanceUtils.isReflectionsEnabled();}
+    @LuaMethod(name="togglePerfReflectionsEnabled",global=true)public static void togglePerfReflectionsEnabled(boolean isToggled){PerformanceUtils.setReflectionsEnabled(isToggled);}
+
+    @LuaMethod(name="isPerfStaticSkybox",global=true)public static boolean isPerfStaticSkybox(){return PerformanceUtils.isStaticSkybox();}
+    @LuaMethod(name="togglePerfStaticSkybox",global=true)public static void togglePerfStaticSkybox(boolean isToggled){PerformanceUtils.setStaticSkybox(isToggled);}
+
+    @LuaMethod(name="isPerfAnimationInterpolation",global=true)public static boolean isPerfAnimationInterpolation(){return PerformanceUtils.isAnimationInterpolation();}
+    @LuaMethod(name="togglePerfAnimationInterpolation",global=true)public static void togglePerfAnimationInterpolation(boolean isToggled){PerformanceUtils.setAnimationInterpolation(isToggled);}
+
+    @LuaMethod(name="resetPerformanceSettings",global=true)public static void resetPerformanceSettings(){PerformanceUtils.resetToDefaultSettings();}
     
     @LuaMethod(name="toggleUnlimitedEndurance",global=true)public static void toggleUnlimitedEndurance(boolean isToggled){EtherMain.getInstance().etherAPI.isUnlimitedEndurance = isToggled;}
     @LuaMethod(name="isUnlimitedEndurance",global=true)public static boolean isUnlimitedEndurance(){return EtherMain.getInstance().etherAPI.isUnlimitedEndurance;}
