@@ -97,6 +97,15 @@
 	UI_ReachRadius_Loot = "Open the container",
 	UI_ReachRadius_TakeAll = "Take all the items",
 
+	UI_Containers_Title = "Containers",
+	UI_Containers_OpenButton = "Open",
+	UI_Containers_Container = "Container",
+	UI_Containers_Distance = "Distance",
+	UI_Containers_Item = "Items",
+	UI_Containers_Radius = "Search radius (tiles)",
+	UI_Containers_RefreshButton = "Refresh",
+	UI_Containers_Found = "Containers found",
+
     UI_DeleteItemTitle = "Delete",
     UI_DeleteItemOne = "1 item",
     UI_DeleteItemSelected = "Selected",

@@ -125,6 +125,7 @@ function EtherReachRadius.onFillWorldObjectContextMenu(player, context, worldobj
 	local playerObj = getSpecificPlayer(player)
 	if not playerObj then return end
 
+	print("[EtherHack] Reach radius: context menu for " .. tostring(worldobjects and #worldobjects or 0) .. " object(s)");
 	for _, object in ipairs(worldobjects) do
 		if object and object:getContainer() then
 			local container = object:getContainer();
@@ -158,9 +159,11 @@ function EtherReachRadius.onObjectLeftMouseButtonDown(object, x, y)
 	local playerObj = getPlayer()
 	if not playerObj then return end
 
-	if not EtherReachRadius.isContainerInReach(container, playerObj) then return end
+	local distance = EtherReachRadius.getContainerDistance(container, playerObj)
 
-	print("[EtherHack] Reach radius: opening a container at a distance of " .. tostring(EtherReachRadius.getContainerDistance(container, playerObj)));
+	if not distance or distance <= 1 or distance > getReachRadius() then return end
+
+	print("[EtherHack] Reach radius: opening a container at a distance of " .. tostring(distance));
 	EtherReachRadius.openLootWindow(object, playerObj:getPlayerNum());
 end
 
