@@ -99,23 +99,6 @@ function EtherVisualsPanel:addSliderWithLabel(title, value, minValue, maxValue, 
 end
 
 --*********************************************************
---* Создание заголовка с кнопкой
---*********************************************************
-function EtherVisualsPanel:addButtonWithLabel(title, buttonTitle, func)
-    local yOffset = 10;
-
-    self:addLabel(10, self.yRowPosition + yOffset, title);
-    local button = UIButton:new(self.width - 130 - 20, self.yRowPosition + yOffset + 3, 130, 20, buttonTitle, func)
-    button:initialise();
-    button:instantiate();
-    self:addChild(button);
-
-    self.yRowPosition = self.yRowPosition + 30;
-
-    return button;
-end
-
---*********************************************************
 --* Создание дочерних элементов
 --*********************************************************
 function EtherVisualsPanel:createChildren()
@@ -133,10 +116,6 @@ function EtherVisualsPanel:createChildren()
     self:addCheckBox(getTranslate("UI_Map_DrawLocalPlayer"), function (isChecked) toggleMapDrawLocalPlayer(isChecked); end, isMapDrawLocalPlayer());
     self:addCheckBox(getTranslate("UI_Map_DrawVehicles"), function (isChecked) toggleMapDrawVehicles(isChecked); end, isMapDrawVehicles());
 	self:addCheckBox(getTranslate("UI_Map_DrawItems"), function (isChecked) toggleMapDrawItems(isChecked); end, isMapDrawItems());
-
-    self:addButtonWithLabel(getTranslate("UI_Containers_Title"), getTranslate("UI_Containers_OpenButton"), function()
-        UIContainers.openPanel();
-    end);
 end
 --*********************************************************
 --* Создание нового экземпляра меню

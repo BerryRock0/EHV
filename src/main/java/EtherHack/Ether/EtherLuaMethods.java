@@ -228,11 +228,7 @@ public final class EtherLuaMethods {
     @LuaMethod(name="isEnableReachRadius",global=true)public static boolean isEnableReachRadius(){return EtherMain.getInstance().etherAPI.isEnableReachRadius;}
     @LuaMethod(name="toggleEnableReachRadius",global=true)public static void toggleEnableReachRadius(boolean isToggled){EtherMain.getInstance().etherAPI.isEnableReachRadius = isToggled;}
     @LuaMethod(name="getReachRadius",global=true)public static float getReachRadius(){return EtherMain.getInstance().etherAPI.reachRadius;}
-    @LuaMethod(name="setReachRadius",global=true)public static void setReachRadius(float radius){EtherMain.getInstance().etherAPI.reachRadius = Math.max(1.0f, Math.min(20.0f, radius));}
-
-    @LuaMethod(name="getContainersList",global=true)public static KahluaTable getContainersList(){return EtherMain.getInstance().etherAPI.getContainersList();}
-    @LuaMethod(name="getContainersListRadius",global=true)public static float getContainersListRadius(){return EtherMain.getInstance().etherAPI.containersListRadius;}
-    @LuaMethod(name="setContainersListRadius",global=true)public static void setContainersListRadius(float radius){EtherMain.getInstance().etherAPI.containersListRadius = Math.max(1.0f, Math.min(50.0f, radius));}
+    @LuaMethod(name="setReachRadius",global=true)public static void setReachRadius(float radius){EtherMain.getInstance().etherAPI.reachRadius = Math.max(1.0f, Math.min(EtherAPI.REACH_RADIUS_MAX, radius));}
 
     @LuaMethod(name="isMapDrawItems",global=true)public static boolean isMapDrawItems(){return EtherMain.getInstance().etherAPI.isMapDrawItems;}
     @LuaMethod(name="toggleMapDrawItems",global=true)public static void toggleMapDrawItems(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawItems = isToggled;}

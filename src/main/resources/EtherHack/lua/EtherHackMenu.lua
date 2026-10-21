@@ -13,7 +13,6 @@ local etherModules = {
     "EtherHack/lua/components/ui/UICheckbox.lua",
     "EtherHack/lua/components/ui/UIButton.lua",
     "EtherHack/lua/components/ui/UISlider.lua",
-    "EtherHack/lua/components/ui/UIContainers.lua",
     "EtherHack/lua/components/ui/UIMechanics.lua",
     "EtherHack/lua/components/ui/UIModalAddXP.lua",
     "EtherHack/lua/components/ui/UIMovableMiniMap.lua",
