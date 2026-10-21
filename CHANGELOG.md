@@ -2,6 +2,7 @@
 
 - Added the `Increase the reach radius` feature, it allows opening and looting containers (drawers, crates, safes, cabinets) and taking items from any distance, without walking to them. The radius is unlimited
 - The overrides of the reach radius are re-installed after the game reloads its lua files, so they are not lost when a world is loaded
+- The relevance check of the server is patched, so the contents of a container are sent to the player even when he is far away from it
 - Added the `Performance` panel with settings for improving the game performance (removing the frame rate limit, lighting, water, puddles and fog quality, reflections, skybox and animation interpolation)
 - Added the `Restore the original settings` button to the `Performance` panel
 

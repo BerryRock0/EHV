@@ -19,11 +19,12 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.*;
 
 public class GamePatcher
 {
-    private final String[] patchFiles = new String[]{"GameWindow.class", "inventory/ItemContainer.class", "Lua/LuaEventManager.class", "Lua/LuaManager.class"};
+    private final String[] patchFiles = new String[]{"GameWindow.class", "inventory/ItemContainer.class", "Lua/LuaEventManager.class", "Lua/LuaManager.class", "network/GameServer.class"};
     private final String gameClassFolder = "zombie";
     private final String whiteListPathEtherFiles = "EtherHack";
 
@@ -194,6 +195,52 @@ public class GamePatcher
         });
     }
 
+    /**
+     * Отключает проверку релевантности соединения при запросе предметов контейнера.
+     * Без этого сервер не отправляет содержимое контейнера игроку, который находится далеко,
+     * и окно лута остаётся пустым, пока игрок не подойдёт к контейнеру вплотную.
+     * Тот же патч нужен и для переноса предметов из контейнера.
+     */
+    public void patchGameServer()
+    {
+        Patch.injectIntoClass("zombie/network/GameServer", "receiveRequestItemsForContainer", true, method -> patchRelevanceCheck(method));
+        Patch.injectIntoClass("zombie/network/GameServer", "receiveRemoveInventoryItemFromContainer", true, method -> patchRelevanceCheck(method));
+    }
+
+    /**
+     * Заменяет проверку "релевантен ли игрок этому тайлу" на безусловное выполнение:
+     * результат вызова убирается со стека, а переход по условию больше не выполняется.
+     */
+    private void patchRelevanceCheck(MethodNode method)
+    {
+        int patchedChecks = 0;
+        AbstractInsnNode insn = method.instructions.getFirst();
+
+        while (insn != null)
+        {
+            if (insn instanceof MethodInsnNode)
+            {
+                MethodInsnNode methodInsn = (MethodInsnNode) insn;
+                if (methodInsn.name.equals("RelevantTo") && methodInsn.desc.equals("(FF)Z"))
+                {
+                    AbstractInsnNode next = methodInsn.getNext();
+                    if (next instanceof JumpInsnNode && next.getOpcode() == Opcodes.IFEQ)
+                    {
+                        InsnList replacement = new InsnList();
+                        replacement.add(new InsnNode(Opcodes.POP));
+                        method.instructions.insert(next, replacement);
+                        method.instructions.remove(next);
+                        patchedChecks++;
+                    }
+                }
+            }
+            insn = insn.getNext();
+        }
+
+        if (patchedChecks > 0)
+            Logger.printLog("Patched " + patchedChecks + " relevance check(s) in " + method.name);
+    }
+
     public void patchLuaManager()
     {
         Patch.injectIntoClass("zombie/Lua/LuaManager", "RunLua", true, method -> {
@@ -246,6 +293,7 @@ public class GamePatcher
         this.patchItemContainer();
         this.patchLuaEventManager();
         this.patchLuaManager();
+        this.patchGameServer();
         Patch.saveModifiedClasses();
         Logger.print("The injections were completed!");
         Logger.print("Extracting EtherHack files to the current directory...");
