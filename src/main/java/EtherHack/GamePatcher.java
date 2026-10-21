@@ -238,7 +238,7 @@ public class GamePatcher
         }
 
         if (patchedChecks > 0)
-            Logger.printLog("Patched " + patchedChecks + " relevance check(s) in " + method.name);
+            Logger.print("Patched " + patchedChecks + " relevance check(s) in " + method.name);
     }
 
     public void patchLuaManager()
