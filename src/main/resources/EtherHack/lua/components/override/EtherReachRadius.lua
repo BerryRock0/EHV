@@ -100,8 +100,14 @@ function EtherReachRadius.openLootWindow(object, playerNum)
 	local container = object:getContainer()
 	if not container then return end
 
+	-- Так же, как это делает сама игра: содержимое контейнера создаётся при первом открытии.
+	-- В одиночной игре контейнер наполняет сервер, поэтому запрос по сети ничего не даёт.
 	if not container:isExplored() then
-		container:requestServerItemsForContainer();
+		if not isClient() then
+			ItemPicker.fillContainer(container, playerObj);
+		else
+			container:requestServerItemsForContainer();
+		end
 		container:setExplored(true);
 	end
 
@@ -124,7 +130,11 @@ function EtherReachRadius.takeAllItems(object, player)
 	if not container then return end
 
 	if not container:isExplored() then
-		container:requestServerItemsForContainer();
+		if not isClient() then
+			ItemPicker.fillContainer(container, playerObj);
+		else
+			container:requestServerItemsForContainer();
+		end
 		container:setExplored(true);
 	end
 
