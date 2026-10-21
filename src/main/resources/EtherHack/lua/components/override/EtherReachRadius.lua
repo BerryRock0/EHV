@@ -157,6 +157,8 @@ function EtherReachRadius.onFillWorldObjectContextMenu(player, context, worldobj
 	local playerObj = getSpecificPlayer(player)
 	if not playerObj then return end
 
+	print("[EtherHack] Reach radius: context menu for " .. tostring(worldobjects and #worldobjects or 0) .. " object(s)");
+
 	for _, object in ipairs(worldobjects) do
 		if object and object:getContainer() then
 			local container = object:getContainer();
@@ -207,9 +209,22 @@ end
 
 function EtherReachRadius.onTick()
 	EtherReachRadius.tickCounter = (EtherReachRadius.tickCounter or 0) + 1;
-	if EtherReachRadius.tickCounter < 120 then return end;
-	EtherReachRadius.tickCounter = 0;
-	EtherReachRadius.applyOverrides();
+	if EtherReachRadius.tickCounter >= 120 then
+		EtherReachRadius.tickCounter = 0;
+		EtherReachRadius.applyOverrides();
+	end
+
+	-- Диагностика: сообщаем, когда предметы контейнера дошли до окна лута
+	if not EtherReachRadius.reportedItems then
+		local lootPanel = getPlayerLoot(0);
+		if lootPanel and lootPanel.inventory then
+			local items = lootPanel.inventory:getItems();
+			if items and items:size() > 0 then
+				EtherReachRadius.reportedItems = true;
+				print("[EtherHack] Reach radius: the loot panel shows " .. items:size() .. " item(s)");
+			end
+		end
+	end
 end
 
 -- Установка перехватов при загрузке клиента
