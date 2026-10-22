@@ -94,6 +94,8 @@
     UI_Exploit_CraftIngredientsCheatButton = "Give",
 	UI_Exploit_ReachRadiusTitle = "Increase the reach radius",
 	UI_Exploit_ReachRadiusSliderTitle = "Reach radius (tiles)",
+	UI_ReachRadius_Loot = "Open the container",
+	UI_ReachRadius_TakeAll = "Take all the items",
 
     UI_DeleteItemTitle = "Delete",
     UI_DeleteItemOne = "1 item",
