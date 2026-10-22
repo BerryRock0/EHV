@@ -35,7 +35,7 @@ function EtherReachRadius.isContainerInReach(container, playerObj)
 	local distance = EtherReachRadius.getContainerDistance(container, playerObj)
 	if not distance then return false end
 
-	return distance > 1 and distance <= getReachRadius();
+	return distance > 1;
 end
 
 --*********************************************************
@@ -61,7 +61,7 @@ function EtherReachRadius.overrideDoClick(object, x, y)
 		local container = object:getContainer();
 		local distance = EtherReachRadius.getContainerDistance(container, playerObj);
 
-		if distance and distance > 1 and distance <= getReachRadius() then
+		if distance and distance > 1 then
 			print("[EtherHack] Reach radius: opening a container at a distance of " .. tostring(distance));
 			EtherReachRadius.openLootWindow(object, 0);
 			return;
@@ -196,7 +196,7 @@ function EtherReachRadius.onObjectLeftMouseButtonDown(object, x, y)
 
 	local distance = EtherReachRadius.getContainerDistance(container, playerObj)
 
-	if not distance or distance <= 1 or distance > getReachRadius() then return end
+	if not distance or distance <= 1 then return end
 
 	print("[EtherHack] Reach radius: opening a container at a distance of " .. tostring(distance));
 	EtherReachRadius.openLootWindow(object, playerObj:getPlayerNum());
