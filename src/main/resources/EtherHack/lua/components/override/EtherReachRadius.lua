@@ -2,15 +2,13 @@
 --* Расширение радиуса досягаемости
 --*********************************************************
 -- Позволяет открывать и опустошать контейнеры (ящики, коробки, сейфы, шкафы),
--- а также забирать предметы с расстояния, на которое настроен радиус.
+-- а также забирать предметы с любого расстояния, без подхода к контейнеру.
 -- Обычная дистанция взаимодействия в игре - 2 тайла.
+--
+-- Важно: игра перезагружает свои lua-файлы при старте мира, поэтому
+-- перехваты устанавливаются заново после загрузки игры (OnGameStart и по таймеру).
 
 EtherReachRadius = EtherReachRadius or {};
-
--- Оригинальная функция перехода к контейнеру
-if not EtherReachRadius.originalWalkToContainer and luautils and luautils.walkToContainer then
-	EtherReachRadius.originalWalkToContainer = luautils.walkToContainer;
-end
 
 --*********************************************************
 --* Расстояние до контейнера
@@ -37,32 +35,66 @@ function EtherReachRadius.isContainerInReach(container, playerObj)
 	local distance = EtherReachRadius.getContainerDistance(container, playerObj)
 	if not distance then return false end
 
-	return distance > 1 and distance <= getReachRadius()
+	return distance > 1 and distance <= getReachRadius();
 end
 
 --*********************************************************
---* Переопределение перехода к контейнеру
+--* Переход к контейнеру без подхода
 --*********************************************************
--- Если контейнер находится в пределах радиуса досягаемости, игрок не идёт к нему,
--- а предметы переносятся сразу, без подхода.
-if EtherReachRadius.originalWalkToContainer then
-	function luautils.walkToContainer(container, playerNum)
-		if isEnableReachRadius() then
-			local playerObj = getSpecificPlayer(playerNum)
-			if EtherReachRadius.isContainerInReach(container, playerObj) then
-				return true
-			end
+function EtherReachRadius.overrideWalkToContainer(container, playerNum)
+	if isEnableReachRadius() then
+		local playerObj = getSpecificPlayer(playerNum)
+		if EtherReachRadius.isContainerInReach(container, playerObj) then
+			return true
 		end
+	end
 
-		return EtherReachRadius.originalWalkToContainer(container, playerNum)
+	return EtherReachRadius.originalWalkToContainer(container, playerNum);
+end
+
+--*********************************************************
+--* Обработка клика по контейнеру на расстоянии
+--*********************************************************
+function EtherReachRadius.overrideDoClick(object, x, y)
+	if isEnableReachRadius() and object and object:getContainer() then
+		local playerObj = getSpecificPlayer(0);
+		local container = object:getContainer();
+		local distance = EtherReachRadius.getContainerDistance(container, playerObj);
+
+		if distance and distance > 1 and distance <= getReachRadius() then
+			print("[EtherHack] Reach radius: opening a container at a distance of " .. tostring(distance));
+			EtherReachRadius.openLootWindow(object, 0);
+			return;
+		end
+	end
+
+	return EtherReachRadius.originalDoClick(object, x, y);
+end
+
+--*********************************************************
+--* Установка перехватов
+--*********************************************************
+function EtherReachRadius.applyOverrides()
+	-- Переход к контейнеру
+	if luautils and luautils.walkToContainer and luautils.walkToContainer ~= EtherReachRadius.overrideWalkToContainer then
+		EtherReachRadius.originalWalkToContainer = luautils.walkToContainer;
+		luautils.walkToContainer = EtherReachRadius.overrideWalkToContainer;
+		print("[EtherHack] Reach radius: the override of luautils.walkToContainer is applied");
+	end
+
+	-- Обработка клика по объекту мира
+	if ISObjectClickHandler and ISObjectClickHandler.doClick and ISObjectClickHandler.doClick ~= EtherReachRadius.overrideDoClick then
+		EtherReachRadius.originalDoClick = ISObjectClickHandler.doClick;
+		ISObjectClickHandler.doClick = EtherReachRadius.overrideDoClick;
+		print("[EtherHack] Reach radius: the override of ISObjectClickHandler.doClick is applied");
 	end
 end
 
 --*********************************************************
 --* Открытие окна лута контейнера
 --*********************************************************
-function EtherReachRadius.openLootWindow(object, player)
-	local playerObj = getSpecificPlayer(player)
+function EtherReachRadius.openLootWindow(object, playerNum)
+	local playerObj = getSpecificPlayer(playerNum)
 	if not playerObj then return end
 
 	local container = object:getContainer()
@@ -73,7 +105,7 @@ function EtherReachRadius.openLootWindow(object, player)
 		container:setExplored(true);
 	end
 
-	local lootPanel = getPlayerLoot(playerObj:getPlayerNum())
+	local lootPanel = getPlayerLoot(playerNum)
 	if not lootPanel then return end
 
 	lootPanel:setNewContainer(container);
@@ -125,7 +157,6 @@ function EtherReachRadius.onFillWorldObjectContextMenu(player, context, worldobj
 	local playerObj = getSpecificPlayer(player)
 	if not playerObj then return end
 
-	print("[EtherHack] Reach radius: context menu for " .. tostring(worldobjects and #worldobjects or 0) .. " object(s)");
 	for _, object in ipairs(worldobjects) do
 		if object and object:getContainer() then
 			local container = object:getContainer();
@@ -147,7 +178,7 @@ function EtherReachRadius.onTakeAllContainer(worldobjects, object, player)
 end
 
 --*********************************************************
---* Открытие контейнера, находящегося на расстоянии
+--* Открытие контейнера, находящегося на расстоянии (клик мышью)
 --*********************************************************
 function EtherReachRadius.onObjectLeftMouseButtonDown(object, x, y)
 	if not isEnableReachRadius() then return end
@@ -167,8 +198,31 @@ function EtherReachRadius.onObjectLeftMouseButtonDown(object, x, y)
 	EtherReachRadius.openLootWindow(object, playerObj:getPlayerNum());
 end
 
+--*********************************************************
+--* Повторная установка перехватов после загрузки мира
+--*********************************************************
+function EtherReachRadius.onGameStart()
+	EtherReachRadius.applyOverrides();
+end
+
+function EtherReachRadius.onTick()
+	EtherReachRadius.tickCounter = (EtherReachRadius.tickCounter or 0) + 1;
+	if EtherReachRadius.tickCounter < 120 then return end;
+	EtherReachRadius.tickCounter = 0;
+	EtherReachRadius.applyOverrides();
+end
+
+-- Установка перехватов при загрузке клиента
+EtherReachRadius.applyOverrides();
+
 Events.OnObjectLeftMouseButtonDown.Remove(EtherReachRadius.onObjectLeftMouseButtonDown);
 Events.OnObjectLeftMouseButtonDown.Add(EtherReachRadius.onObjectLeftMouseButtonDown);
 
 Events.OnFillWorldObjectContextMenu.Remove(EtherReachRadius.onFillWorldObjectContextMenu);
 Events.OnFillWorldObjectContextMenu.Add(EtherReachRadius.onFillWorldObjectContextMenu);
+
+Events.OnGameStart.Remove(EtherReachRadius.onGameStart);
+Events.OnGameStart.Add(EtherReachRadius.onGameStart);
+
+Events.OnTick.Remove(EtherReachRadius.onTick);
+Events.OnTick.Add(EtherReachRadius.onTick);

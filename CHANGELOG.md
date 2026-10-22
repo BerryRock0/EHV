@@ -1,6 +1,7 @@
 ## [Ether Hack v2.7](https://github.com/Quzile/Project-Zomboid-EtherHack/releases/tag/v2.7)
 
 - Added the `Increase the reach radius` feature, it allows opening and looting containers (drawers, crates, safes, cabinets) and taking items from any distance, without walking to them. The radius is unlimited
+- The overrides of the reach radius are re-installed after the game reloads its lua files, so they are not lost when a world is loaded
 - Added the `Performance` panel with settings for improving the game performance (removing the frame rate limit, lighting, water, puddles and fog quality, reflections, skybox and animation interpolation)
 - Added the `Restore the original settings` button to the `Performance` panel
 
