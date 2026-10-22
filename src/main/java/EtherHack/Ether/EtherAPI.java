@@ -117,6 +117,9 @@ public class EtherAPI
     public boolean isEnableReachRadius;
     public float reachRadius;
 
+    /** Максимальный радиус досягаемости, фактически без ограничения */
+    public static final float REACH_RADIUS_MAX = 999.0f;
+
     private void initStartupConfig()
     {
         Properties config = new Properties();
@@ -186,7 +189,7 @@ public class EtherAPI
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(config, "isMapDrawZombies", false);
         this.isMapDrawItems = ConfigUtils.getBooleanFromConfig(config, "isMapDrawItems", false);
         this.isEnableReachRadius = ConfigUtils.getBooleanFromConfig(config, "isEnableReachRadius", false);
-        this.reachRadius = ConfigUtils.getFloatFromConfig(config, "reachRadius", 4.0f);
+        this.reachRadius = ConfigUtils.getFloatFromConfig(config, "reachRadius", REACH_RADIUS_MAX);
     }
 
     public EtherAPI()
