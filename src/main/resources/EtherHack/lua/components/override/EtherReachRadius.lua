@@ -100,8 +100,14 @@ function EtherReachRadius.openLootWindow(object, playerNum)
 	local container = object:getContainer()
 	if not container then return end
 
+	-- Так же, как это делает сама игра: содержимое контейнера создаётся при первом открытии.
+	-- В одиночной игре контейнер наполняет сервер, поэтому запрос по сети ничего не даёт.
 	if not container:isExplored() then
-		container:requestServerItemsForContainer();
+		if not isClient() then
+			ItemPicker.fillContainer(container, playerObj);
+		else
+			container:requestServerItemsForContainer();
+		end
 		container:setExplored(true);
 	end
 
@@ -124,7 +130,11 @@ function EtherReachRadius.takeAllItems(object, player)
 	if not container then return end
 
 	if not container:isExplored() then
-		container:requestServerItemsForContainer();
+		if not isClient() then
+			ItemPicker.fillContainer(container, playerObj);
+		else
+			container:requestServerItemsForContainer();
+		end
 		container:setExplored(true);
 	end
 
@@ -156,6 +166,8 @@ function EtherReachRadius.onFillWorldObjectContextMenu(player, context, worldobj
 
 	local playerObj = getSpecificPlayer(player)
 	if not playerObj then return end
+
+	print("[EtherHack] Reach radius: context menu for " .. tostring(worldobjects and #worldobjects or 0) .. " object(s)");
 
 	for _, object in ipairs(worldobjects) do
 		if object and object:getContainer() then
@@ -207,9 +219,22 @@ end
 
 function EtherReachRadius.onTick()
 	EtherReachRadius.tickCounter = (EtherReachRadius.tickCounter or 0) + 1;
-	if EtherReachRadius.tickCounter < 120 then return end;
-	EtherReachRadius.tickCounter = 0;
-	EtherReachRadius.applyOverrides();
+	if EtherReachRadius.tickCounter >= 120 then
+		EtherReachRadius.tickCounter = 0;
+		EtherReachRadius.applyOverrides();
+	end
+
+	-- Диагностика: сообщаем, когда предметы контейнера дошли до окна лута
+	if not EtherReachRadius.reportedItems then
+		local lootPanel = getPlayerLoot(0);
+		if lootPanel and lootPanel.inventory then
+			local items = lootPanel.inventory:getItems();
+			if items and items:size() > 0 then
+				EtherReachRadius.reportedItems = true;
+				print("[EtherHack] Reach radius: the loot panel shows " .. items:size() .. " item(s)");
+			end
+		end
+	end
 end
 
 -- Установка перехватов при загрузке клиента
