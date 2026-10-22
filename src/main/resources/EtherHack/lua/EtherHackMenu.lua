@@ -8,6 +8,7 @@ local etherModules = {
     "EtherHack/lua/components/override/EtherDebugMenu.lua",
     "EtherHack/lua/components/override/EtherEditInventoryItem.lua",
     "EtherHack/lua/components/override/EtherEditWorldObjects.lua",
+    "EtherHack/lua/components/override/EtherReachRadius.lua",
     "EtherHack/lua/components/ui/UIButtonsPanel.lua",
     "EtherHack/lua/components/ui/UICheckbox.lua",
     "EtherHack/lua/components/ui/UIButton.lua",

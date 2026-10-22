@@ -92,6 +92,8 @@
 	UI_Exploit_LearnAllRecipesButton = "Learn",
 	UI_Exploit_CraftIngredientsCheatTitle = "Give out all the ingredients for the selected recipe",
     UI_Exploit_CraftIngredientsCheatButton = "Give",
+	UI_Exploit_ReachRadiusTitle = "Increase the reach radius",
+	UI_Exploit_ReachRadiusSliderTitle = "Reach radius (tiles)",
 
     UI_DeleteItemTitle = "Delete",
     UI_DeleteItemOne = "1 item",
@@ -199,8 +201,6 @@
 	UI_VisualsPanel_DrawLineToVehicles = "Show lines to vehicle",
 	UI_VisualsPanel_DrawLineToPlayers = "Show lines to players",
 	UI_VisualsPanel_360Vision = "The viewing angle of objects is 360 degrees",
-	UI_VisualsPanel_DrawContainers = "Show the contents of drawers and containers",
-	UI_VisualsPanel_DrawContainersRadius = "Scanning radius of containers",
 
 	UI_VisualsDraws_PrimaryHand = "Primary hand: ",
 	UI_VisualsDraws_SecondaryHand = "Secondary hand: ",
