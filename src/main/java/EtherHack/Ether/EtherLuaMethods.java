@@ -225,11 +225,10 @@ public final class EtherLuaMethods {
     @LuaMethod(name="isVisualEnable360Vision", global=true)public static boolean isVisualEnable360Vision(){return EtherMain.getInstance().etherAPI.isVisualEnable360Vision;}
     @LuaMethod(name="toggleVisualEnable360Vision", global=true)public static void toggleVisualEnable360Vision(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualEnable360Vision = isToggled;}
 
-    @LuaMethod(name="isVisualDrawContainers",global=true)public static boolean isVisualDrawContainers(){return EtherMain.getInstance().etherAPI.isVisualDrawContainers;}
-    @LuaMethod(name="toggleVisualDrawContainers",global=true)public static void toggleVisualDrawContainers(boolean isToggled){EtherMain.getInstance().etherAPI.isVisualDrawContainers = isToggled;}
-
-    @LuaMethod(name="getVisualDrawContainersRadius",global=true)public static float getVisualDrawContainersRadius(){return EtherMain.getInstance().etherAPI.visualDrawContainersRadius;}
-    @LuaMethod(name="setVisualDrawContainersRadius",global=true)public static void setVisualDrawContainersRadius(float radius){EtherMain.getInstance().etherAPI.visualDrawContainersRadius = Math.max(1.0f, Math.min(50.0f, radius));}
+    @LuaMethod(name="isEnableReachRadius",global=true)public static boolean isEnableReachRadius(){return EtherMain.getInstance().etherAPI.isEnableReachRadius;}
+    @LuaMethod(name="toggleEnableReachRadius",global=true)public static void toggleEnableReachRadius(boolean isToggled){EtherMain.getInstance().etherAPI.isEnableReachRadius = isToggled;}
+    @LuaMethod(name="getReachRadius",global=true)public static float getReachRadius(){return EtherMain.getInstance().etherAPI.reachRadius;}
+    @LuaMethod(name="setReachRadius",global=true)public static void setReachRadius(float radius){EtherMain.getInstance().etherAPI.reachRadius = Math.max(1.0f, Math.min(20.0f, radius));}
 
     @LuaMethod(name="isMapDrawItems",global=true)public static boolean isMapDrawItems(){return EtherMain.getInstance().etherAPI.isMapDrawItems;}
     @LuaMethod(name="toggleMapDrawItems",global=true)public static void toggleMapDrawItems(boolean isToggled){EtherMain.getInstance().etherAPI.isMapDrawItems = isToggled;}

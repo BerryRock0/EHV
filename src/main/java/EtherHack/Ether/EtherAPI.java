@@ -6,8 +6,6 @@ import EtherHack.annotations.LuaEvents;
 import EtherHack.annotations.SubscribeLuaEvent;
 import EtherHack.utils.ColorUtils;
 import EtherHack.utils.ConfigUtils;
-import EtherHack.utils.ContainerUtils;
-import EtherHack.utils.ContainerViewer;
 import EtherHack.utils.EventSubscriber;
 import EtherHack.utils.Exposer;
 import EtherHack.utils.Logger;
@@ -116,18 +114,8 @@ public class EtherAPI
     public boolean isMapDrawVehicles;
     public boolean isMapDrawZombies;
     public boolean isMapDrawItems;
-    public boolean isVisualDrawContainers;
-    public float visualDrawContainersRadius;
-
-    /** Интервал между сканированием контейнеров вокруг игрока (в миллисекундах) */
-    private static final long CONTAINERS_SCAN_INTERVAL = 500;
-    /** Минимальное смещение игрока, при котором выполняется повторное сканирование контейнеров (в тайлах) */
-    private static final float CONTAINERS_SCAN_MOVE_DISTANCE = 1.0f;
-
-    private long lastContainersScanTime = 0;
-    private float lastContainersScanX = Float.NaN;
-    private float lastContainersScanY = Float.NaN;
-    private ArrayList<ContainerUtils.ContainerInfo> nearbyContainers = new ArrayList<ContainerUtils.ContainerInfo>();
+    public boolean isEnableReachRadius;
+    public float reachRadius;
 
     private void initStartupConfig()
     {
@@ -197,8 +185,8 @@ public class EtherAPI
         this.isMapDrawVehicles = ConfigUtils.getBooleanFromConfig(config, "isMapDrawVehicles", false);
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(config, "isMapDrawZombies", false);
         this.isMapDrawItems = ConfigUtils.getBooleanFromConfig(config, "isMapDrawItems", false);
-        this.isVisualDrawContainers = ConfigUtils.getBooleanFromConfig(config, "isVisualDrawContainers", false);
-        this.visualDrawContainersRadius = ConfigUtils.getFloatFromConfig(config, "visualDrawContainersRadius", 15.0f);
+        this.isEnableReachRadius = ConfigUtils.getBooleanFromConfig(config, "isEnableReachRadius", false);
+        this.reachRadius = ConfigUtils.getFloatFromConfig(config, "reachRadius", 3.0f);
     }
 
     public EtherAPI()
@@ -317,51 +305,9 @@ public class EtherAPI
         try
         {
             this.updateUltraPlayerVision();
-            this.updateContainersViewer();
         }
         catch (Exception exception)
         {}
-    }
-
-    /**
-     * Поиск контейнеров рядом с игроком и отрисовка их содержимого.
-     * Контейнеры отображаются даже в тех случаях, когда до них нельзя дотянуться.
-     */
-    private void updateContainersViewer()
-    {
-        if (!this.isVisualDrawContainers)
-            return;
-
-        IsoPlayer player = IsoPlayer.getInstance();
-        if (player == null)
-            return;
-
-        this.refreshNearbyContainers(player);
-        ContainerViewer.render(this.nearbyContainers, this.mainUIAccentColor);
-    }
-
-    /**
-     * Обновление списка контейнеров рядом с игроком.
-     * Сканирование выполняется не чаще, чем раз в CONTAINERS_SCAN_INTERVAL миллисекунд,
-     * а также дополнительно при перемещении игрока.
-     */
-    private void refreshNearbyContainers(IsoPlayer player)
-    {
-        long currentTime = System.currentTimeMillis();
-        float playerX = player.getX();
-        float playerY = player.getY();
-
-        boolean isPlayerMoved = Float.isNaN(this.lastContainersScanX)
-                || Math.abs(playerX - this.lastContainersScanX) > CONTAINERS_SCAN_MOVE_DISTANCE
-                || Math.abs(playerY - this.lastContainersScanY) > CONTAINERS_SCAN_MOVE_DISTANCE;
-
-        if (!isPlayerMoved && currentTime - this.lastContainersScanTime < CONTAINERS_SCAN_INTERVAL)
-            return;
-
-        this.lastContainersScanTime = currentTime;
-        this.lastContainersScanX = playerX;
-        this.lastContainersScanY = playerY;
-        this.nearbyContainers = ContainerUtils.getNearbyContainers(player, this.visualDrawContainersRadius);
     }
 
     public void updateUltraPlayerVision()
