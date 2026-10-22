@@ -186,7 +186,7 @@ public class EtherAPI
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(config, "isMapDrawZombies", false);
         this.isMapDrawItems = ConfigUtils.getBooleanFromConfig(config, "isMapDrawItems", false);
         this.isEnableReachRadius = ConfigUtils.getBooleanFromConfig(config, "isEnableReachRadius", false);
-        this.reachRadius = ConfigUtils.getFloatFromConfig(config, "reachRadius", 3.0f);
+        this.reachRadius = ConfigUtils.getFloatFromConfig(config, "reachRadius", 4.0f);
     }
 
     public EtherAPI()
