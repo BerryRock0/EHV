@@ -199,6 +199,8 @@
 	UI_VisualsPanel_DrawLineToVehicles = "Show lines to vehicle",
 	UI_VisualsPanel_DrawLineToPlayers = "Show lines to players",
 	UI_VisualsPanel_360Vision = "The viewing angle of objects is 360 degrees",
+	UI_VisualsPanel_DrawContainers = "Show the contents of drawers and containers",
+	UI_VisualsPanel_DrawContainersRadius = "Scanning radius of containers",
 
 	UI_VisualsDraws_PrimaryHand = "Primary hand: ",
 	UI_VisualsDraws_SecondaryHand = "Secondary hand: ",
@@ -241,5 +243,18 @@
 	UI_Settings_WorldItemColor = "Color for rendering world item UI elements",
 	UI_Settings_PushableColor = "Color for rendering pushable UI elements",
 	UI_Settings_BuildingColor = "Color for rendering building UI elements",
+
+	UI_Performance_UncappedFPS = "Remove the frame rate limit",
+	UI_Performance_LockFPS = "Frame rate limit (FPS)",
+	UI_Performance_LightingQuality = "Lighting quality (0 - best, 3 - fastest)",
+	UI_Performance_LightingFPS = "Lighting update rate (FPS)",
+	UI_Performance_WaterQuality = "Water quality",
+	UI_Performance_PuddlesQuality = "Puddles quality",
+	UI_Performance_FogQuality = "Fog quality",
+	UI_Performance_Reflections = "Enable reflections",
+	UI_Performance_StaticSkybox = "Static skybox",
+	UI_Performance_AnimationInterpolation = "Animation interpolation",
+	UI_Performance_ResetTitle = "Restore the original settings",
+	UI_Performance_ResetButton = "Reset",
 
 }

@@ -1,3 +1,10 @@
+## [Ether Hack v2.7](https://github.com/Quzile/Project-Zomboid-EtherHack/releases/tag/v2.7)
+
+- Added the `Show the contents of drawers and containers` feature, it displays the contents of nearby containers (drawers, crates, safes, etc.) directly in the world, even if they are out of reach
+- Added the `Scanning radius of containers` slider to the `Visuals` panel
+- Added the `Performance` panel with settings for improving the game performance (removing the frame rate limit, lighting, water, puddles and fog quality, reflections, skybox and animation interpolation)
+- Added the `Restore the original settings` button to the `Performance` panel
+
 ## [Ether Hack v1.1](https://github.com/Quzile/Project-Zomboid-EtherHack/releases/tag/v1.1) - 2023-07-09
 
 - Fixed API and GUI initialization
