@@ -4,6 +4,13 @@ plugins {
 
 compileJava.options.encoding = 'UTF-8'
 
+// The game runs on Java 17, the classes of the cheat have to be compatible with it
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+}
+
 def properties = new Properties()
 file("src/main/resources/EtherHack/EtherHack.properties").withInputStream { properties.load(it) }
 
