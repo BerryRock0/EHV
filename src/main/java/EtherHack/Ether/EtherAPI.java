@@ -6,7 +6,6 @@ import EtherHack.annotations.LuaEvents;
 import EtherHack.annotations.SubscribeLuaEvent;
 import EtherHack.utils.ColorUtils;
 import EtherHack.utils.ConfigUtils;
-import EtherHack.utils.ContainerUtils;
 import EtherHack.utils.EventSubscriber;
 import EtherHack.utils.Exposer;
 import EtherHack.utils.Logger;
@@ -28,8 +27,6 @@ import se.krka.kahlua.vm.Platform;
 import zombie.Lua.LuaManager;
 import zombie.SandboxOptions;
 import zombie.characterTextures.BloodBodyPartType;
-import se.krka.kahlua.vm.KahluaTable;
-import zombie.Lua.LuaManager;
 import zombie.characters.IsoPlayer;
 import zombie.characters.IsoZombie;
 import zombie.core.Color;
@@ -119,7 +116,9 @@ public class EtherAPI
     public boolean isMapDrawItems;
     public boolean isEnableReachRadius;
     public float reachRadius;
-    public float containersListRadius;
+
+    /** Максимальный радиус досягаемости, фактически без ограничения */
+    public static final float REACH_RADIUS_MAX = 999.0f;
 
     private void initStartupConfig()
     {
@@ -190,8 +189,7 @@ public class EtherAPI
         this.isMapDrawZombies = ConfigUtils.getBooleanFromConfig(config, "isMapDrawZombies", false);
         this.isMapDrawItems = ConfigUtils.getBooleanFromConfig(config, "isMapDrawItems", false);
         this.isEnableReachRadius = ConfigUtils.getBooleanFromConfig(config, "isEnableReachRadius", false);
-        this.reachRadius = ConfigUtils.getFloatFromConfig(config, "reachRadius", 4.0f);
-        this.containersListRadius = ConfigUtils.getFloatFromConfig(config, "containersListRadius", 15.0f);
+        this.reachRadius = ConfigUtils.getFloatFromConfig(config, "reachRadius", REACH_RADIUS_MAX);
     }
 
     public EtherAPI()
@@ -347,47 +345,5 @@ public class EtherAPI
         }
         catch(Exception e)
         {}
-    }
-
-    /**
-     * Список контейнеров (ящиков) рядом с игроком и их содержимого.
-     * Данные передаются в Lua в виде таблиц.
-     */
-    public KahluaTable getContainersList()
-    {
-        KahluaTable list = LuaManager.platform.newTable();
-
-        IsoPlayer player = IsoPlayer.getInstance();
-        if (player == null)
-            return list;
-
-        ArrayList<ContainerUtils.ContainerInfo> containers = ContainerUtils.getNearbyContainers(player, this.containersListRadius);
-        int containerIndex = 1;
-
-        for (ContainerUtils.ContainerInfo container : containers)
-        {
-            KahluaTable containerTable = LuaManager.platform.newTable();
-            containerTable.rawset("name", container.name);
-            containerTable.rawset("distance", container.distance);
-            containerTable.rawset("x", container.x);
-            containerTable.rawset("y", container.y);
-            containerTable.rawset("z", container.z);
-
-            KahluaTable itemsTable = LuaManager.platform.newTable();
-            int itemIndex = 1;
-
-            for (ContainerUtils.ContainerItem item : container.items)
-            {
-                KahluaTable itemTable = LuaManager.platform.newTable();
-                itemTable.rawset("name", item.name);
-                itemTable.rawset("count", item.count);
-                itemsTable.rawset(itemIndex++, itemTable);
-            }
-
-            containerTable.rawset("items", itemsTable);
-            list.rawset(containerIndex++, containerTable);
-        }
-
-        return list;
     }
 }
